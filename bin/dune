@@ -1,0 +1,4 @@
+(executable
+ (public_name proofwriter)
+ (name main)
+ (libraries proofwriter))

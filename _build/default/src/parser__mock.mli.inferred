@@ -1,0 +1,14 @@
+type token =
+    RPAREN
+  | OR
+  | NOT
+  | LPAREN
+  | IMP
+  | IFF
+  | EOF
+  | BOOL of bool
+  | AND
+val menhir_begin_marker : int
+val xv_prog : Ast.expr
+val xv_expr : Ast.expr
+val menhir_end_marker : int
