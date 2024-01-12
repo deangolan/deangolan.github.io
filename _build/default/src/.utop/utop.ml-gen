@@ -13,6 +13,7 @@ Clflags.include_dirs :=
   ; "/home/dean/.opam/default/lib/ocaml/unix"
   ; "/home/dean/.opam/default/lib/ocplib-endian"
   ; "/home/dean/.opam/default/lib/ocplib-endian/bigstring"
+  ; "/home/dean/.opam/default/lib/ppx_deriving/runtime"
   ; "/home/dean/.opam/default/lib/react"
   ; "/home/dean/.opam/default/lib/result"
   ; "/home/dean/.opam/default/lib/trie"

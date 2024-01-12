@@ -3,6 +3,7 @@
 
 type token = 
   | RPAREN
+  | PROP of (string)
   | OR
   | NOT
   | LPAREN

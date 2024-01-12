@@ -1,5 +1,5 @@
+%token <string> PROP
 %token <bool> BOOL 
-%token SEP
 %token OR
 %token AND
 %token NOT
@@ -24,6 +24,7 @@ prog:
     ;
 
 expr:
+    | p = PROP { Prop p }
     | b = BOOL { Bool b }
     | e1 = expr; OR; e2 = expr { Binop (Or, e1, e2) }
     | e1 = expr; AND; e2 = expr { Binop (And, e1, e2) }

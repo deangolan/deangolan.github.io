@@ -1,1 +1,1 @@
-src/ast.ml:
+src/ast.pp.ml: Ppx_deriving_runtime

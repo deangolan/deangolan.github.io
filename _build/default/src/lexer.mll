@@ -4,6 +4,7 @@ open Parser
 
 
 let whitespace = [' ' '\t' '\n' '\r']+
+let prop = ['a'-'z']
 let _true = "T" | "1" | "true" 
 let _false = "F" | "0" | "false"
 let _and = "&" | "/\\"
@@ -16,6 +17,7 @@ let iff = "<->"
 rule read =
     parse
     | whitespace { read lexbuf }
+    | prop { PROP (Lexing.lexeme lexbuf) }
     | "(" { LPAREN }
     | ")" { RPAREN }
     | _true { BOOL true }
