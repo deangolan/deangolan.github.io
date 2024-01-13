@@ -1,6 +1,7 @@
 %token <string> PROP
 %token <bool> BOOL
-%token PR
+%token <Ast.rule> RULE
+%token COLON
 %token OR
 %token AND
 %token NOT
@@ -15,16 +16,17 @@
 %left IMP
 %left AND
 %left OR
-%right NOT
+%left NOT
+%left COLON
 
-%start <Ast.expr> prog
-
+%start <Ast.expr option> prog
 
 %%
 
 
 prog:
-    | e = expr; EOF { e }
+    | EOF; { None }
+    | e = expr; EOF { Some e }
     ;
 
 
@@ -37,4 +39,5 @@ expr:
     | e1 = expr; IFF; e2 = expr { Binop (Iff, e1, e2) }
     | NOT; e = expr { Not (e) }
     | LPAREN; e = expr; RPAREN { e } 
+    | e = expr; COLON; r = RULE { Stmnt (e, r) }
     ;

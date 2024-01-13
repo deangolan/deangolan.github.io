@@ -12,13 +12,12 @@ let _or = "|" | "\\/"
 let not = "~"
 let imp = "->"
 let iff = "<->"
-let rule = ['A'-'Z'] ['A'-'Z' 'a'-'z']+
 
 rule read =
     parse
     | whitespace { read lexbuf }
     | prop { PROP (Lexing.lexeme lexbuf) }
-    | rule { RULE (Lexing.lexeme lexbuf) }
+    | "PR" { RULE Ast.Premise } 
     | ":" { COLON }
     | "(" { LPAREN }
     | ")" { RPAREN }

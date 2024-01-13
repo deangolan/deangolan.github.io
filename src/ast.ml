@@ -11,14 +11,10 @@ type binary_op =
     [@@deriving show]
 
 
-type stmt =
+type expr =
+    | Stmnt of expr * rule
     | Prop of string
     | Bool of bool
-    | Binop of binary_op * stmt * stmt 
-    | Not of stmt 
-    [@@deriving show]
-
-
-type expr =
-    | Statement of stmt * rule option
+    | Binop of binary_op * expr * expr
+    | Not of expr
     [@@deriving show]

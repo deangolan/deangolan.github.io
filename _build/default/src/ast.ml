@@ -12,6 +12,7 @@ type binary_op =
 
 
 type expr =
+    | Stmnt of expr * rule
     | Prop of string
     | Bool of bool
     | Binop of binary_op * expr * expr

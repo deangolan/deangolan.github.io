@@ -3,8 +3,9 @@ open Ast
 
 let parse (s : string) : expr =
   let lexbuf = Lexing.from_string s in
-  let ast = Parser.prog Lexer.read lexbuf in
-  ast
+  match Parser.prog Lexer.read lexbuf with
+    | None -> failwith "Empty input"
+    | Some e -> e
 
 
 let string_of_val = function
@@ -14,6 +15,7 @@ let string_of_val = function
 
 
 let rec eval = function
+    | Stmnt (exp, rule) -> Stmnt (eval exp, rule)
     | Binop (binop, exp1, exp2) -> collapse binop (eval exp1) (eval exp2)
     | Not (Bool a) -> Bool (not a)
     | Not exp -> negate exp

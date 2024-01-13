@@ -13,11 +13,12 @@ let not = "~"
 let imp = "->"
 let iff = "<->"
 
-
 rule read =
     parse
     | whitespace { read lexbuf }
     | prop { PROP (Lexing.lexeme lexbuf) }
+    | "PR" { RULE Ast.Premise } 
+    | ":" { COLON }
     | "(" { LPAREN }
     | ")" { RPAREN }
     | _true { BOOL true }

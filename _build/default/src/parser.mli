@@ -2,15 +2,16 @@
 (* The type of tokens. *)
 
 type token = 
+  | RULE of (Ast.rule)
   | RPAREN
   | PROP of (string)
-  | PR
   | OR
   | NOT
   | LPAREN
   | IMP
   | IFF
   | EOF
+  | COLON
   | BOOL of (bool)
   | AND
 
@@ -20,4 +21,4 @@ exception Error
 
 (* The monolithic API. *)
 
-val prog: (Lexing.lexbuf -> token) -> Lexing.lexbuf -> (Ast.expr)
+val prog: (Lexing.lexbuf -> token) -> Lexing.lexbuf -> (Ast.expr option)
