@@ -4,12 +4,14 @@
 type token = 
   | RPAREN
   | PROP of (string)
+  | PR
   | OR
   | NOT
   | LPAREN
   | IMP
   | IFF
   | EOF
+  | COLON
   | BOOL of (bool)
   | AND
 

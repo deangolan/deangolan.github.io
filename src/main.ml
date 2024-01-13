@@ -10,11 +10,11 @@ let parse (s : string) : expr =
 let string_of_val = function
     | Prop p -> p 
     | Bool b -> string_of_bool b 
-    | Binop (binop, a, b) -> Binop (binop, a, b) |> show_expr 
-    | Not e -> Not e |> show_expr 
- 
+    | exp -> show_expr exp
+
 
 let rec eval = function
+    | Statement (exp, rule) -> Statement (eval exp, rule)
     | Binop (_, Prop _, Prop _) as exp -> exp
     | Binop (_, Prop _, Bool _) as exp -> exp
     | Binop (_, Bool _, Prop _) as exp -> exp
@@ -34,8 +34,9 @@ and collapse binop e1 e2 = match binop, e1, e2 with
     
 and negate = function
     | Bool a -> Bool (not a)
-    | Prop _ -> failwith "Precondition violated" 
-    | Binop _ | Not _ -> failwith "Precondition violated" 
+    | Statement _ -> failwith "Precondition violated: Cannot negate statement"
+    | Prop _ -> failwith "Precondition violated: Cannot negate proposition"
+    | Binop _ | Not _ -> failwith "Precondition violated: Cannot negate operator" 
 
 
 let interp (s: string) : string =
