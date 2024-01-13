@@ -11,13 +11,12 @@
 %token RPAREN
 %token EOF
 
-
+%left COLON
 %left IFF
 %left IMP
 %left AND
 %left OR
-%left NOT
-%left COLON
+%nonassoc NOT
 
 %start <Ast.expr option> prog
 
