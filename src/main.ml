@@ -14,29 +14,25 @@ let string_of_val = function
 
 
 let rec eval = function
-    | Statement (exp, rule) -> Statement (eval exp, rule)
-    | Binop (_, Prop _, Prop _) as exp -> exp
-    | Binop (_, Prop _, Bool _) as exp -> exp
-    | Binop (_, Bool _, Prop _) as exp -> exp
-    | Binop (binop, Bool a, Bool b) -> collapse binop a b
-    | Binop (binop, Bool a, exp) -> eval (Binop (binop, Bool a, eval exp))
-    | Binop (binop, exp1, exp2 ) -> eval (Binop (binop, eval exp1, exp2))
+    | Binop (binop, exp1, exp2) -> collapse binop (eval exp1) (eval exp2)
     | Not (Bool a) -> Bool (not a)
-    | Not exp -> eval exp
-    | Prop _ -> failwith "Precondition violated"
-    | Bool _ -> failwith "Precondition violated"
+    | Not exp -> negate exp
+    | Prop _ as prop -> prop
+    | Bool _ as bool -> bool
 
-and collapse binop e1 e2 = match binop, e1, e2 with
-    | And, a, b -> Bool (a && b)
-    | Or, a, b -> Bool (a || b)
-    | Implies, a, b -> Bool (not a || b)
-    | Iff, a, b -> Bool (a = b)
-    
-and negate = function
+and collapse binop exp1 exp2 = match binop, exp1, exp2 with
+    | binop, Bool a, Bool b -> begin 
+        match binop with
+        | And -> Bool (a && b)
+        | Or -> Bool (a || b)
+        | Imp -> Bool ((not a) || b)
+        | Iff -> Bool (a = b)
+    end
+    | _ -> Binop (binop, exp1, exp2) 
+
+and negate exp = match eval exp with
     | Bool a -> Bool (not a)
-    | Statement _ -> failwith "Precondition violated: Cannot negate statement"
-    | Prop _ -> failwith "Precondition violated: Cannot negate proposition"
-    | Binop _ | Not _ -> failwith "Precondition violated: Cannot negate operator" 
+    | exp -> Not exp
 
 
 let interp (s: string) : string =

@@ -6,13 +6,12 @@ type rule =
 type binary_op =
     | Or 
     | And
-    | Implies
+    | Imp
     | Iff
     [@@deriving show]
 
 
 type expr =
-    | Statement of expr * rule 
     | Prop of string
     | Bool of bool
     | Binop of binary_op * expr * expr

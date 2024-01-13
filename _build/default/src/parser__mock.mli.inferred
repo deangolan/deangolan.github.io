@@ -8,7 +8,6 @@ type token =
   | IMP
   | IFF
   | EOF
-  | COLON
   | BOOL of bool
   | AND
 val menhir_begin_marker : int

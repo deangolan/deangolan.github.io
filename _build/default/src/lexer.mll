@@ -17,7 +17,6 @@ let iff = "<->"
 rule read =
     parse
     | whitespace { read lexbuf }
-    | ":" { COLON }
     | prop { PROP (Lexing.lexeme lexbuf) }
     | "(" { LPAREN }
     | ")" { RPAREN }
@@ -28,5 +27,4 @@ rule read =
     | not { NOT }
     | imp { IMP }
     | iff { IFF }
-    | "PR" | "Premise" { PR }
     | eof { EOF }

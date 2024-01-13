@@ -11,7 +11,6 @@ type token =
   | IMP
   | IFF
   | EOF
-  | COLON
   | BOOL of (bool)
   | AND
 

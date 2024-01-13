@@ -6,15 +6,19 @@ type rule =
 type binary_op =
     | Or 
     | And
-    | Implies
+    | Imp
     | Iff
     [@@deriving show]
 
 
-type expr =
-    | Statement of expr * rule 
+type stmt =
     | Prop of string
     | Bool of bool
-    | Binop of binary_op * expr * expr
-    | Not of expr
+    | Binop of binary_op * stmt * stmt 
+    | Not of stmt 
+    [@@deriving show]
+
+
+type expr =
+    | Statement of stmt * rule option
     [@@deriving show]

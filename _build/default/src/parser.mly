@@ -1,7 +1,6 @@
 %token <string> PROP
 %token <bool> BOOL
 %token PR
-%token COLON
 %token OR
 %token AND
 %token NOT
@@ -16,8 +15,7 @@
 %left IMP
 %left AND
 %left OR
-%left NOT
-%right COLON
+%right NOT
 
 %start <Ast.expr> prog
 
@@ -31,13 +29,12 @@ prog:
 
 
 expr:
-    | s = expr ; COLON; PR { Statement (s, Premise) }
     | p = PROP { Prop p }
     | b = BOOL { Bool b }
     | e1 = expr; OR; e2 = expr { Binop (Or, e1, e2) }
     | e1 = expr; AND; e2 = expr { Binop (And, e1, e2) }
-    | e1 = expr; IMP; e2 = expr { Binop (Implies, e1, e2) }
+    | e1 = expr; IMP; e2 = expr { Binop (Imp, e1, e2) }
     | e1 = expr; IFF; e2 = expr { Binop (Iff, e1, e2) }
-    | NOT; e = expr { Not e }
+    | NOT; e = expr { Not (e) }
     | LPAREN; e = expr; RPAREN { e } 
     ;
