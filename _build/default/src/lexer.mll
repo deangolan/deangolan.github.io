@@ -4,20 +4,20 @@ open Parser
 
 
 let whitespace = [' ' '\t' '\n' '\r']+
-let prop = ['a'-'z']
-let _true = "T" | "1" | "true" 
-let _false = "F" | "0" | "false"
+let atom = ['a'-'z']
+let _true = "T" | "true" 
+let _false = "F" | "false"
 let _and = "&" | "/\\"
 let _or = "|" | "\\/"
 let not = "~"
 let imp = "->"
 let iff = "<->"
 
+
 rule read =
     parse
     | whitespace { read lexbuf }
-    | prop { PROP (Lexing.lexeme lexbuf) }
-    | "PR" { RULE Ast.Premise } 
+    | atom { ATOM (Lexing.lexeme lexbuf) }
     | ":" { COLON }
     | "(" { LPAREN }
     | ")" { RPAREN }
@@ -28,4 +28,9 @@ rule read =
     | not { NOT }
     | imp { IMP }
     | iff { IFF }
+    | ['0'-'9']+ { INT (int_of_string (Lexing.lexeme lexbuf)) }
+    | "," { COMMA }
+    | "PR" { PR }
+    | "ID" { ID } 
+    | "MT" { MT }
     | eof { EOF }

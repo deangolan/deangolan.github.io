@@ -1,17 +1,23 @@
 type token =
-    RULE of Ast.rule
-  | RPAREN
-  | PROP of string
+    RPAREN
+  | PR
   | OR
   | NOT
+  | MT
   | LPAREN
+  | INT of int
   | IMP
   | IFF
+  | ID
   | EOF
+  | COMMA
   | COLON
   | BOOL of bool
+  | ATOM of string
   | AND
 val menhir_begin_marker : int
-val xv_prog : Ast.expr option
-val xv_expr : Ast.expr
+val xv_rule : Ast.rule
+val xv_prop : Ast.prop
+val xv_prog : Ast.line option
+val xv_expr : Ast.line
 val menhir_end_marker : int

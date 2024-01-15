@@ -1,20 +1,29 @@
 type rule =
-    | Premise
+    [ `Premise
+    | `Idempotence of int 
+    | `Commutative of int
+    | `Identity of int 
+    | `ModusTollens of int * int
+    ]
     [@@deriving show]
 
 
-type binary_op =
-    | Or 
-    | And
-    | Imp
-    | Iff
+type conn =
+    [ `Or 
+    | `And
+    | `Imp
+    | `Iff
+    ]
     [@@deriving show]
 
 
-type expr =
-    | Stmnt of expr * rule
-    | Prop of string
-    | Bool of bool
-    | Binop of binary_op * expr * expr
-    | Not of expr
+type prop =
+    [ `Atom of string
+    | `Bool of bool
+    | `Conn of conn * prop * prop
+    | `Not of prop
+    ]
     [@@deriving show]
+
+
+type line = {proposition: prop; derivedby: rule} [@@deriving show]

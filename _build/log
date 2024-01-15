@@ -1,4 +1,4 @@
-# dune utop src
+# dune build
 # OCAMLPARAM: unset
 # Shared cache: disabled
 # Shared cache location: /home/dean/.cache/dune/db
@@ -20,6 +20,12 @@
 #        }
 #  ; instrument_with = []
 #  }
-$ /home/dean/.opam/default/bin/ocamlc.opt -config > /tmp/dune_19ad5c_output
-$ (cd _build/.sandbox/7762da54281858bb7447dfdec2724614/default && /home/dean/.opam/default/bin/menhir src/parser.mly --base src/parser --infer-write-query src/parser__mock.ml.mock)
-$ (cd _build/.sandbox/409479d360ff5b7a832313ad7e645844/default && /home/dean/.opam/default/bin/menhir src/parser.mly --base src/parser --infer-read-reply src/parser__mock.mli.inferred)
+$ /home/dean/.opam/default/bin/ocamlc.opt -config > /tmp/dune_e4ac9d_output
+$ (cd _build/default && /home/dean/.opam/default/bin/ocamldep.opt -modules -impl bin/main.ml) > _build/default/bin/.main.eobjs/dune__exe__Main.impl.d
+$ (cd _build/default && /home/dean/.opam/default/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I bin/.main.eobjs/byte -I bin/.main.eobjs/native -I /home/dean/.opam/default/lib/ppx_deriving/runtime -I /home/dean/.opam/default/lib/result -I src/.interp.objs/byte -I src/.interp.objs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o bin/.main.eobjs/native/dune__exe__Main.cmx -c -impl bin/main.ml)
+> File "bin/main.ml", line 17, characters 77-80:
+> 17 |     | `Conn (`And, exp, `Bool true) | `Conn (`And, `Bool true, exp) -> exp = con 
+>                                                                                   ^^^
+> Error: This expression has type bool but an expression was expected of type
+>          [> `Bool of bool ]
+[2]
