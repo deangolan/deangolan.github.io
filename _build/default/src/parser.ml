@@ -94,7 +94,7 @@ let _menhir_action_01 =
   fun p r ->
     (
 # 37 "src/parser.mly"
-                                ( {proposition = p; derivedby = r } )
+                                ( {prop = p; derivedby = r } )
 # 99 "src/parser.ml"
      : (Ast.line))
 

@@ -32,4 +32,4 @@ and negate exp = match eval exp with
 
 let interp s =
     let line = parse s in
-    {proposition = eval line.proposition; derivedby = line.derivedby}
+    {prop = eval line.prop; derivedby = line.derivedby}

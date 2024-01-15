@@ -34,7 +34,7 @@ prog:
 
 
 expr:
-    | p = prop; COLON; r = rule { {proposition = p; derivedby = r } }
+    | p = prop; COLON; r = rule { {prop = p; derivedby = r } }
     ;
 
 

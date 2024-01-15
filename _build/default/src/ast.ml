@@ -26,4 +26,4 @@ type prop =
     [@@deriving show]
 
 
-type line = {proposition: prop; derivedby: rule} [@@deriving show]
+type line = {prop: prop; derivedby: rule} [@@deriving show]

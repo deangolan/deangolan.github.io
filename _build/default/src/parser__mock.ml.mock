@@ -270,7 +270,7 @@ and (xv_rule, xv_prop, xv_prog, xv_expr) =
    : 'tv_prop) (_startpos_p_ : Lexing.position) (_endpos_p_ : Lexing.position) (_startofs_p_ : int) (_endofs_p_ : int) (_loc_p_ : Lexing.position * Lexing.position) ->
     (
 # 37 "src/parser.mly"
-                                ( {proposition = p; derivedby = r } )
+                                ( {prop = p; derivedby = r } )
 # 275 "src/parser__mock.ml.mock"
      : 'tv_expr) in
   ((let rec diverge() = diverge() in diverge()) : 'tv_rule * 'tv_prop * 'tv_prog * 'tv_expr)
