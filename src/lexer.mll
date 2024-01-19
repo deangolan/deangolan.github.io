@@ -36,8 +36,8 @@ rule read =
     | "COM" | "Commu" { COM }
     | "ASO" | "Asso" { ASO }
     | "DIS" | "Dist" { DIS }
-    | "DN" { DN }
-    | "DM" { DM }
+    | "DN" | "DoubleNeg" { DN }
+    | "DM" | "Dominance" { DM }
     | "ID" | "Identity" { ID }
     | "MP" | "Modus Ponens" { MP }
     | "MT" | "Modus Tolens" { MT }
