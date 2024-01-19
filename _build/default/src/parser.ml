@@ -10,8 +10,6 @@ module MenhirBasics = struct
   type token = 
     | RPAREN
     | PR
-    | ORINTRO
-    | ORELIM
     | OR
     | NOT
     | MT
@@ -21,13 +19,9 @@ module MenhirBasics = struct
     | INT of (
 # 3 "src/parser.mly"
        (int)
-# 25 "src/parser.ml"
+# 23 "src/parser.ml"
   )
-    | IMPINTRO
-    | IMPELIM
     | IMP
-    | IFFINTRO
-    | IFFELIM
     | IFF
     | IDM
     | ID
@@ -41,16 +35,14 @@ module MenhirBasics = struct
     | BOOL of (
 # 2 "src/parser.mly"
        (bool)
-# 45 "src/parser.ml"
+# 39 "src/parser.ml"
   )
     | ATOM of (
 # 1 "src/parser.mly"
        (string)
-# 50 "src/parser.ml"
+# 44 "src/parser.ml"
   )
     | ASO
-    | ANDINTRO
-    | ANDELIM
     | AND
   
 end
@@ -109,241 +101,177 @@ and _menhir_box_prog =
 let _menhir_action_01 =
   fun p r ->
     (
-# 52 "src/parser.mly"
+# 44 "src/parser.mly"
                                 ( {prop = p; derivedby = r } )
-# 115 "src/parser.ml"
+# 107 "src/parser.ml"
      : (Ast.line))
 
 let _menhir_action_02 =
   fun () ->
     (
-# 46 "src/parser.mly"
+# 38 "src/parser.mly"
           ( None )
-# 123 "src/parser.ml"
+# 115 "src/parser.ml"
      : (Ast.line option))
 
 let _menhir_action_03 =
   fun e ->
     (
-# 47 "src/parser.mly"
+# 39 "src/parser.mly"
                     ( Some e )
-# 131 "src/parser.ml"
+# 123 "src/parser.ml"
      : (Ast.line option))
 
 let _menhir_action_04 =
   fun a ->
     (
-# 57 "src/parser.mly"
+# 49 "src/parser.mly"
                ( `Atom a )
-# 139 "src/parser.ml"
+# 131 "src/parser.ml"
      : (Ast.prop))
 
 let _menhir_action_05 =
   fun b ->
     (
-# 58 "src/parser.mly"
+# 50 "src/parser.mly"
                ( `Bool b )
-# 147 "src/parser.ml"
+# 139 "src/parser.ml"
      : (Ast.prop))
 
 let _menhir_action_06 =
   fun p1 p2 ->
     (
-# 59 "src/parser.mly"
+# 51 "src/parser.mly"
                                ( `Conn (`Or, p1, p2) )
-# 155 "src/parser.ml"
+# 147 "src/parser.ml"
      : (Ast.prop))
 
 let _menhir_action_07 =
   fun p1 p2 ->
     (
-# 60 "src/parser.mly"
+# 52 "src/parser.mly"
                                 ( `Conn (`And, p1, p2) )
-# 163 "src/parser.ml"
+# 155 "src/parser.ml"
      : (Ast.prop))
 
 let _menhir_action_08 =
   fun p1 p2 ->
     (
-# 61 "src/parser.mly"
-                                ( `Conn (`Imp, p1, p2) )
-# 171 "src/parser.ml"
+# 53 "src/parser.mly"
+                                ( `Conn (`Impl, p1, p2) )
+# 163 "src/parser.ml"
      : (Ast.prop))
 
 let _menhir_action_09 =
   fun p1 p2 ->
     (
-# 62 "src/parser.mly"
+# 54 "src/parser.mly"
                                 ( `Conn (`Iff, p1, p2) )
-# 179 "src/parser.ml"
+# 171 "src/parser.ml"
      : (Ast.prop))
 
 let _menhir_action_10 =
   fun e ->
     (
-# 63 "src/parser.mly"
+# 55 "src/parser.mly"
                     ( `Not (e) )
-# 187 "src/parser.ml"
+# 179 "src/parser.ml"
      : (Ast.prop))
 
 let _menhir_action_11 =
   fun e ->
     (
-# 64 "src/parser.mly"
+# 56 "src/parser.mly"
                                ( e )
-# 195 "src/parser.ml"
+# 187 "src/parser.ml"
      : (Ast.prop))
 
 let _menhir_action_12 =
   fun () ->
     (
-# 69 "src/parser.mly"
+# 61 "src/parser.mly"
          ( `Premise )
-# 203 "src/parser.ml"
+# 195 "src/parser.ml"
      : (Ast.rule))
 
 let _menhir_action_13 =
-  fun i1 i2 ->
+  fun i ->
     (
-# 70 "src/parser.mly"
-                                          ( `AndIntro (i1, i2) )
-# 211 "src/parser.ml"
+# 62 "src/parser.mly"
+                  ( `LE i )
+# 203 "src/parser.ml"
      : (Ast.rule))
 
 let _menhir_action_14 =
   fun i ->
     (
-# 71 "src/parser.mly"
-                       ( `AndElim i )
-# 219 "src/parser.ml"
+# 63 "src/parser.mly"
+                   ( `Idempotence i )
+# 211 "src/parser.ml"
      : (Ast.rule))
 
 let _menhir_action_15 =
   fun i ->
     (
-# 72 "src/parser.mly"
-                      ( `OrIntro i )
-# 227 "src/parser.ml"
+# 64 "src/parser.mly"
+                   ( `Commutative i )
+# 219 "src/parser.ml"
      : (Ast.rule))
 
 let _menhir_action_16 =
-  fun i1 i2 ->
+  fun i ->
     (
-# 73 "src/parser.mly"
-                                        ( `OrElim (i1, i2) )
-# 235 "src/parser.ml"
+# 65 "src/parser.mly"
+                   ( `Associative i )
+# 227 "src/parser.ml"
      : (Ast.rule))
 
 let _menhir_action_17 =
-  fun i1 i2 ->
+  fun i ->
     (
-# 74 "src/parser.mly"
-                                          ( `ImpIntro (i1, i2) )
-# 243 "src/parser.ml"
+# 66 "src/parser.mly"
+                   ( `Distributive i )
+# 235 "src/parser.ml"
      : (Ast.rule))
 
 let _menhir_action_18 =
-  fun i1 i2 ->
+  fun i ->
     (
-# 75 "src/parser.mly"
-                                         ( `ImpElim (i1, i2) )
-# 251 "src/parser.ml"
+# 67 "src/parser.mly"
+                  ( `DoubleNegation i )
+# 243 "src/parser.ml"
      : (Ast.rule))
 
 let _menhir_action_19 =
-  fun i1 i2 ->
+  fun i ->
     (
-# 76 "src/parser.mly"
-                                          ( `IffIntro (i1, i2) )
-# 259 "src/parser.ml"
+# 68 "src/parser.mly"
+                  ( `DeMorgan i )
+# 251 "src/parser.ml"
      : (Ast.rule))
 
 let _menhir_action_20 =
-  fun i1 i2 ->
+  fun i ->
     (
-# 77 "src/parser.mly"
-                                         ( `IffElim (i1, i2) )
-# 267 "src/parser.ml"
+# 69 "src/parser.mly"
+                  ( `Identity i )
+# 259 "src/parser.ml"
      : (Ast.rule))
 
 let _menhir_action_21 =
-  fun i ->
+  fun i1 i2 ->
     (
-# 78 "src/parser.mly"
-                  ( `LE i )
-# 275 "src/parser.ml"
+# 70 "src/parser.mly"
+                                    ( `ModusPonens (i1, i2) )
+# 267 "src/parser.ml"
      : (Ast.rule))
 
 let _menhir_action_22 =
-  fun i ->
-    (
-# 79 "src/parser.mly"
-                   ( `Idempotence i )
-# 283 "src/parser.ml"
-     : (Ast.rule))
-
-let _menhir_action_23 =
-  fun i ->
-    (
-# 80 "src/parser.mly"
-                   ( `Commutative i )
-# 291 "src/parser.ml"
-     : (Ast.rule))
-
-let _menhir_action_24 =
-  fun i ->
-    (
-# 81 "src/parser.mly"
-                   ( `Associative i )
-# 299 "src/parser.ml"
-     : (Ast.rule))
-
-let _menhir_action_25 =
-  fun i ->
-    (
-# 82 "src/parser.mly"
-                   ( `Distributive i )
-# 307 "src/parser.ml"
-     : (Ast.rule))
-
-let _menhir_action_26 =
-  fun i ->
-    (
-# 83 "src/parser.mly"
-                  ( `DoubleNegation i )
-# 315 "src/parser.ml"
-     : (Ast.rule))
-
-let _menhir_action_27 =
-  fun i ->
-    (
-# 84 "src/parser.mly"
-                  ( `DeMorgan i )
-# 323 "src/parser.ml"
-     : (Ast.rule))
-
-let _menhir_action_28 =
-  fun i ->
-    (
-# 85 "src/parser.mly"
-                  ( `Identity i )
-# 331 "src/parser.ml"
-     : (Ast.rule))
-
-let _menhir_action_29 =
   fun i1 i2 ->
     (
-# 86 "src/parser.mly"
-                                    ( `ModusPonens (i1, i2) )
-# 339 "src/parser.ml"
-     : (Ast.rule))
-
-let _menhir_action_30 =
-  fun i1 i2 ->
-    (
-# 87 "src/parser.mly"
+# 71 "src/parser.mly"
                                     ( `ModusTollens (i1, i2) )
-# 347 "src/parser.ml"
+# 275 "src/parser.ml"
      : (Ast.rule))
 
 let _menhir_print_token : token -> string =
@@ -351,10 +279,6 @@ let _menhir_print_token : token -> string =
     match _tok with
     | AND ->
         "AND"
-    | ANDELIM ->
-        "ANDELIM"
-    | ANDINTRO ->
-        "ANDINTRO"
     | ASO ->
         "ASO"
     | ATOM _ ->
@@ -381,16 +305,8 @@ let _menhir_print_token : token -> string =
         "IDM"
     | IFF ->
         "IFF"
-    | IFFELIM ->
-        "IFFELIM"
-    | IFFINTRO ->
-        "IFFINTRO"
     | IMP ->
         "IMP"
-    | IMPELIM ->
-        "IMPELIM"
-    | IMPINTRO ->
-        "IMPINTRO"
     | INT _ ->
         "INT"
     | LE ->
@@ -405,10 +321,6 @@ let _menhir_print_token : token -> string =
         "NOT"
     | OR ->
         "OR"
-    | ORELIM ->
-        "ORELIM"
-    | ORINTRO ->
-        "ORINTRO"
     | PR ->
         "PR"
     | RPAREN ->
@@ -516,49 +428,19 @@ include struct
               let _tok = _menhir_lexer _menhir_lexbuf in
               let _v = _menhir_action_12 () in
               _menhir_goto_rule _menhir_stack _v _tok
-          | ORINTRO ->
+          | MT ->
               let _tok = _menhir_lexer _menhir_lexbuf in
               (match (_tok : MenhirBasics.token) with
               | INT _v_1 ->
                   let _tok = _menhir_lexer _menhir_lexbuf in
-                  let i = _v_1 in
-                  let _v = _menhir_action_15 i in
-                  _menhir_goto_rule _menhir_stack _v _tok
-              | _ ->
-                  _eRR ())
-          | ORELIM ->
-              let _tok = _menhir_lexer _menhir_lexbuf in
-              (match (_tok : MenhirBasics.token) with
-              | INT _v_3 ->
-                  let _tok = _menhir_lexer _menhir_lexbuf in
                   (match (_tok : MenhirBasics.token) with
                   | COMMA ->
                       let _tok = _menhir_lexer _menhir_lexbuf in
                       (match (_tok : MenhirBasics.token) with
-                      | INT _v_4 ->
+                      | INT _v_2 ->
                           let _tok = _menhir_lexer _menhir_lexbuf in
-                          let (i2, i1) = (_v_4, _v_3) in
-                          let _v = _menhir_action_16 i1 i2 in
-                          _menhir_goto_rule _menhir_stack _v _tok
-                      | _ ->
-                          _eRR ())
-                  | _ ->
-                      _eRR ())
-              | _ ->
-                  _eRR ())
-          | MT ->
-              let _tok = _menhir_lexer _menhir_lexbuf in
-              (match (_tok : MenhirBasics.token) with
-              | INT _v_6 ->
-                  let _tok = _menhir_lexer _menhir_lexbuf in
-                  (match (_tok : MenhirBasics.token) with
-                  | COMMA ->
-                      let _tok = _menhir_lexer _menhir_lexbuf in
-                      (match (_tok : MenhirBasics.token) with
-                      | INT _v_7 ->
-                          let _tok = _menhir_lexer _menhir_lexbuf in
-                          let (i2, i1) = (_v_7, _v_6) in
-                          let _v = _menhir_action_30 i1 i2 in
+                          let (i2, i1) = (_v_2, _v_1) in
+                          let _v = _menhir_action_22 i1 i2 in
                           _menhir_goto_rule _menhir_stack _v _tok
                       | _ ->
                           _eRR ())
@@ -569,16 +451,16 @@ include struct
           | MP ->
               let _tok = _menhir_lexer _menhir_lexbuf in
               (match (_tok : MenhirBasics.token) with
-              | INT _v_9 ->
+              | INT _v_4 ->
                   let _tok = _menhir_lexer _menhir_lexbuf in
                   (match (_tok : MenhirBasics.token) with
                   | COMMA ->
                       let _tok = _menhir_lexer _menhir_lexbuf in
                       (match (_tok : MenhirBasics.token) with
-                      | INT _v_10 ->
+                      | INT _v_5 ->
                           let _tok = _menhir_lexer _menhir_lexbuf in
-                          let (i2, i1) = (_v_10, _v_9) in
-                          let _v = _menhir_action_29 i1 i2 in
+                          let (i2, i1) = (_v_5, _v_4) in
+                          let _v = _menhir_action_21 i1 i2 in
                           _menhir_goto_rule _menhir_stack _v _tok
                       | _ ->
                           _eRR ())
@@ -589,190 +471,80 @@ include struct
           | LE ->
               let _tok = _menhir_lexer _menhir_lexbuf in
               (match (_tok : MenhirBasics.token) with
-              | INT _v_12 ->
+              | INT _v_7 ->
                   let _tok = _menhir_lexer _menhir_lexbuf in
-                  let i = _v_12 in
-                  let _v = _menhir_action_21 i in
+                  let i = _v_7 in
+                  let _v = _menhir_action_13 i in
                   _menhir_goto_rule _menhir_stack _v _tok
-              | _ ->
-                  _eRR ())
-          | IMPINTRO ->
-              let _tok = _menhir_lexer _menhir_lexbuf in
-              (match (_tok : MenhirBasics.token) with
-              | INT _v_14 ->
-                  let _tok = _menhir_lexer _menhir_lexbuf in
-                  (match (_tok : MenhirBasics.token) with
-                  | COMMA ->
-                      let _tok = _menhir_lexer _menhir_lexbuf in
-                      (match (_tok : MenhirBasics.token) with
-                      | INT _v_15 ->
-                          let _tok = _menhir_lexer _menhir_lexbuf in
-                          let (i2, i1) = (_v_15, _v_14) in
-                          let _v = _menhir_action_17 i1 i2 in
-                          _menhir_goto_rule _menhir_stack _v _tok
-                      | _ ->
-                          _eRR ())
-                  | _ ->
-                      _eRR ())
-              | _ ->
-                  _eRR ())
-          | IMPELIM ->
-              let _tok = _menhir_lexer _menhir_lexbuf in
-              (match (_tok : MenhirBasics.token) with
-              | INT _v_17 ->
-                  let _tok = _menhir_lexer _menhir_lexbuf in
-                  (match (_tok : MenhirBasics.token) with
-                  | COMMA ->
-                      let _tok = _menhir_lexer _menhir_lexbuf in
-                      (match (_tok : MenhirBasics.token) with
-                      | INT _v_18 ->
-                          let _tok = _menhir_lexer _menhir_lexbuf in
-                          let (i2, i1) = (_v_18, _v_17) in
-                          let _v = _menhir_action_18 i1 i2 in
-                          _menhir_goto_rule _menhir_stack _v _tok
-                      | _ ->
-                          _eRR ())
-                  | _ ->
-                      _eRR ())
-              | _ ->
-                  _eRR ())
-          | IFFINTRO ->
-              let _tok = _menhir_lexer _menhir_lexbuf in
-              (match (_tok : MenhirBasics.token) with
-              | INT _v_20 ->
-                  let _tok = _menhir_lexer _menhir_lexbuf in
-                  (match (_tok : MenhirBasics.token) with
-                  | COMMA ->
-                      let _tok = _menhir_lexer _menhir_lexbuf in
-                      (match (_tok : MenhirBasics.token) with
-                      | INT _v_21 ->
-                          let _tok = _menhir_lexer _menhir_lexbuf in
-                          let (i2, i1) = (_v_21, _v_20) in
-                          let _v = _menhir_action_19 i1 i2 in
-                          _menhir_goto_rule _menhir_stack _v _tok
-                      | _ ->
-                          _eRR ())
-                  | _ ->
-                      _eRR ())
-              | _ ->
-                  _eRR ())
-          | IFFELIM ->
-              let _tok = _menhir_lexer _menhir_lexbuf in
-              (match (_tok : MenhirBasics.token) with
-              | INT _v_23 ->
-                  let _tok = _menhir_lexer _menhir_lexbuf in
-                  (match (_tok : MenhirBasics.token) with
-                  | COMMA ->
-                      let _tok = _menhir_lexer _menhir_lexbuf in
-                      (match (_tok : MenhirBasics.token) with
-                      | INT _v_24 ->
-                          let _tok = _menhir_lexer _menhir_lexbuf in
-                          let (i2, i1) = (_v_24, _v_23) in
-                          let _v = _menhir_action_20 i1 i2 in
-                          _menhir_goto_rule _menhir_stack _v _tok
-                      | _ ->
-                          _eRR ())
-                  | _ ->
-                      _eRR ())
               | _ ->
                   _eRR ())
           | IDM ->
               let _tok = _menhir_lexer _menhir_lexbuf in
               (match (_tok : MenhirBasics.token) with
-              | INT _v_26 ->
+              | INT _v_9 ->
                   let _tok = _menhir_lexer _menhir_lexbuf in
-                  let i = _v_26 in
-                  let _v = _menhir_action_22 i in
+                  let i = _v_9 in
+                  let _v = _menhir_action_14 i in
                   _menhir_goto_rule _menhir_stack _v _tok
               | _ ->
                   _eRR ())
           | ID ->
               let _tok = _menhir_lexer _menhir_lexbuf in
               (match (_tok : MenhirBasics.token) with
-              | INT _v_28 ->
+              | INT _v_11 ->
                   let _tok = _menhir_lexer _menhir_lexbuf in
-                  let i = _v_28 in
-                  let _v = _menhir_action_28 i in
+                  let i = _v_11 in
+                  let _v = _menhir_action_20 i in
                   _menhir_goto_rule _menhir_stack _v _tok
               | _ ->
                   _eRR ())
           | DN ->
               let _tok = _menhir_lexer _menhir_lexbuf in
               (match (_tok : MenhirBasics.token) with
-              | INT _v_30 ->
+              | INT _v_13 ->
                   let _tok = _menhir_lexer _menhir_lexbuf in
-                  let i = _v_30 in
-                  let _v = _menhir_action_26 i in
+                  let i = _v_13 in
+                  let _v = _menhir_action_18 i in
                   _menhir_goto_rule _menhir_stack _v _tok
               | _ ->
                   _eRR ())
           | DM ->
               let _tok = _menhir_lexer _menhir_lexbuf in
               (match (_tok : MenhirBasics.token) with
-              | INT _v_32 ->
+              | INT _v_15 ->
                   let _tok = _menhir_lexer _menhir_lexbuf in
-                  let i = _v_32 in
-                  let _v = _menhir_action_27 i in
+                  let i = _v_15 in
+                  let _v = _menhir_action_19 i in
                   _menhir_goto_rule _menhir_stack _v _tok
               | _ ->
                   _eRR ())
           | DIS ->
               let _tok = _menhir_lexer _menhir_lexbuf in
               (match (_tok : MenhirBasics.token) with
-              | INT _v_34 ->
+              | INT _v_17 ->
                   let _tok = _menhir_lexer _menhir_lexbuf in
-                  let i = _v_34 in
-                  let _v = _menhir_action_25 i in
+                  let i = _v_17 in
+                  let _v = _menhir_action_17 i in
                   _menhir_goto_rule _menhir_stack _v _tok
               | _ ->
                   _eRR ())
           | COM ->
               let _tok = _menhir_lexer _menhir_lexbuf in
               (match (_tok : MenhirBasics.token) with
-              | INT _v_36 ->
+              | INT _v_19 ->
                   let _tok = _menhir_lexer _menhir_lexbuf in
-                  let i = _v_36 in
-                  let _v = _menhir_action_23 i in
+                  let i = _v_19 in
+                  let _v = _menhir_action_15 i in
                   _menhir_goto_rule _menhir_stack _v _tok
               | _ ->
                   _eRR ())
           | ASO ->
               let _tok = _menhir_lexer _menhir_lexbuf in
               (match (_tok : MenhirBasics.token) with
-              | INT _v_38 ->
+              | INT _v_21 ->
                   let _tok = _menhir_lexer _menhir_lexbuf in
-                  let i = _v_38 in
-                  let _v = _menhir_action_24 i in
-                  _menhir_goto_rule _menhir_stack _v _tok
-              | _ ->
-                  _eRR ())
-          | ANDINTRO ->
-              let _tok = _menhir_lexer _menhir_lexbuf in
-              (match (_tok : MenhirBasics.token) with
-              | INT _v_40 ->
-                  let _tok = _menhir_lexer _menhir_lexbuf in
-                  (match (_tok : MenhirBasics.token) with
-                  | COMMA ->
-                      let _tok = _menhir_lexer _menhir_lexbuf in
-                      (match (_tok : MenhirBasics.token) with
-                      | INT _v_41 ->
-                          let _tok = _menhir_lexer _menhir_lexbuf in
-                          let (i2, i1) = (_v_41, _v_40) in
-                          let _v = _menhir_action_13 i1 i2 in
-                          _menhir_goto_rule _menhir_stack _v _tok
-                      | _ ->
-                          _eRR ())
-                  | _ ->
-                      _eRR ())
-              | _ ->
-                  _eRR ())
-          | ANDELIM ->
-              let _tok = _menhir_lexer _menhir_lexbuf in
-              (match (_tok : MenhirBasics.token) with
-              | INT _v_43 ->
-                  let _tok = _menhir_lexer _menhir_lexbuf in
-                  let i = _v_43 in
-                  let _v = _menhir_action_14 i in
+                  let i = _v_21 in
+                  let _v = _menhir_action_16 i in
                   _menhir_goto_rule _menhir_stack _v _tok
               | _ ->
                   _eRR ())

@@ -2,4 +2,4 @@
  (preprocess (pps ppx_deriving.show))
  (public_name proofwriter)
  (name main)
- (libraries interp))
+ (libraries line))

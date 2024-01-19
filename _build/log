@@ -1,4 +1,4 @@
-# dune utop
+# dune build
 # OCAMLPARAM: unset
 # Shared cache: disabled
 # Shared cache location: /home/dean/.cache/dune/db
@@ -20,4 +20,35 @@
 #        }
 #  ; instrument_with = []
 #  }
-$ /home/dean/.opam/default/bin/ocamlc.opt -config > /tmp/dune_700da4_output
+$ /home/dean/.opam/default/bin/ocamlc.opt -config > /tmp/dune_f3cc6a_output
+$ (cd _build/.sandbox/3a7adf7bf015c1e4372aee4f5efe0bc9/default && .ppx/0bb5094b13567c3c4e1ee33245b80e63/ppx.exe -o bin/prooftree.pp.mli --intf bin/prooftree.mli -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/default && /home/dean/.opam/default/bin/ocamldep.opt -modules -intf bin/prooftree.pp.mli) > _build/default/bin/.main.eobjs/dune__exe__Prooftree.intf.d
+$ (cd _build/default && /home/dean/.opam/default/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I bin/.main.eobjs/byte -I /home/dean/.opam/default/lib/ppx_deriving/runtime -I /home/dean/.opam/default/lib/result -I src/.line.objs/byte -no-alias-deps -opaque -open Dune__exe -o bin/.main.eobjs/byte/dune__exe__Prooftree.cmi -c -intf bin/prooftree.pp.mli)
+$ (cd _build/default && /home/dean/.opam/default/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I bin/.main.eobjs/byte -I bin/.main.eobjs/native -I /home/dean/.opam/default/lib/ppx_deriving/runtime -I /home/dean/.opam/default/lib/result -I src/.line.objs/byte -I src/.line.objs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o bin/.main.eobjs/native/dune__exe__Rules.cmx -c -impl bin/rules.pp.ml)
+> File "bin/rules.ml", line 21, characters 6-27:
+> 21 |     | `Conn (conn1, p1, q1), `Conn (conn2, p2, q2) when conn1 = conn2 -> 
+>            ^^^^^^^^^^^^^^^^^^^^^
+> Error: This pattern matches values of type [? `Conn of 'a ]
+>        but a pattern was expected which matches values of type line
+[2]
+$ (cd _build/default && /home/dean/.opam/default/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I bin/.main.eobjs/byte -I bin/.main.eobjs/native -I /home/dean/.opam/default/lib/ppx_deriving/runtime -I /home/dean/.opam/default/lib/result -I src/.line.objs/byte -I src/.line.objs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o bin/.main.eobjs/native/dune__exe__Prooftree.cmx -c -impl bin/prooftree.pp.ml)
+> File "bin/prooftree.ml", line 1:
+> Error: The implementation bin/prooftree.pp.ml
+>        does not match the interface bin/.main.eobjs/byte/dune__exe__Prooftree.cmi:
+>         Values do not match:
+>           val addline : int -> Line.line -> bool
+>         is not included in
+>           val addline : Line.line -> bool
+>         The type int -> Line.line -> bool is not compatible with the type
+>           Line.line -> bool
+>         Type int is not compatible with type Line.line
+>         File "bin/prooftree.mli", line 3, characters 0-26:
+>           Expected declaration
+>         File "bin/prooftree.ml", line 6, characters 4-11: Actual declaration
+[2]
+$ (cd _build/default && /home/dean/.opam/default/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I bin/.main.eobjs/byte -I bin/.main.eobjs/native -I /home/dean/.opam/default/lib/ppx_deriving/runtime -I /home/dean/.opam/default/lib/result -I src/.line.objs/byte -I src/.line.objs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o bin/.main.eobjs/native/dune__exe__Main.cmx -c -impl bin/main.pp.ml)
+> File "bin/main.ml", line 1, characters 0-14:
+> 1 | open Prooftree
+>     ^^^^^^^^^^^^^^
+> Error (warning 33 [unused-open]): unused open Dune__exe.Prooftree.
+[2]

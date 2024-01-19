@@ -11,14 +11,6 @@ type rule =
     | `LE of int
     | `ModusPonens of int * int
     | `ModusTollens of int * int
-    | `AndIntro of int * int
-    | `AndElim of int
-    | `OrIntro of int 
-    | `OrElim of int * int 
-    | `ImpIntro of int * int 
-    | `ImpElim of int * int 
-    | `IffIntro of int * int 
-    | `IffElim of int * int 
     ]
     [@@deriving show]
 
@@ -26,7 +18,7 @@ type rule =
 type conn =
     [ `And 
     | `Or
-    | `Imp
+    | `Impl
     | `Iff
     ]
     [@@deriving show]

@@ -1,8 +1,6 @@
 type token =
     RPAREN
   | PR
-  | ORINTRO
-  | ORELIM
   | OR
   | NOT
   | MT
@@ -10,11 +8,7 @@ type token =
   | LPAREN
   | LE
   | INT of int
-  | IMPINTRO
-  | IMPELIM
   | IMP
-  | IFFINTRO
-  | IFFELIM
   | IFF
   | IDM
   | ID
@@ -28,8 +22,6 @@ type token =
   | BOOL of bool
   | ATOM of string
   | ASO
-  | ANDINTRO
-  | ANDELIM
   | AND
 val menhir_begin_marker : int
 val xv_rule : Ast.rule

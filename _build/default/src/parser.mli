@@ -4,8 +4,6 @@
 type token = 
   | RPAREN
   | PR
-  | ORINTRO
-  | ORELIM
   | OR
   | NOT
   | MT
@@ -13,11 +11,7 @@ type token =
   | LPAREN
   | LE
   | INT of (int)
-  | IMPINTRO
-  | IMPELIM
   | IMP
-  | IFFINTRO
-  | IFFELIM
   | IFF
   | IDM
   | ID
@@ -31,8 +25,6 @@ type token =
   | BOOL of (bool)
   | ATOM of (string)
   | ASO
-  | ANDINTRO
-  | ANDELIM
   | AND
 
 (* This exception is raised by the monolithic API functions. *)

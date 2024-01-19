@@ -30,23 +30,15 @@ rule read =
     | iff { IFF }
     | ['0'-'9']+ { INT (int_of_string (Lexing.lexeme lexbuf)) }
     | "," { COMMA }
-    | "PR" { PR }
-    | "&I" { ANDINTRO }
-    | "&E" { ANDELIM }
-    | "|I" { ORINTRO }
-    | "|E" { ORELIM }
-    | "->I" { IMPINTRO }
-    | "->E" { IMPELIM }
-    | "<->I" { IFFINTRO }
-    | "<->E" { IFFELIM }
+    | "PR" | "Premise" { PR }
     | "LE" { LE }
-    | "IDM" { IDM }
-    | "COM" { COM }
-    | "ASO" { ASO }
-    | "DIS" { DIS }
+    | "IDM" | "Idem" { IDM }
+    | "COM" | "Commu" { COM }
+    | "ASO" | "Asso" { ASO }
+    | "DIS" | "Dist" { DIS }
     | "DN" { DN }
     | "DM" { DM }
-    | "ID" { ID }
-    | "MP" { MP }
-    | "MT" { MT }
+    | "ID" | "Identity" { ID }
+    | "MP" | "Modus Ponens" { MP }
+    | "MT" | "Modus Tolens" { MT }
     | eof { EOF }

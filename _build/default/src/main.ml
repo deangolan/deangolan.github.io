@@ -20,7 +20,7 @@ and collapse binop exp1 exp2 = match binop, exp1, exp2 with
         match binop with
         | `And -> `Bool (a && b)
         | `Or -> `Bool (a || b)
-        | `Imp -> `Bool ((not a) || b)
+        | `Impl -> `Bool ((not a) || b)
         | `Iff -> `Bool (a = b)
     end
     | _ -> `Conn (binop, exp1, exp2) 
