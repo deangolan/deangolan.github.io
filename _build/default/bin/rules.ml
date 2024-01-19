@@ -2,19 +2,20 @@ open Line
 
 
 let rec is_valid getline linenum =
+    let getprop = (fun linenum -> (getline linenum).prop) in
     match getline linenum with
     | { prop = _ ; derivedby = `Premise} -> true
-    | { prop ; derivedby = `LE a} -> check le (getline a) prop
-    | { prop ; derivedby = `Idempotence a} -> check idempotence (getline a) prop
-    | { prop ; derivedby = `Commutative a} -> check commutative (getline a) prop
-    | { prop ; derivedby = `Associative a} -> check associative (getline a) prop
-    | { prop ; derivedby = `Distributive a} -> check distributive (getline a) prop
-    | { prop ; derivedby = `DoubleNegation a} -> check doublenegation (getline a) prop
-    | { prop ; derivedby = `DeMorgan a} -> check demorgans (getline a) prop
-    | { prop ; derivedby = `Identity a} -> check identity (getline a) prop
-    | { prop ; derivedby = `Dominance a} -> check dominance (getline a) prop
-    | { prop ; derivedby = `ModusPonens (a, b)} ->  modusponens (getline a) (getline b) prop
-    | { prop ; derivedby = `ModusTollens (a, b)} ->  modustollens (getline a) (getline b) prop
+    | { prop ; derivedby = `LE a} -> check le (getprop a) prop
+    | { prop ; derivedby = `Idempotence a} -> check idempotence (getprop a) prop
+    | { prop ; derivedby = `Commutative a} -> check commutative (getprop a) prop
+    | { prop ; derivedby = `Associative a} -> check associative (getprop a) prop
+    | { prop ; derivedby = `Distributive a} -> check distributive (getprop a) prop
+    | { prop ; derivedby = `DoubleNegation a} -> check doublenegation (getprop a) prop
+    | { prop ; derivedby = `DeMorgan a} -> check demorgans (getprop a) prop
+    | { prop ; derivedby = `Identity a} -> check identity (getprop a) prop
+    | { prop ; derivedby = `Dominance a} -> check dominance (getprop a) prop
+    | { prop ; derivedby = `ModusPonens (a, b)} ->  modusponens (getprop a) (getprop b) prop
+    | { prop ; derivedby = `ModusTollens (a, b)} ->  modustollens (getprop a) (getprop b) prop
 
 and check patt p q =
     patt p q || match p, q with
@@ -80,7 +81,7 @@ and demorgans p q = match p, q with
     `Conn ((`And|`Or) as conn2, `Not p2, `Not q2)
         -> conn1 = conn2 && p1 = p2 && q1 = q2
     |`Conn ((`And|`Or) as conn1, `Not p1, `Not q1), 
-    `Not (((`And|`Or) as conn2, p2, q2))
+    `Not (`Conn ((`And|`Or) as conn2, p2, q2))
         -> conn1 = conn2 && p1 = p2 && q1 = q2
     | _ -> false
 
@@ -107,3 +108,9 @@ and modusponens p1 p2 q = match p1, p2 with
 and modustollens p1 p2 q = match p1, p2 with
     | `Conn (`Impl, q1, p1), `Not p2 -> p1 = p2 && q1 = `Not q
     | _ -> false
+
+
+let all_valid lines =
+    let getline = Hashtbl.find lines in
+    let aux = fun linenum _line valid -> valid && is_valid getline linenum in 
+    Hashtbl.fold aux lines true

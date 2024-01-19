@@ -1,5 +1,7 @@
 open Line
 
-type getline = int -> line 
 
-val is_valid : getline -> int -> bool
+val is_valid : (int -> line) -> int -> bool
+
+
+val all_valid : (int, line) Hashtbl.t -> bool

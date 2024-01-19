@@ -1,1 +1,1 @@
-bin/rules.pp.mli: Line
+bin/rules.pp.mli: Hashtbl Line

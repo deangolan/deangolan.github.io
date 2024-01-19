@@ -13,4 +13,6 @@ let editline linenum line =
     Rules.is_valid (Hashtbl.find lines) linenum 
 
 
-let deleteline linenum = Hashtbl.remove linenum; 
+let deleteline linenum = 
+    Hashtbl.remove lines linenum;
+    Rules.all_valid lines

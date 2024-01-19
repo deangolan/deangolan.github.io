@@ -1,7 +1,10 @@
 open Line 
 
-val addline : line -> bool
 
-val editline : line -> bool
+val addline : int -> line -> bool
 
-val deleteline : line -> bool
+
+val editline : int -> line -> bool
+
+
+val deleteline : int -> bool
