@@ -8,7 +8,7 @@
 (source
  (github username/reponame))
 
-(authors "Author Name")
+(authors "Dean Golan")
 
 (maintainers "Maintainer Name")
 
@@ -20,8 +20,4 @@
  (name proofwriter)
  (synopsis "A short synopsis")
  (description "A longer description")
- (depends ocaml dune)
- (tags
-  (topics "to describe" your project)))
-
-; See the complete stanza docs at https://dune.readthedocs.io/en/stable/dune-files.html#dune-project
+ (depends js_of_ocaml js_of_ocaml-ppx))

@@ -1,4 +1,4 @@
-# dune build
+# dune build @fmt
 # OCAMLPARAM: unset
 # Shared cache: disabled
 # Shared cache location: /home/dean/.cache/dune/db
@@ -20,5 +20,20 @@
 #        }
 #  ; instrument_with = []
 #  }
-$ /home/dean/.opam/default/bin/ocamlc.opt -config > /tmp/dune_e77e7f_output
-$ /home/dean/.opam/default/bin/js_of_ocaml --version > /tmp/dune_54c715_output
+$ /home/dean/.opam/default/bin/ocamlc.opt -config > /tmp/dune_35f6af_output
+$ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/site/dune _build/default/site/.formatted/dune
+> diff --git a/_build/default/site/dune b/_build/default/site/.formatted/dune
+> index de83136..acf2365 100644
+> --- a/_build/default/site/dune
+> +++ b/_build/default/site/.formatted/dune
+> @@ -1,6 +1,7 @@
+>  (rule
+>   (deps ../js/main.bc.js)
+> - (target ./prooftree.js )
+> + (target ./prooftree.js)
+>   (mode
+>    (promote (until-clean)))
+> - (action (copy %{deps} %{target})))
+> + (action
+> +  (copy %{deps} %{target})))
+[1]
