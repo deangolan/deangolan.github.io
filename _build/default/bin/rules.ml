@@ -17,14 +17,14 @@ let rec is_valid getline linenum =
     | { prop ; derivedby = `ModusPonens (a, b)} ->  modusponens (getprop a) (getprop b) prop
     | { prop ; derivedby = `ModusTollens (a, b)} ->  modustollens (getprop a) (getprop b) prop
 
-and check patt p q =
-    patt p q || match p, q with
+and check pattern p q =
+    pattern p q || match p, q with
     | `Conn (conn1, p1, q1), `Conn (conn2, p2, q2) when conn1 = conn2 -> 
-            (check patt p1 p2 || check patt q1 q2) && (p1 = p2 || q1 = q2)
-    | `Not p, `Not q -> check patt p q 
+            (check pattern p1 p2 || check pattern q1 q2) && (p1 = p2 || q1 = q2)
+    | `Not p, `Not q -> check pattern p q 
     | _ -> false 
 
-(* *)
+(* Patterns for equivalence rules. Must be symmetric. *)
 
 and le p q = match p, q with
     | `Conn (`Impl, p1, q1), `Conn (`Or, `Not p2, q2)
@@ -56,7 +56,6 @@ and associative p q = match p, q with
     `Conn (`Or, p2, `Conn (`Or, q2, r2))
         -> p1 = p2 && q1 = q2 && r1 = r2
     | _ -> false
-
 
 and distributive p q = match p, q with
     | `Conn (`Or, p1, `Conn (`And, q1, r1)),
@@ -99,7 +98,7 @@ and dominance p q = match p with
         -> `Bool (true) = q
     | _ -> false
 
-(* *)
+(* Patterns for implication rules. *)
 
 and modusponens p1 p2 q = match p1, p2 with
     | `Conn (`Impl, p1, q1), p2 -> p1 = p2 && q1 = q
@@ -112,5 +111,5 @@ and modustollens p1 p2 q = match p1, p2 with
 
 let all_valid lines =
     let getline = Hashtbl.find lines in
-    let aux = fun linenum _line valid -> valid && is_valid getline linenum in 
+    let aux = fun linenum _line acc -> acc && is_valid getline linenum in 
     Hashtbl.fold aux lines true
