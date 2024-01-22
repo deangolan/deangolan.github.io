@@ -1,4 +1,0 @@
-(lang dune 3.12)
-(name proofwriter)
-(sections (lib .))
-(files (lib (META dune-package opam)))

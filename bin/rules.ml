@@ -109,28 +109,30 @@ and doublenegation p q =
 and demorgans p q =
   match (p, q) with
   | ( `Not (`Conn (((`And | `Or) as conn1), p1, q1))
-    , `Conn (((`And | `Or) as conn2), `Not p2, `Not q2) ) ->
-      conn1 = conn2 && p1 = p2 && q1 = q2
+    , `Conn (((`And | `Or) as conn2), `Not p2, `Not q2) ) 
   | ( `Conn (((`And | `Or) as conn1), `Not p1, `Not q1)
     , `Not (`Conn (((`And | `Or) as conn2), p2, q2)) ) ->
-      conn1 = conn2 && p1 = p2 && q1 = q2
+      conn1 <> conn2 && p1 = p2 && q1 = q2
   | _ ->
       false
 
 and identity p q =
   match (p, q) with
-  | (`Conn (`And, `Bool true, p1) | `Conn (`And, p1, `Bool true)), p2 ->
-      p1 = p2
-  | (`Conn (`Or, `Bool false, p1) | `Conn (`Or, p1, `Bool false)), p2 ->
+  | (`Conn (`And, `Bool true, p1) | `Conn (`And, p1, `Bool true)), p2 
+  | (`Conn (`Or, `Bool false, p1) | `Conn (`Or, p1, `Bool false)), p2 
+  | p1, (`Conn (`And, `Bool true, p2) | `Conn (`And, p2, `Bool true)) 
+  | p1, (`Conn (`Or, `Bool false, p2) | `Conn (`Or, p2, `Bool false)) ->
       p1 = p2
   | _ ->
       false
 
 and dominance p q =
-  match p with
-  | `Conn (`And, `Bool false, _) | `Conn (`And, _, `Bool false) ->
+  match p, q with
+  | (`Conn (`And, `Bool false, _) | `Conn (`And, _, `Bool false)), q
+  | q, (`Conn (`And, `Bool false, _) | `Conn (`And, _, `Bool false)) ->
       `Bool false = q
-  | `Conn (`Or, `Bool true, _) | `Conn (`Or, _, `Bool true) ->
+  | (`Conn (`Or, `Bool true, _) | `Conn (`Or, _, `Bool true)), q
+  | q, (`Conn (`Or, `Bool true, _) | `Conn (`Or, _, `Bool true)) ->
       `Bool true = q
   | _ ->
       false
