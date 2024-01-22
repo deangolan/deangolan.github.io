@@ -1,4 +1,4 @@
-# dune build
+# dune fmt
 # OCAMLPARAM: unset
 # Shared cache: disabled
 # Shared cache location: /home/dean/.cache/dune/db
@@ -20,23 +20,582 @@
 #        }
 #  ; instrument_with = []
 #  }
-$ /home/dean/.opam/default/bin/ocamlc.opt -config > /tmp/dune_5da539_output
-$ /home/dean/.opam/default/bin/js_of_ocaml --version > /tmp/dune_eaf663_output
-$ (cd _build/default && /home/dean/.opam/default/bin/ocamldep.opt -modules -impl bin/export.pp.ml) > _build/default/bin/.export.eobjs/dune__exe__Export.impl.d
-$ (cd _build/default && /home/dean/.opam/default/bin/ocamldep.opt -modules -impl bin/prooftree.pp.ml) > _build/default/bin/.export.eobjs/dune__exe__Prooftree.impl.d
-$ (cd _build/default && /home/dean/.opam/default/bin/ocamldep.opt -modules -intf bin/rules.pp.mli) > _build/default/bin/.export.eobjs/dune__exe__Rules.intf.d
-$ (cd _build/default && /home/dean/.opam/default/bin/ocamldep.opt -modules -impl bin/rules.pp.ml) > _build/default/bin/.export.eobjs/dune__exe__Rules.impl.d
-$ (cd _build/default && /home/dean/.opam/default/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -49 -nopervasives -nostdlib -g -bin-annot -I bin/.export.eobjs/byte -no-alias-deps -opaque -o bin/.export.eobjs/byte/dune__exe.cmo -c -impl bin/.export.eobjs/dune__exe.ml-gen)
-$ (cd _build/default && /home/dean/.opam/default/bin/ocamldep.opt -modules -intf bin/export.pp.mli) > _build/default/bin/.export.eobjs/dune__exe__Export.intf.d
-$ (cd _build/default && /home/dean/.opam/default/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I bin/.export.eobjs/byte -I /home/dean/.opam/default/lib/js_of_ocaml -I /home/dean/.opam/default/lib/js_of_ocaml-compiler/runtime -I /home/dean/.opam/default/lib/ppx_deriving/runtime -I /home/dean/.opam/default/lib/result -I src/.line.objs/byte -no-alias-deps -opaque -open Dune__exe -o bin/.export.eobjs/byte/dune__exe__Rules.cmi -c -intf bin/rules.pp.mli)
-$ (cd _build/default && /home/dean/.opam/default/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I bin/.export.eobjs/byte -I /home/dean/.opam/default/lib/js_of_ocaml -I /home/dean/.opam/default/lib/js_of_ocaml-compiler/runtime -I /home/dean/.opam/default/lib/ppx_deriving/runtime -I /home/dean/.opam/default/lib/result -I src/.line.objs/byte -no-alias-deps -opaque -open Dune__exe -o bin/.export.eobjs/byte/dune__exe__Export.cmi -c -intf bin/export.pp.mli)
-$ (cd _build/default/bin && /home/dean/.opam/default/bin/js_of_ocaml --pretty --source-map-inline -o .export.eobjs/jsoo/dune__exe.cmo.js .export.eobjs/byte/dune__exe.cmo)
-$ (cd _build/default && /home/dean/.opam/default/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I bin/.export.eobjs/byte -I /home/dean/.opam/default/lib/js_of_ocaml -I /home/dean/.opam/default/lib/js_of_ocaml-compiler/runtime -I /home/dean/.opam/default/lib/ppx_deriving/runtime -I /home/dean/.opam/default/lib/result -I src/.line.objs/byte -no-alias-deps -opaque -open Dune__exe -o bin/.export.eobjs/byte/dune__exe__Prooftree.cmo -c -impl bin/prooftree.pp.ml)
-$ (cd _build/default && /home/dean/.opam/default/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I bin/.export.eobjs/byte -I /home/dean/.opam/default/lib/js_of_ocaml -I /home/dean/.opam/default/lib/js_of_ocaml-compiler/runtime -I /home/dean/.opam/default/lib/ppx_deriving/runtime -I /home/dean/.opam/default/lib/result -I src/.line.objs/byte -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o bin/.export.eobjs/byte/dune__exe__Rules.cmo -c -impl bin/rules.pp.ml)
-$ (cd _build/default/bin && /home/dean/.opam/default/bin/js_of_ocaml --pretty --source-map-inline -o .export.eobjs/jsoo/dune__exe__Prooftree.cmo.js .export.eobjs/byte/dune__exe__Prooftree.cmo)
-$ (cd _build/default && /home/dean/.opam/default/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I bin/.export.eobjs/byte -I /home/dean/.opam/default/lib/js_of_ocaml -I /home/dean/.opam/default/lib/js_of_ocaml-compiler/runtime -I /home/dean/.opam/default/lib/ppx_deriving/runtime -I /home/dean/.opam/default/lib/result -I src/.line.objs/byte -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o bin/.export.eobjs/byte/dune__exe__Export.cmo -c -impl bin/export.pp.ml)
-$ (cd _build/default/bin && /home/dean/.opam/default/bin/js_of_ocaml --pretty --source-map-inline -o .export.eobjs/jsoo/dune__exe__Export.cmo.js .export.eobjs/byte/dune__exe__Export.cmo)
-$ (cd _build/default/bin && /home/dean/.opam/default/bin/js_of_ocaml --pretty --source-map-inline -o .export.eobjs/jsoo/dune__exe__Rules.cmo.js .export.eobjs/byte/dune__exe__Rules.cmo)
-$ (cd _build/default && /home/dean/.opam/default/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -o bin/export.bc-for-jsoo -no-check-prims -noautolink /home/dean/.opam/default/lib/js_of_ocaml-compiler/runtime/jsoo_runtime.cma /home/dean/.opam/default/lib/js_of_ocaml/js_of_ocaml.cma /home/dean/.opam/default/lib/result/result.cma /home/dean/.opam/default/lib/ppx_deriving/runtime/ppx_deriving_runtime.cma src/line.cma bin/.export.eobjs/byte/dune__exe.cmo bin/.export.eobjs/byte/dune__exe__Rules.cmo bin/.export.eobjs/byte/dune__exe__Prooftree.cmo bin/.export.eobjs/byte/dune__exe__Export.cmo)
-$ (cd _build/default/bin && /home/dean/.opam/default/bin/js_of_ocaml build-runtime --pretty --source-map-inline -o .export.eobjs/jsoo/export.bc.runtime.js)
-$ (cd _build/default/bin && /home/dean/.opam/default/bin/js_of_ocaml link --source-map-inline -o export.bc.js .export.eobjs/jsoo/export.bc.runtime.js ../.js/default/stdlib/stdlib.cma.js ../.js/default/js_of_ocaml-compiler.runtime/jsoo_runtime.cma.js ../.js/default/js_of_ocaml/js_of_ocaml.cma.js ../.js/default/result/result.cma.js ../.js/default/ppx_deriving.runtime/ppx_deriving_runtime.cma.js ../src/.line.objs/jsoo/default/line.cma.js .export.eobjs/jsoo/dune__exe.cmo.js .export.eobjs/jsoo/dune__exe__Rules.cmo.js .export.eobjs/jsoo/dune__exe__Prooftree.cmo.js .export.eobjs/jsoo/dune__exe__Export.cmo.js ../.js/default/stdlib/std_exit.cmo.js)
+$ /home/dean/.opam/default/bin/ocamlc.opt -config > /tmp/dune_38db52_output
+$ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/src/dune _build/default/src/.formatted/dune
+> diff --git a/_build/default/src/dune b/_build/default/src/.formatted/dune
+> index 6cb254f..9253308 100644
+> --- a/_build/default/src/dune
+> +++ b/_build/default/src/.formatted/dune
+> @@ -1,9 +1,9 @@
+> -(library 
+> -  (name line)
+> -  (preprocess (pps ppx_deriving.show)))
+> +(library
+> + (name line)
+> + (preprocess
+> +  (pps ppx_deriving.show)))
+>  
+> -(menhir 
+> -  (modules parser))
+> +(menhir
+> + (modules parser))
+>  
+>  (ocamllex lexer)
+> -
+[1]
+$ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/src/ast.ml _build/default/src/.formatted/ast.ml
+> diff --git a/_build/default/src/ast.ml b/_build/default/src/.formatted/ast.ml
+> index 7ddf54a..af16ec4 100644
+> --- a/_build/default/src/ast.ml
+> +++ b/_build/default/src/.formatted/ast.ml
+> @@ -1,36 +1,22 @@
+>  type rule =
+> -    [ `Premise
+> -    | `Idempotence of int 
+> -    | `Commutative of int
+> -    | `Associative of int
+> -    | `Distributive of int
+> -    | `DoubleNegation of int
+> -    | `DeMorgan of int
+> -    | `Identity of int 
+> -    | `Dominance of int
+> -    | `LE of int
+> -    | `ModusPonens of int * int
+> -    | `ModusTollens of int * int
+> -    ]
+> -    [@@deriving show]
+> -
+> -
+> -type conn =
+> -    [ `And 
+> -    | `Or
+> -    | `Impl
+> -    | `Iff
+> -    ]
+> -    [@@deriving show]
+> +  [ `Premise
+> +  | `Idempotence of int
+> +  | `Commutative of int
+> +  | `Associative of int
+> +  | `Distributive of int
+> +  | `DoubleNegation of int
+> +  | `DeMorgan of int
+> +  | `Identity of int
+> +  | `Dominance of int
+> +  | `LE of int
+> +  | `ModusPonens of int * int
+> +  | `ModusTollens of int * int ]
+> +[@@deriving show]
+>  
+> +type conn = [`And | `Or | `Impl | `Iff] [@@deriving show]
+>  
+>  type prop =
+> -    [ `Atom of string
+> -    | `Bool of bool
+> -    | `Conn of conn * prop * prop
+> -    | `Not of prop
+> -    ]
+> -    [@@deriving show]
+> -
+> +  [`Atom of string | `Bool of bool | `Conn of conn * prop * prop | `Not of prop]
+> +[@@deriving show]
+>  
+>  type line = {prop: prop; derivedby: rule} [@@deriving show]
+[1]
+$ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/src/line.mli _build/default/src/.formatted/line.mli
+> diff --git a/_build/default/src/line.mli b/_build/default/src/.formatted/line.mli
+> index 280c5ad..58b0331 100644
+> --- a/_build/default/src/line.mli
+> +++ b/_build/default/src/.formatted/line.mli
+> @@ -1,39 +1,24 @@
+>  type rule =
+> -    [ `Premise
+> -    | `Idempotence of int 
+> -    | `Commutative of int
+> -    | `Associative of int
+> -    | `Distributive of int
+> -    | `DoubleNegation of int
+> -    | `DeMorgan of int
+> -    | `Identity of int 
+> -    | `Dominance of int
+> -    | `LE of int
+> -    | `ModusPonens of int * int
+> -    | `ModusTollens of int * int
+> -    ]
+> -    [@@deriving show]
+> -
+> -
+> -type conn =
+> -    [ `And 
+> -    | `Or
+> -    | `Impl
+> -    | `Iff
+> -    ]
+> -    [@@deriving show]
+> -
+> +  [ `Premise
+> +  | `Idempotence of int
+> +  | `Commutative of int
+> +  | `Associative of int
+> +  | `Distributive of int
+> +  | `DoubleNegation of int
+> +  | `DeMorgan of int
+> +  | `Identity of int
+> +  | `Dominance of int
+> +  | `LE of int
+> +  | `ModusPonens of int * int
+> +  | `ModusTollens of int * int ]
+> +[@@deriving show]
+> +
+> +type conn = [`And | `Or | `Impl | `Iff] [@@deriving show]
+>  
+>  type prop =
+> -    [ `Atom of string
+> -    | `Bool of bool
+> -    | `Conn of conn * prop * prop
+> -    | `Not of prop
+> -    ]
+> -    [@@deriving show]
+> -
+> +  [`Atom of string | `Bool of bool | `Conn of conn * prop * prop | `Not of prop]
+> +[@@deriving show]
+>  
+>  type line = {prop: prop; derivedby: rule} [@@deriving show]
+>  
+> -
+> -val interp : string -> line 
+> +val interp : string -> line
+[1]
+$ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/src/main.ml _build/default/src/.formatted/main.ml
+> diff --git a/_build/default/src/main.ml b/_build/default/src/.formatted/main.ml
+> index bc96dd9..703a7c2 100644
+> --- a/_build/default/src/main.ml
+> +++ b/_build/default/src/.formatted/main.ml
+> @@ -1,35 +1,43 @@
+>  open Ast
+>  
+> -
+>  let parse s =
+>    let lexbuf = Lexing.from_string s in
+>    match Parser.prog Lexer.read lexbuf with
+> -    | None -> failwith "Empty input"
+> -    | Some e -> e
+> -
+> +  | None ->
+> +      failwith "Empty input"
+> +  | Some e ->
+> +      e
+>  
+>  let rec eval = function
+> -    | `Conn (binop, exp1, exp2) -> collapse binop (eval exp1) (eval exp2)
+> -    | `Not (`Bool a) -> `Bool (not a)
+> -    | `Not exp -> negate exp
+> -    | `Atom _ as atom -> atom 
+> -    | `Bool _ as bool -> bool
+> -
+> -and collapse binop exp1 exp2 = match binop, exp1, exp2 with
+> -    | binop, `Bool a, `Bool b -> begin 
+> -        match binop with
+> -        | `And -> `Bool (a && b)
+> -        | `Or -> `Bool (a || b)
+> -        | `Impl -> `Bool ((not a) || b)
+> -        | `Iff -> `Bool (a = b)
+> -    end
+> -    | _ -> `Conn (binop, exp1, exp2) 
+> -
+> -and negate exp = match eval exp with
+> -    | `Bool a -> `Bool (not a)
+> -    | exp -> `Not exp
+> -
+> +  | `Conn (binop, exp1, exp2) ->
+> +      collapse binop (eval exp1) (eval exp2)
+> +  | `Not (`Bool a) ->
+> +      `Bool (not a)
+> +  | `Not exp ->
+> +      negate exp
+> +  | `Atom _ as atom ->
+> +      atom
+> +  | `Bool _ as bool ->
+> +      bool
+> +
+> +and collapse binop exp1 exp2 =
+> +  match (binop, exp1, exp2) with
+> +  | binop, `Bool a, `Bool b -> (
+> +    match binop with
+> +    | `And ->
+> +        `Bool (a && b)
+> +    | `Or ->
+> +        `Bool (a || b)
+> +    | `Impl ->
+> +        `Bool ((not a) || b)
+> +    | `Iff ->
+> +        `Bool (a = b) )
+> +  | _ ->
+> +      `Conn (binop, exp1, exp2)
+> +
+> +and negate exp =
+> +  match eval exp with `Bool a -> `Bool (not a) | exp -> `Not exp
+>  
+>  let interp s =
+> -    let line = parse s in
+> -    {prop = eval line.prop; derivedby = line.derivedby}
+> +  let line = parse s in
+> +  {prop= eval line.prop; derivedby= line.derivedby}
+[1]
+$ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/bin/dune _build/default/bin/.formatted/dune
+> diff --git a/_build/default/bin/dune b/_build/default/bin/.formatted/dune
+> index 2959170..ec4c4b3 100644
+> --- a/_build/default/bin/dune
+> +++ b/_build/default/bin/.formatted/dune
+> @@ -1,6 +1,6 @@
+>  (executable
+>   (name export)
+> - (libraries js_of_ocaml
+> -   line)
+> - (preprocess (pps ppx_deriving.show js_of_ocaml-ppx))
+> + (libraries js_of_ocaml line)
+> + (preprocess
+> +  (pps ppx_deriving.show js_of_ocaml-ppx))
+>   (modes js))
+[1]
+$ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/bin/prooftree.ml _build/default/bin/.formatted/prooftree.ml
+> diff --git a/_build/default/bin/prooftree.ml b/_build/default/bin/.formatted/prooftree.ml
+> index b9effdd..856a533 100644
+> --- a/_build/default/bin/prooftree.ml
+> +++ b/_build/default/bin/.formatted/prooftree.ml
+> @@ -2,17 +2,14 @@ open Line
+>  
+>  let lines : (int, line) Hashtbl.t = Hashtbl.create 20
+>  
+> -
+>  let addline linenum line =
+> -    Hashtbl.add lines linenum line;
+> -    Rules.is_valid (Hashtbl.find lines) linenum
+> -
+> -
+> -let editline linenum line = 
+> -    Hashtbl.replace lines linenum line;
+> -    Rules.is_valid (Hashtbl.find lines) linenum 
+> +  Hashtbl.add lines linenum line ;
+> +  Rules.is_valid (Hashtbl.find lines) linenum
+>  
+> +let editline linenum line =
+> +  Hashtbl.replace lines linenum line ;
+> +  Rules.is_valid (Hashtbl.find lines) linenum
+>  
+> -let deleteline linenum = 
+> -    Hashtbl.remove lines linenum;
+> -    Rules.all_valid lines
+> +let deleteline linenum =
+> +  Hashtbl.remove lines linenum ;
+> +  Rules.all_valid lines
+[1]
+$ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/bin/rules.ml _build/default/bin/.formatted/rules.ml
+> diff --git a/_build/default/bin/rules.ml b/_build/default/bin/.formatted/rules.ml
+> index f121b95..91bc00e 100644
+> --- a/_build/default/bin/rules.ml
+> +++ b/_build/default/bin/.formatted/rules.ml
+> @@ -1,115 +1,157 @@
+> -open Line 
+> -
+> +open Line
+>  
+>  let rec is_valid getline linenum =
+> -    let getprop = (fun linenum -> (getline linenum).prop) in
+> -    match getline linenum with
+> -    | { prop = _ ; derivedby = `Premise} -> true
+> -    | { prop ; derivedby = `LE a} -> check le (getprop a) prop
+> -    | { prop ; derivedby = `Idempotence a} -> check idempotence (getprop a) prop
+> -    | { prop ; derivedby = `Commutative a} -> check commutative (getprop a) prop
+> -    | { prop ; derivedby = `Associative a} -> check associative (getprop a) prop
+> -    | { prop ; derivedby = `Distributive a} -> check distributive (getprop a) prop
+> -    | { prop ; derivedby = `DoubleNegation a} -> check doublenegation (getprop a) prop
+> -    | { prop ; derivedby = `DeMorgan a} -> check demorgans (getprop a) prop
+> -    | { prop ; derivedby = `Identity a} -> check identity (getprop a) prop
+> -    | { prop ; derivedby = `Dominance a} -> check dominance (getprop a) prop
+> -    | { prop ; derivedby = `ModusPonens (a, b)} ->  modusponens (getprop a) (getprop b) prop
+> -    | { prop ; derivedby = `ModusTollens (a, b)} ->  modustollens (getprop a) (getprop b) prop
+> +  let getprop linenum = (getline linenum).prop in
+> +  match getline linenum with
+> +  | {prop= _; derivedby= `Premise} ->
+> +      true
+> +  | {prop; derivedby= `LE a} ->
+> +      check le (getprop a) prop
+> +  | {prop; derivedby= `Idempotence a} ->
+> +      check idempotence (getprop a) prop
+> +  | {prop; derivedby= `Commutative a} ->
+> +      check commutative (getprop a) prop
+> +  | {prop; derivedby= `Associative a} ->
+> +      check associative (getprop a) prop
+> +  | {prop; derivedby= `Distributive a} ->
+> +      check distributive (getprop a) prop
+> +  | {prop; derivedby= `DoubleNegation a} ->
+> +      check doublenegation (getprop a) prop
+> +  | {prop; derivedby= `DeMorgan a} ->
+> +      check demorgans (getprop a) prop
+> +  | {prop; derivedby= `Identity a} ->
+> +      check identity (getprop a) prop
+> +  | {prop; derivedby= `Dominance a} ->
+> +      check dominance (getprop a) prop
+> +  | {prop; derivedby= `ModusPonens (a, b)} ->
+> +      modusponens (getprop a) (getprop b) prop
+> +  | {prop; derivedby= `ModusTollens (a, b)} ->
+> +      modustollens (getprop a) (getprop b) prop
+>  
+>  and check pattern p q =
+> -    pattern p q || match p, q with
+> -    | `Conn (conn1, p1, q1), `Conn (conn2, p2, q2) when conn1 = conn2 -> 
+> -            (check pattern p1 p2 || check pattern q1 q2) && (p1 = p2 || q1 = q2)
+> -    | `Not p, `Not q -> check pattern p q 
+> -    | _ -> false 
+> +  pattern p q
+> +  ||
+> +  match (p, q) with
+> +  | `Conn (conn1, p1, q1), `Conn (conn2, p2, q2) when conn1 = conn2 ->
+> +      (check pattern p1 p2 || check pattern q1 q2) && (p1 = p2 || q1 = q2)
+> +  | `Not p, `Not q ->
+> +      check pattern p q
+> +  | _ ->
+> +      false
+>  
+>  (* Patterns for equivalence rules. Must be symmetric. *)
+>  
+> -and le p q = match p, q with
+> -    | `Conn (`Impl, p1, q1), `Conn (`Or, `Not p2, q2)
+> -    | `Conn (`Or, `Not p2, q2), `Conn (`Impl, p1, q1)
+> -        -> p1 = p2 && q1 = q2
+> -    | `Conn (`Iff, p1, q1),
+> -    `Conn (`And, `Conn (`Impl, p2, q2), `Conn (`Impl, q3, p3))
+> -    | `Conn (`And, `Conn (`Impl, p2, q2), `Conn (`Impl, q3, p3)),
+> -    `Conn (`Iff, p1, q1) 
+> -        -> p1 = p2 && p2 = p3 && q1 = q2 && q2 = q3
+> -    | _ -> false
+> -
+> -and idempotence p q = match p, q with
+> -    | `Conn ((`And|`Or), p1, p2), p when p1 = p2 -> p1 = p 
+> -    | p, `Conn ((`And|`Or), p1, p2) when p1 = p2 -> p1 = p 
+> -    | _ -> false
+> -
+> -and commutative p q = match p, q with
+> -    | `Conn ((`And|`Or|`Iff) as conn1, p1, q1), 
+> -    `Conn ((`And|`Or|`Iff) as conn2, q2, p2) 
+> -        -> conn1 = conn2 && p1 = p2 && q1 = q2
+> -    | _ -> false
+> -
+> -and associative p q = match p, q with
+> -    | `Conn (`And, `Conn (`And, p1, q1), r1),
+> -    `Conn (`And, p2, `Conn (`And, q2, r2))
+> -        -> p1 = p2 && q1 = q2 && r1 = r2
+> -    | `Conn (`Or, `Conn (`Or, p1, q1), r1),
+> -    `Conn (`Or, p2, `Conn (`Or, q2, r2))
+> -        -> p1 = p2 && q1 = q2 && r1 = r2
+> -    | _ -> false
+> -
+> -and distributive p q = match p, q with
+> -    | `Conn (`Or, p1, `Conn (`And, q1, r1)),
+> -    `Conn (`And, `Conn (`Or, p2, q2), `Conn (`Or, p3, r2))
+> -    | `Conn (`And, `Conn (`Or, p2, q2), `Conn (`Or, p3, r2)),
+> -    `Conn (`Or, p1, `Conn (`And, q1, r1))
+> -        -> p1 = p2 && p2 = p3 && q1 = q2 && r1 = r2
+> -    | `Conn (`And, p1, `Conn (`Or, q1, r1)),
+> -    `Conn (`Or, `Conn (`And, p2, q2), `Conn (`And, p3, r2))
+> -    | `Conn (`Or, `Conn (`And, p2, q2), `Conn (`And, p3, r2)),
+> -    `Conn (`And, p1, `Conn (`Or, q1, r1))
+> -        -> p1 = p2 && p2 = p3 && q1 = q2 && r1 = r2
+> -    | _ -> false
+> -
+> -and doublenegation p q = match p, q with
+> -    | `Not (`Not p1), p2 -> p1 = p2
+> -    | p1, `Not (`Not p2) -> p1 = p2
+> -    | _ -> false
+> -
+> -and demorgans p q = match p, q with
+> -    | `Not (`Conn ((`And|`Or) as conn1, p1, q1)), 
+> -    `Conn ((`And|`Or) as conn2, `Not p2, `Not q2)
+> -        -> conn1 = conn2 && p1 = p2 && q1 = q2
+> -    |`Conn ((`And|`Or) as conn1, `Not p1, `Not q1), 
+> -    `Not (`Conn ((`And|`Or) as conn2, p2, q2))
+> -        -> conn1 = conn2 && p1 = p2 && q1 = q2
+> -    | _ -> false
+> -
+> -and identity p q = match p, q with
+> -    | (`Conn (`And, `Bool true, p1)|`Conn (`And, p1, `Bool true)), p2
+> -        -> p1 = p2
+> -    | (`Conn (`Or, `Bool false, p1)|`Conn (`Or, p1, `Bool false)), p2
+> -        -> p1 = p2
+> -    | _ -> false
+> -
+> -and dominance p q = match p with
+> -    | (`Conn (`And, `Bool false, _)|`Conn (`And, _, `Bool false))
+> -        -> `Bool (false) = q
+> -    | (`Conn (`Or, `Bool true, _)|`Conn (`Or, _, `Bool true))
+> -        -> `Bool (true) = q
+> -    | _ -> false
+> +and le p q =
+> +  match (p, q) with
+> +  | `Conn (`Impl, p1, q1), `Conn (`Or, `Not p2, q2)
+> +  | `Conn (`Or, `Not p2, q2), `Conn (`Impl, p1, q1) ->
+> +      p1 = p2 && q1 = q2
+> +  | ( `Conn (`Iff, p1, q1)
+> +    , `Conn (`And, `Conn (`Impl, p2, q2), `Conn (`Impl, q3, p3)) )
+> +  | ( `Conn (`And, `Conn (`Impl, p2, q2), `Conn (`Impl, q3, p3))
+> +    , `Conn (`Iff, p1, q1) ) ->
+> +      p1 = p2 && p2 = p3 && q1 = q2 && q2 = q3
+> +  | _ ->
+> +      false
+> +
+> +and idempotence p q =
+> +  match (p, q) with
+> +  | `Conn ((`And | `Or), p1, p2), p when p1 = p2 ->
+> +      p1 = p
+> +  | p, `Conn ((`And | `Or), p1, p2) when p1 = p2 ->
+> +      p1 = p
+> +  | _ ->
+> +      false
+> +
+> +and commutative p q =
+> +  match (p, q) with
+> +  | ( `Conn (((`And | `Or | `Iff) as conn1), p1, q1)
+> +    , `Conn (((`And | `Or | `Iff) as conn2), q2, p2) ) ->
+> +      conn1 = conn2 && p1 = p2 && q1 = q2
+> +  | _ ->
+> +      false
+> +
+> +and associative p q =
+> +  match (p, q) with
+> +  | ( `Conn (`And, `Conn (`And, p1, q1), r1)
+> +    , `Conn (`And, p2, `Conn (`And, q2, r2)) ) ->
+> +      p1 = p2 && q1 = q2 && r1 = r2
+> +  | `Conn (`Or, `Conn (`Or, p1, q1), r1), `Conn (`Or, p2, `Conn (`Or, q2, r2))
+> +    ->
+> +      p1 = p2 && q1 = q2 && r1 = r2
+> +  | _ ->
+> +      false
+> +
+> +and distributive p q =
+> +  match (p, q) with
+> +  | ( `Conn (`Or, p1, `Conn (`And, q1, r1))
+> +    , `Conn (`And, `Conn (`Or, p2, q2), `Conn (`Or, p3, r2)) )
+> +  | ( `Conn (`And, `Conn (`Or, p2, q2), `Conn (`Or, p3, r2))
+> +    , `Conn (`Or, p1, `Conn (`And, q1, r1)) ) ->
+> +      p1 = p2 && p2 = p3 && q1 = q2 && r1 = r2
+> +  | ( `Conn (`And, p1, `Conn (`Or, q1, r1))
+> +    , `Conn (`Or, `Conn (`And, p2, q2), `Conn (`And, p3, r2)) )
+> +  | ( `Conn (`Or, `Conn (`And, p2, q2), `Conn (`And, p3, r2))
+> +    , `Conn (`And, p1, `Conn (`Or, q1, r1)) ) ->
+> +      p1 = p2 && p2 = p3 && q1 = q2 && r1 = r2
+> +  | _ ->
+> +      false
+> +
+> +and doublenegation p q =
+> +  match (p, q) with
+> +  | `Not (`Not p1), p2 ->
+> +      p1 = p2
+> +  | p1, `Not (`Not p2) ->
+> +      p1 = p2
+> +  | _ ->
+> +      false
+> +
+> +and demorgans p q =
+> +  match (p, q) with
+> +  | ( `Not (`Conn (((`And | `Or) as conn1), p1, q1))
+> +    , `Conn (((`And | `Or) as conn2), `Not p2, `Not q2) ) ->
+> +      conn1 = conn2 && p1 = p2 && q1 = q2
+> +  | ( `Conn (((`And | `Or) as conn1), `Not p1, `Not q1)
+> +    , `Not (`Conn (((`And | `Or) as conn2), p2, q2)) ) ->
+> +      conn1 = conn2 && p1 = p2 && q1 = q2
+> +  | _ ->
+> +      false
+> +
+> +and identity p q =
+> +  match (p, q) with
+> +  | (`Conn (`And, `Bool true, p1) | `Conn (`And, p1, `Bool true)), p2 ->
+> +      p1 = p2
+> +  | (`Conn (`Or, `Bool false, p1) | `Conn (`Or, p1, `Bool false)), p2 ->
+> +      p1 = p2
+> +  | _ ->
+> +      false
+> +
+> +and dominance p q =
+> +  match p with
+> +  | `Conn (`And, `Bool false, _) | `Conn (`And, _, `Bool false) ->
+> +      `Bool false = q
+> +  | `Conn (`Or, `Bool true, _) | `Conn (`Or, _, `Bool true) ->
+> +      `Bool true = q
+> +  | _ ->
+> +      false
+>  
+>  (* Patterns for implication rules. *)
+>  
+> -and modusponens p1 p2 q = match p1, p2 with
+> -    | `Conn (`Impl, p1, q1), p2 -> p1 = p2 && q1 = q
+> -    | _ -> false
+> -    
+> -and modustollens p1 p2 q = match p1, p2 with
+> -    | `Conn (`Impl, q1, p1), `Not p2 -> p1 = p2 && q1 = `Not q
+> -    | _ -> false
+> +and modusponens p1 p2 q =
+> +  match (p1, p2) with
+> +  | `Conn (`Impl, p1, q1), p2 ->
+> +      p1 = p2 && q1 = q
+> +  | _ ->
+> +      false
+>  
+> +and modustollens p1 p2 q =
+> +  match (p1, p2) with
+> +  | `Conn (`Impl, q1, p1), `Not p2 ->
+> +      p1 = p2 && q1 = `Not q
+> +  | _ ->
+> +      false
+>  
+>  let all_valid lines =
+> -    let getline = Hashtbl.find lines in
+> -    let aux = fun linenum _line acc -> acc && is_valid getline linenum in 
+> -    Hashtbl.fold aux lines true
+> +  let getline = Hashtbl.find lines in
+> +  let aux linenum _line acc = acc && is_valid getline linenum in
+> +  Hashtbl.fold aux lines true
+[1]
+$ (cd _build/default && /home/dean/.opam/default/bin/ocamlformat --impl bin/export.ml) > _build/default/bin/.formatted/export.ml
+$ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/bin/rules.mli _build/default/bin/.formatted/rules.mli
+> diff --git a/_build/default/bin/rules.mli b/_build/default/bin/.formatted/rules.mli
+> index 373823b..a06ec9e 100644
+> --- a/_build/default/bin/rules.mli
+> +++ b/_build/default/bin/.formatted/rules.mli
+> @@ -1,7 +1,5 @@
+>  open Line
+>  
+> -
+>  val is_valid : (int -> line) -> int -> bool
+>  
+> -
+>  val all_valid : (int, line) Hashtbl.t -> bool
+[1]
+$ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/bin/export.ml _build/default/bin/.formatted/export.ml
+> diff --git a/_build/default/bin/export.ml b/_build/default/bin/.formatted/export.ml
+> index 01611cb..f0709eb 100644
+> --- a/_build/default/bin/export.ml
+> +++ b/_build/default/bin/.formatted/export.ml
+> @@ -1,11 +1,14 @@
+> -open Js_of_ocaml 
+> +open Js_of_ocaml
+>  open Prooftree
+>  
+>  let _ =
+> -    Js.export_all
+> +  Js.export_all
+>      (object%js
+> -        method addline = addline
+> -        method editline = editline
+> -        method deletline = deleteline
+> -        val lines = lines
+> -    end)
+> +       method addline = addline
+> +
+> +       method editline = editline
+> +
+> +       method deletline = deleteline
+> +
+> +       val lines = lines
+> +    end )
+[1]

@@ -1,6 +1,6 @@
 (executable
  (name export)
- (libraries js_of_ocaml
-   line)
- (preprocess (pps ppx_deriving.show js_of_ocaml-ppx))
+ (libraries js_of_ocaml line)
+ (preprocess
+  (pps ppx_deriving.show js_of_ocaml-ppx))
  (modes js))

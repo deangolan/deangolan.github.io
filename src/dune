@@ -1,9 +1,9 @@
-(library 
-  (name line)
-  (preprocess (pps ppx_deriving.show)))
+(library
+ (name line)
+ (preprocess
+  (pps ppx_deriving.show)))
 
-(menhir 
-  (modules parser))
+(menhir
+ (modules parser))
 
 (ocamllex lexer)
-
