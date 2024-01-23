@@ -1,5 +1,7 @@
 {
 open Parser
+
+exception SyntaxError of string
 }
 
 
@@ -41,4 +43,5 @@ rule read =
     | "ID" | "Identity" { ID }
     | "MP" | "Modus Ponens" { MP }
     | "MT" | "Modus Tolens" { MT }
+    | _ { raise (SyntaxError ("Unexpected character: " ^ Lexing.lexeme lexbuf)) }
     | eof { EOF }

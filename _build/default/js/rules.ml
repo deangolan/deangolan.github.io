@@ -1,32 +1,37 @@
 open Line
 
-let rec is_valid getline linenum =
-  let getprop linenum = (getline linenum).prop in
-  match getline linenum with
+exception NoProp of string
+
+let rec is_valid lines line =
+  let find_prop linenum = match Hashtbl.find_opt lines linenum with
+    | None -> raise (NoProp ("No proposition in line: " ^ Int.to_string linenum))
+    | Some line -> line.prop 
+  in
+  match line with
   | {prop= _; derivedby= `Premise} ->
       true
   | {prop; derivedby= `LE a} ->
-      check le (getprop a) prop
+      check le (find_prop a) prop
   | {prop; derivedby= `Idempotence a} ->
-      check idempotence (getprop a) prop
+      check idempotence (find_prop a) prop
   | {prop; derivedby= `Commutative a} ->
-      check commutative (getprop a) prop
+      check commutative (find_prop a) prop
   | {prop; derivedby= `Associative a} ->
-      check associative (getprop a) prop
+      check associative (find_prop a) prop
   | {prop; derivedby= `Distributive a} ->
-      check distributive (getprop a) prop
+      check distributive (find_prop a) prop
   | {prop; derivedby= `DoubleNegation a} ->
-      check doublenegation (getprop a) prop
+      check doublenegation (find_prop a) prop
   | {prop; derivedby= `DeMorgan a} ->
-      check demorgans (getprop a) prop
+      check demorgans (find_prop a) prop
   | {prop; derivedby= `Identity a} ->
-      check identity (getprop a) prop
+      check identity (find_prop a) prop
   | {prop; derivedby= `Dominance a} ->
-      check dominance (getprop a) prop
+      check dominance (find_prop a) prop
   | {prop; derivedby= `ModusPonens (a, b)} ->
-      modusponens (getprop a) (getprop b) prop
+      modusponens (find_prop a) (find_prop b) prop
   | {prop; derivedby= `ModusTollens (a, b)} ->
-      modustollens (getprop a) (getprop b) prop
+      modustollens (find_prop a) (find_prop b) prop
 
 and check pattern p q =
   pattern p q
@@ -154,6 +159,5 @@ and modustollens p1 p2 q =
       false
 
 let all_valid lines =
-  let getline = Hashtbl.find lines in
-  let aux linenum _line acc = acc && is_valid getline linenum in
+  let aux _linenum line acc = acc && (is_valid lines line) in
   Hashtbl.fold aux lines true

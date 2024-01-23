@@ -4,7 +4,7 @@ let parse s =
   let lexbuf = Lexing.from_string s in
   match Parser.prog Lexer.read lexbuf with
   | None ->
-      failwith "Empty input"
+      failwith "Cannot parse empty proposition"
   | Some e ->
       e
 

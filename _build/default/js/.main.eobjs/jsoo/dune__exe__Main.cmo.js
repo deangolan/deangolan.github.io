@@ -26,33 +26,29 @@
    global_data.CamlinternalOO;
    var
     Js_of_ocaml_Js = global_data.Js_of_ocaml__Js,
-    t10 = Dune_exe_Prooftree[1],
+    t7 = Dune_exe_Prooftree[1],
     cst_Prooftree = "Prooftree";
-   function t9(param, linenum){
-    return caml_call1(Dune_exe_Prooftree[4], linenum);
+   function t6(param, linenum){
+    return caml_call1(Dune_exe_Prooftree[3], linenum);
    }
-   function t8(param, linenum, line){
-    return caml_call2(Dune_exe_Prooftree[3], linenum, line);
-   }
-   function t7(param, linenum, line){
+   function t5(param, linenum, line){
     return caml_call2(Dune_exe_Prooftree[2], linenum, line);
    }
-   function t6(param, line){
+   function t4(param, line){
     var _a_ = caml_call1(Line[9], line);
     return caml_call1(Line[8], _a_);
    }
    caml_call2
     (Js_of_ocaml_Js[50],
      cst_Prooftree,
-     {interp: caml_js_wrap_meth_callback(t6),
-      addline: caml_js_wrap_meth_callback(t7),
-      editline: caml_js_wrap_meth_callback(t8),
-      deletline: caml_js_wrap_meth_callback(t9),
-      lines: t10});
+     {interp: caml_js_wrap_meth_callback(t4),
+      replace: caml_js_wrap_meth_callback(t5),
+      delete: caml_js_wrap_meth_callback(t6),
+      lines: t7});
    var Dune_exe_Main = [0];
-   runtime.caml_register_global(13, Dune_exe_Main, "Dune__exe__Main");
+   runtime.caml_register_global(12, Dune_exe_Main, "Dune__exe__Main");
    return;
   }
   (globalThis));
 
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLjAsImZpbGUiOiIubWFpbi5lb2Jqcy9qc29vL2R1bmVfX2V4ZV9fTWFpbi5jbW8uanMiLCJzb3VyY2VSb290IjoiIiwibmFtZXMiOlsibGluZW51bSIsImxpbmUiXSwic291cmNlcyI6WyIvd29ya3NwYWNlX3Jvb3QvanMvbWFpbi5tbCJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Rzs7Ozs7Rzs7Ozs7Ozs7Ozs7Ozs7c0JBWXdCQTtJQUFVLE9BQUEsa0NBQVZBO0dBQTRCO3NCQUY3QkEsU0FBUUM7SUFBTyxPQUFBLGtDQUFmRCxTQUFRQztHQUE0QjtzQkFGckNELFNBQVFDO0lBQU8sT0FBQSxrQ0FBZkQsU0FBUUM7R0FBMkI7c0JBRnBDQTtJQUFPLFVBQUEsb0JBQVBBO0lBQU8sT0FBQTtHQUFrQztHQUY1RDs7Ozs7Ozs7R0FBQTs7O0UiLCJzb3VyY2VzQ29udGVudCI6WyJvcGVuIEpzX29mX29jYW1sXG5vcGVuIFByb29mdHJlZVxuXG5sZXQgXyA9XG4gIEpzLmV4cG9ydCBcIlByb29mdHJlZVwiXG4gICAgKG9iamVjdCVqc1xuICAgICAgIG1ldGhvZCBpbnRlcnAgbGluZSA9IExpbmUuaW50ZXJwIGxpbmUgfD4gTGluZS5zaG93X2xpbmVcblxuICAgICAgIG1ldGhvZCBhZGRsaW5lIGxpbmVudW0gbGluZSA9IGFkZGxpbmUgbGluZW51bSBsaW5lXG5cbiAgICAgICBtZXRob2QgZWRpdGxpbmUgbGluZW51bSBsaW5lID0gZWRpdGxpbmUgbGluZW51bSBsaW5lXG5cbiAgICAgICBtZXRob2QgZGVsZXRsaW5lIGxpbmVudW0gPSBkZWxldGVsaW5lIGxpbmVudW1cblxuICAgICAgIHZhbCBsaW5lcyA9IGxpbmVzXG4gICAgZW5kIClcbiJdfQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLjAsImZpbGUiOiIubWFpbi5lb2Jqcy9qc29vL2R1bmVfX2V4ZV9fTWFpbi5jbW8uanMiLCJzb3VyY2VSb290IjoiIiwibmFtZXMiOlsibGluZW51bSIsImxpbmUiXSwic291cmNlcyI6WyIvd29ya3NwYWNlX3Jvb3QvanMvbWFpbi5tbCJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Rzs7Ozs7Rzs7Ozs7Ozs7Ozs7Ozs7c0JBU3FCQTtJQUFVLE9BQUEsa0NBQVZBO0dBQXVDO3NCQUZ0Q0EsU0FBUUM7SUFBTyxPQUFBLGtDQUFmRCxTQUFRQztHQUEwQztzQkFGbkRBO0lBQU8sVUFBQSxvQkFBUEE7SUFBTyxPQUFBO0dBQTZCO0dBRnZEOzs7Ozs7O0dBQUE7OztFIiwic291cmNlc0NvbnRlbnQiOlsib3BlbiBKc19vZl9vY2FtbFxuXG5sZXQgXyA9XG4gIEpzLmV4cG9ydCBcIlByb29mdHJlZVwiXG4gICAgKG9iamVjdCVqc1xuICAgICAgIG1ldGhvZCBpbnRlcnAgbGluZSA9IExpbmUuaW50ZXJwIGxpbmUgfD4gTGluZS5zaG93XG5cbiAgICAgICBtZXRob2QgcmVwbGFjZSBsaW5lbnVtIGxpbmUgPSBQcm9vZnRyZWUucmVwbGFjZV9saW5lIGxpbmVudW0gbGluZVxuXG4gICAgICAgbWV0aG9kIGRlbGV0ZSBsaW5lbnVtID0gUHJvb2Z0cmVlLmRlbGV0ZV9saW5lIGxpbmVudW1cblxuICAgICAgIHZhbCBsaW5lcyA9IFByb29mdHJlZS5saW5lc1xuICAgIGVuZCApXG4iXX0=

@@ -26,6 +26,6 @@ type token =
 val menhir_begin_marker : int
 val xv_rule : Ast.rule
 val xv_prop : Ast.prop
-val xv_prog : Ast.line option
-val xv_expr : Ast.line
+val xv_prog : Ast.t option
+val xv_expr : Ast.t
 val menhir_end_marker : int

@@ -3,4 +3,6 @@
  (libraries js_of_ocaml line)
  (preprocess
   (pps js_of_ocaml-ppx))
- (modes js))
+ (modes js)
+ (ocamlopt_flags
+  (--enable with-js-error)))

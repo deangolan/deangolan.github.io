@@ -1,15 +1,10 @@
-open Line
+let lines : (int, Line.t) Hashtbl.t = Hashtbl.create 40
 
-let lines : (int, line) Hashtbl.t = Hashtbl.create 40
+let replace_line (linenum : int) (s : string) : bool =
+  let line = Line.interp s in
+  Hashtbl.replace lines linenum line ;
+  Rules.is_valid lines line
 
-let addline linenum line =
-  Hashtbl.add lines linenum (Line.interp line) ;
-  Rules.is_valid (Hashtbl.find lines) linenum
-
-let editline linenum line =
-  Hashtbl.replace lines linenum (Line.interp line) ;
-  Rules.is_valid (Hashtbl.find lines) linenum
-
-let deleteline linenum =
+let delete_line (linenum : int) : bool =
   Hashtbl.remove lines linenum ;
   Rules.all_valid lines

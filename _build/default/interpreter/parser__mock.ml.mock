@@ -402,7 +402,7 @@ and (xv_rule, xv_prop, xv_prog, xv_expr) =
 # 403 "interpreter/parser__mock.ml.mock"
      : 'tv_prog) : (
 # 32 "interpreter/parser.mly"
-       (Ast.line option)
+       (Ast.t option)
 # 407 "interpreter/parser__mock.ml.mock"
     )) in
   let _ = fun (_startpos : Lexing.position) (_endpos : Lexing.position) (_endpos__0_ : Lexing.position) (_symbolstartpos : Lexing.position) (_startofs : int) (_endofs : int) (_endofs__0_ : int) (_symbolstartofs : int) (_sloc : Lexing.position * Lexing.position) (_loc : Lexing.position * Lexing.position) (
@@ -416,7 +416,7 @@ and (xv_rule, xv_prop, xv_prog, xv_expr) =
 # 417 "interpreter/parser__mock.ml.mock"
      : 'tv_prog) : (
 # 32 "interpreter/parser.mly"
-       (Ast.line option)
+       (Ast.t option)
 # 421 "interpreter/parser__mock.ml.mock"
     )) in
   let _ = fun (_startpos : Lexing.position) (_endpos : Lexing.position) (_endpos__0_ : Lexing.position) (_symbolstartpos : Lexing.position) (_startofs : int) (_endofs : int) (_endofs__0_ : int) (_symbolstartofs : int) (_sloc : Lexing.position * Lexing.position) (_loc : Lexing.position * Lexing.position) (

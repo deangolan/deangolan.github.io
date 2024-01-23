@@ -1,1 +1,1 @@
-js/rules.pp.ml: Hashtbl Line
+js/rules.pp.ml: Hashtbl Int Line

@@ -1,16 +1,13 @@
 open Js_of_ocaml
-open Prooftree
 
 let _ =
   Js.export "Prooftree"
     (object%js
-       method interp line = Line.interp line |> Line.show_line
+       method interp line = Line.interp line |> Line.show
 
-       method addline linenum line = addline linenum line
+       method replace linenum line = Prooftree.replace_line linenum line
 
-       method editline linenum line = editline linenum line
+       method delete linenum = Prooftree.delete_line linenum
 
-       method deletline linenum = deleteline linenum
-
-       val lines = lines
+       val lines = Prooftree.lines
     end )

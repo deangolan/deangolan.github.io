@@ -96,7 +96,7 @@ and ('s, 'r) _menhir_cell1_NOT =
   | MenhirCell1_NOT of 's * ('s, 'r) _menhir_state
 
 and _menhir_box_prog = 
-  | MenhirBox_prog of (Ast.line option) [@@unboxed]
+  | MenhirBox_prog of (Ast.t option) [@@unboxed]
 
 let _menhir_action_01 =
   fun p r ->
@@ -104,7 +104,7 @@ let _menhir_action_01 =
 # 44 "interpreter/parser.mly"
                                 ( {prop = p; derivedby = r } )
 # 107 "interpreter/parser.ml"
-     : (Ast.line))
+     : (Ast.t))
 
 let _menhir_action_02 =
   fun () ->
@@ -112,7 +112,7 @@ let _menhir_action_02 =
 # 38 "interpreter/parser.mly"
           ( None )
 # 115 "interpreter/parser.ml"
-     : (Ast.line option))
+     : (Ast.t option))
 
 let _menhir_action_03 =
   fun e ->
@@ -120,7 +120,7 @@ let _menhir_action_03 =
 # 39 "interpreter/parser.mly"
                     ( Some e )
 # 123 "interpreter/parser.ml"
-     : (Ast.line option))
+     : (Ast.t option))
 
 let _menhir_action_04 =
   fun a ->

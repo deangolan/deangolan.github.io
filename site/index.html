@@ -27,12 +27,12 @@
 </head>
 <body>
 
-    <div><span id="isValid" class="valid">Valid</span></div>
+<div><span id="isValid" class="valid">Valid</span></div>
 
 <div id="inputContainer">
   <div class="input-row" id="inputRow1">
     <span class="input-number">1.</span>
-    <input type="text" id="input1" class="dynamic-input" onkeydown="handleKeyDown(event, 1)">
+    <input type="text" id="input1" class="dynamic-input" onkeydown="handleKeyDown(event, 1)" onblur="handleBlur(1)">
     <span class="output-text"></span>
   </div>
 </div>
@@ -40,12 +40,51 @@
 <script src="prooftree.js"></script>
 
 <script>
+  let biggestInputNumber = 1;
+
   function handleKeyDown(event, inputNumber) {
+    const inputElement = document.getElementById('input' + inputNumber);
+
     if (event.key === 'Enter') {
       event.preventDefault();
-      updateOutputText(inputNumber);
-      createNewInput(inputNumber + 1);
+
+      if (inputNumber === biggestInputNumber) {
+        createNewInput(inputNumber + 1);
+      } else {
+        // Move to the input field below without creating a new one
+        const nextInput = document.getElementById('input' + (inputNumber + 1));
+        if (nextInput) {
+          nextInput.focus();
+        }
+      }
+    } else if (event.key === 'Backspace' && inputElement.value === '' && inputNumber > 1) {
+      event.preventDefault();
+      deleteInput(inputNumber);
     }
+  }
+
+  function deleteInput(inputNumber) {
+    const inputRow = document.getElementById('inputRow' + inputNumber);
+    inputRow.remove();
+    updateOutputText(inputNumber - 1);
+    if (inputNumber === biggestInputNumber) {
+      biggestInputNumber--;
+    }
+
+    // Set focus to the input field above after deletion
+    const previousInput = document.getElementById('input' + (inputNumber - 1));
+    if (previousInput) {
+      previousInput.focus();
+    }
+    if (Prooftree.deleteline(inputNumber)) {
+        isValid.textContent = 'Valid';
+    } else {
+        isValid.textContent = 'Invalid';
+    }
+  }
+
+  function handleBlur(inputNumber) {
+    updateOutputText(inputNumber);
   }
 
   function updateOutputText(inputNumber) {
@@ -53,19 +92,20 @@
     const outputTextElement = document.getElementById('inputRow' + inputNumber).getElementsByClassName('output-text')[0];
     outputTextElement.textContent = Prooftree.interp(inputElement.value);
     if (Prooftree.editline(inputNumber, inputElement.value)) {
-        isValid.textContent = 'Valid'
+        isValid.textContent = 'Valid';
     } else {
-        isValid.textContent = 'Invalid'
-    } 
+        isValid.textContent = 'Invalid';
+    }
   }
 
   function createNewInput(newInputNumber) {
     const inputContainer = document.getElementById('inputContainer');
-    
+    biggestInputNumber = newInputNumber;
+
     const inputRow = document.createElement('div');
     inputRow.className = 'input-row';
     inputRow.id = 'inputRow' + newInputNumber;
-    
+
     const inputNumberSpan = document.createElement('span');
     inputNumberSpan.className = 'input-number';
     inputNumberSpan.textContent = newInputNumber + '.';
@@ -78,7 +118,7 @@
       handleKeyDown(event, newInputNumber);
     };
     input.onblur = function () {
-      updateOutputText(newInputNumber);
+      handleBlur(newInputNumber);
     };
 
     const outputTextSpan = document.createElement('span');

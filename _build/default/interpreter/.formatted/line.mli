@@ -19,6 +19,6 @@ type prop =
   [`Atom of string | `Bool of bool | `Conn of conn * prop * prop | `Not of prop]
 [@@deriving show]
 
-type line = {prop: prop; derivedby: rule} [@@deriving show]
+type t = {prop: prop; derivedby: rule} [@@deriving show]
 
-val interp : string -> line
+val interp : string -> t

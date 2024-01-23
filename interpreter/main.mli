@@ -1,3 +1,3 @@
 open Ast
 
-val interp : string -> line
+val interp : string -> t 

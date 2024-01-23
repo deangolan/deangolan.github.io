@@ -28,26 +28,19 @@
     Dune_exe_Rules = global_data.Dune__exe__Rules,
     Line = global_data.Line,
     lines = caml_call2(Stdlib_Hashtbl[1], 0, 40);
-   function addline(linenum, line){
-    var _c_ = caml_call1(Line[9], line);
-    caml_call3(Stdlib_Hashtbl[5], lines, linenum, _c_);
-    var _d_ = caml_call1(Stdlib_Hashtbl[6], lines);
-    return caml_call2(Dune_exe_Rules[1], _d_, linenum);
+   function replace_line(linenum, s){
+    var line = caml_call1(Line[9], s);
+    caml_call3(Stdlib_Hashtbl[11], lines, linenum, line);
+    return caml_call2(Dune_exe_Rules[1], lines, line);
    }
-   function editline(linenum, line){
-    var _a_ = caml_call1(Line[9], line);
-    caml_call3(Stdlib_Hashtbl[11], lines, linenum, _a_);
-    var _b_ = caml_call1(Stdlib_Hashtbl[6], lines);
-    return caml_call2(Dune_exe_Rules[1], _b_, linenum);
-   }
-   function deleteline(linenum){
+   function delete_line(linenum){
     caml_call2(Stdlib_Hashtbl[10], lines, linenum);
     return caml_call1(Dune_exe_Rules[2], lines);
    }
-   var Dune_exe_Prooftree = [0, lines, addline, editline, deleteline];
+   var Dune_exe_Prooftree = [0, lines, replace_line, delete_line];
    runtime.caml_register_global(3, Dune_exe_Prooftree, "Dune__exe__Prooftree");
    return;
   }
   (globalThis));
 
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLjAsImZpbGUiOiIubWFpbi5lb2Jqcy9qc29vL2R1bmVfX2V4ZV9fUHJvb2Z0cmVlLmNtby5qcyIsInNvdXJjZVJvb3QiOiIiLCJuYW1lcyI6WyJsaW5lcyIsImFkZGxpbmUiLCJsaW5lbnVtIiwibGluZSIsImVkaXRsaW5lIiwiZGVsZXRlbGluZSJdLCJzb3VyY2VzIjpbIi93b3Jrc3BhY2Vfcm9vdC9qcy9wcm9vZnRyZWUubWwiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztHOzs7OztHOzs7OztHOzs7OztHQUVvQzs7Ozs7SUFBaENBLFFBQWdDO1lBRWhDQyxRQUFRQyxTQUFRQztJQUNRLFVBQUEsb0JBRFJBO0lBQ2xCLDhCQUhFSCxPQUVRRTtJQUVLLFVBQUEsOEJBSmJGO0lBR0YsT0FBQSxtQ0FEVUU7R0FFaUM7WUFFekNFLFNBQVNGLFNBQVFDO0lBQ1csVUFBQSxvQkFEWEE7SUFDbkIsK0JBUEVILE9BTVNFO0lBRUksVUFBQSw4QkFSYkY7SUFPRixPQUFBLG1DQURXRTtHQUVnQztZQUV6Q0csV0FBV0g7SUFDYiwrQkFYRUYsT0FVV0U7eUNBVlhGO0dBWW1CO2dDQVpuQkEsT0FFQUMsU0FJQUcsVUFJQUM7OztFIiwic291cmNlc0NvbnRlbnQiOlsib3BlbiBMaW5lXG5cbmxldCBsaW5lcyA6IChpbnQsIGxpbmUpIEhhc2h0YmwudCA9IEhhc2h0YmwuY3JlYXRlIDQwXG5cbmxldCBhZGRsaW5lIGxpbmVudW0gbGluZSA9XG4gIEhhc2h0YmwuYWRkIGxpbmVzIGxpbmVudW0gKExpbmUuaW50ZXJwIGxpbmUpIDtcbiAgUnVsZXMuaXNfdmFsaWQgKEhhc2h0YmwuZmluZCBsaW5lcykgbGluZW51bVxuXG5sZXQgZWRpdGxpbmUgbGluZW51bSBsaW5lID1cbiAgSGFzaHRibC5yZXBsYWNlIGxpbmVzIGxpbmVudW0gKExpbmUuaW50ZXJwIGxpbmUpIDtcbiAgUnVsZXMuaXNfdmFsaWQgKEhhc2h0YmwuZmluZCBsaW5lcykgbGluZW51bVxuXG5sZXQgZGVsZXRlbGluZSBsaW5lbnVtID1cbiAgSGFzaHRibC5yZW1vdmUgbGluZXMgbGluZW51bSA7XG4gIFJ1bGVzLmFsbF92YWxpZCBsaW5lc1xuIl19
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLjAsImZpbGUiOiIubWFpbi5lb2Jqcy9qc29vL2R1bmVfX2V4ZV9fUHJvb2Z0cmVlLmNtby5qcyIsInNvdXJjZVJvb3QiOiIiLCJuYW1lcyI6WyJsaW5lcyIsInJlcGxhY2VfbGluZSIsImxpbmVudW0iLCJzIiwibGluZSIsImRlbGV0ZV9saW5lIl0sInNvdXJjZXMiOlsiL3dvcmtzcGFjZV9yb290L2pzL3Byb29mdHJlZS5tbCJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0c7Ozs7O0c7Ozs7O0c7Ozs7O0dBQXNDOzs7OztJQUFsQ0EsUUFBa0M7WUFFbENDLGFBQWNDLFNBQWdCQztJQUNyQixJQUFQQyxPQUFPLG9CQURxQkQ7SUFFaEMsK0JBSkVILE9BRWNFLFNBQ1pFO0lBQ0osT0FBQSw4QkFKRUosT0FHRUk7R0FFcUI7WUFFdkJDLFlBQWFIO0lBQ2YsK0JBUkVGLE9BT2FFO3lDQVBiRjtHQVNtQjtnQ0FUbkJBLE9BRUFDLGNBS0FJOzs7RSIsInNvdXJjZXNDb250ZW50IjpbImxldCBsaW5lcyA6IChpbnQsIExpbmUudCkgSGFzaHRibC50ID0gSGFzaHRibC5jcmVhdGUgNDBcblxubGV0IHJlcGxhY2VfbGluZSAobGluZW51bSA6IGludCkgKHMgOiBzdHJpbmcpIDogYm9vbCA9XG4gIGxldCBsaW5lID0gTGluZS5pbnRlcnAgcyBpblxuICBIYXNodGJsLnJlcGxhY2UgbGluZXMgbGluZW51bSBsaW5lIDtcbiAgUnVsZXMuaXNfdmFsaWQgbGluZXMgbGluZSBcblxubGV0IGRlbGV0ZV9saW5lIChsaW5lbnVtIDogaW50KSA6IGJvb2wgPVxuICBIYXNodGJsLnJlbW92ZSBsaW5lcyBsaW5lbnVtIDtcbiAgUnVsZXMuYWxsX3ZhbGlkIGxpbmVzXG4iXX0=

@@ -29,7 +29,7 @@
 %left OR
 %nonassoc NOT
 
-%start <Ast.line option> prog
+%start <Ast.t option> prog
 
 %%
 

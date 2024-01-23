@@ -20,7 +20,7 @@
 #        }
 #  ; instrument_with = []
 #  }
-$ /home/dean/.opam/default/bin/ocamlc.opt -config > /tmp/dune_35f6af_output
+$ /home/dean/.opam/default/bin/ocamlc.opt -config > /tmp/dune_e41b16_output
 $ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/site/dune _build/default/site/.formatted/dune
 > diff --git a/_build/default/site/dune b/_build/default/site/.formatted/dune
 > index de83136..acf2365 100644
@@ -36,4 +36,121 @@ $ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/site/
 > - (action (copy %{deps} %{target})))
 > + (action
 > +  (copy %{deps} %{target})))
+[1]
+$ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/interpreter/line.mli _build/default/interpreter/.formatted/line.mli
+> diff --git a/_build/default/interpreter/line.mli b/_build/default/interpreter/.formatted/line.mli
+> index 36ef5a7..26fa00b 100644
+> --- a/_build/default/interpreter/line.mli
+> +++ b/_build/default/interpreter/.formatted/line.mli
+> @@ -21,4 +21,4 @@ type prop =
+>  
+>  type t = {prop: prop; derivedby: rule} [@@deriving show]
+>  
+> -val interp : string -> t 
+> +val interp : string -> t
+[1]
+$ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/interpreter/main.mli _build/default/interpreter/.formatted/main.mli
+> diff --git a/_build/default/interpreter/main.mli b/_build/default/interpreter/.formatted/main.mli
+> index c747a00..b16ec0f 100644
+> --- a/_build/default/interpreter/main.mli
+> +++ b/_build/default/interpreter/.formatted/main.mli
+> @@ -1,3 +1,3 @@
+>  open Ast
+>  
+> -val interp : string -> t 
+> +val interp : string -> t
+[1]
+$ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/js/dune _build/default/js/.formatted/dune
+> diff --git a/_build/default/js/dune b/_build/default/js/.formatted/dune
+> index 28cc99e..45c89fb 100644
+> --- a/_build/default/js/dune
+> +++ b/_build/default/js/.formatted/dune
+> @@ -1,6 +1,8 @@
+>  (executable
+> -  (name main)
+> -  (libraries js_of_ocaml line)
+> -  (preprocess (pps js_of_ocaml-ppx))
+> -  (modes js)
+> -  (ocamlopt_flags (--enable with-js-error)))
+> + (name main)
+> + (libraries js_of_ocaml line)
+> + (preprocess
+> +  (pps js_of_ocaml-ppx))
+> + (modes js)
+> + (ocamlopt_flags
+> +  (--enable with-js-error)))
+[1]
+$ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/js/prooftree.ml _build/default/js/.formatted/prooftree.ml
+> diff --git a/_build/default/js/prooftree.ml b/_build/default/js/.formatted/prooftree.ml
+> index 1998626..d1c5a4a 100644
+> --- a/_build/default/js/prooftree.ml
+> +++ b/_build/default/js/.formatted/prooftree.ml
+> @@ -3,7 +3,7 @@ let lines : (int, Line.t) Hashtbl.t = Hashtbl.create 40
+>  let replace_line (linenum : int) (s : string) : bool =
+>    let line = Line.interp s in
+>    Hashtbl.replace lines linenum line ;
+> -  Rules.is_valid lines line 
+> +  Rules.is_valid lines line
+>  
+>  let delete_line (linenum : int) : bool =
+>    Hashtbl.remove lines linenum ;
+[1]
+$ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/js/rules.ml _build/default/js/.formatted/rules.ml
+> diff --git a/_build/default/js/rules.ml b/_build/default/js/.formatted/rules.ml
+> index 33d4385..26d7c82 100644
+> --- a/_build/default/js/rules.ml
+> +++ b/_build/default/js/.formatted/rules.ml
+> @@ -3,9 +3,12 @@ open Line
+>  exception NoProp of string
+>  
+>  let rec is_valid lines line =
+> -  let find_prop linenum = match Hashtbl.find_opt lines linenum with
+> -    | None -> raise (NoProp ("No proposition in line: " ^ Int.to_string linenum))
+> -    | Some line -> line.prop 
+> +  let find_prop linenum =
+> +    match Hashtbl.find_opt lines linenum with
+> +    | None ->
+> +        raise (NoProp ("No proposition in line: " ^ Int.to_string linenum))
+> +    | Some line ->
+> +        line.prop
+>    in
+>    match line with
+>    | {prop= _; derivedby= `Premise} ->
+> @@ -114,7 +117,7 @@ and doublenegation p q =
+>  and demorgans p q =
+>    match (p, q) with
+>    | ( `Not (`Conn (((`And | `Or) as conn1), p1, q1))
+> -    , `Conn (((`And | `Or) as conn2), `Not p2, `Not q2) ) 
+> +    , `Conn (((`And | `Or) as conn2), `Not p2, `Not q2) )
+>    | ( `Conn (((`And | `Or) as conn1), `Not p1, `Not q1)
+>      , `Not (`Conn (((`And | `Or) as conn2), p2, q2)) ) ->
+>        conn1 <> conn2 && p1 = p2 && q1 = q2
+> @@ -123,16 +126,16 @@ and demorgans p q =
+>  
+>  and identity p q =
+>    match (p, q) with
+> -  | (`Conn (`And, `Bool true, p1) | `Conn (`And, p1, `Bool true)), p2 
+> -  | (`Conn (`Or, `Bool false, p1) | `Conn (`Or, p1, `Bool false)), p2 
+> -  | p1, (`Conn (`And, `Bool true, p2) | `Conn (`And, p2, `Bool true)) 
+> +  | (`Conn (`And, `Bool true, p1) | `Conn (`And, p1, `Bool true)), p2
+> +  | (`Conn (`Or, `Bool false, p1) | `Conn (`Or, p1, `Bool false)), p2
+> +  | p1, (`Conn (`And, `Bool true, p2) | `Conn (`And, p2, `Bool true))
+>    | p1, (`Conn (`Or, `Bool false, p2) | `Conn (`Or, p2, `Bool false)) ->
+>        p1 = p2
+>    | _ ->
+>        false
+>  
+>  and dominance p q =
+> -  match p, q with
+> +  match (p, q) with
+>    | (`Conn (`And, `Bool false, _) | `Conn (`And, _, `Bool false)), q
+>    | q, (`Conn (`And, `Bool false, _) | `Conn (`And, _, `Bool false)) ->
+>        `Bool false = q
+> @@ -159,5 +162,5 @@ and modustollens p1 p2 q =
+>        false
+>  
+>  let all_valid lines =
+> -  let aux _linenum line acc = acc && (is_valid lines line) in
+> +  let aux _linenum line acc = acc && is_valid lines line in
+>    Hashtbl.fold aux lines true
 [1]

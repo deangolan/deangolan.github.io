@@ -33,4 +33,4 @@ exception Error
 
 (* The monolithic API. *)
 
-val prog: (Lexing.lexbuf -> token) -> Lexing.lexbuf -> (Ast.line option)
+val prog: (Lexing.lexbuf -> token) -> Lexing.lexbuf -> (Ast.t option)
