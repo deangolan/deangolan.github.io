@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dynamic Input Fields</title>
+  <title>ProofWriter</title>
   <style>
     body {
       font-family: 'Fira Code', sans-serif;
       margin: 20px;
     }
-    .input-row {
+    .line {
       display: flex;
       align-items: center;
       margin-bottom: 10px;
@@ -20,119 +20,93 @@
     .output-text {
       margin-left: 10px;
     }
-    .dynamic-input {
+    .lines {
         font-family: 'Fira Code', monospace;
     }
   </style>
 </head>
 <body>
 
-<div><span id="isValid" class="valid">Valid</span></div>
+<div><span id="displayValid">Valid</span></div>
 
-<div id="inputContainer">
-  <div class="input-row" id="inputRow1">
-    <span class="input-number">1.</span>
-    <input type="text" id="input1" class="dynamic-input" onkeydown="handleKeyDown(event, 1)" onblur="handleBlur(1)">
-    <span class="output-text"></span>
+<div id="lines">
+  <div class="linenum" id="linenum1">
+    <span class="lineId">1.</span>
+    <input type="text" id="input1" class="lines" onkeydown="handleKeyDown(event, 1)" onblur="handleBlur(1)">
+    <span class="output-text" id="output1"></span>
   </div>
 </div>
 
 <script src="prooftree.js"></script>
-
 <script>
-  let biggestInputNumber = 1;
 
-  function handleKeyDown(event, inputNumber) {
-    const inputElement = document.getElementById('input' + inputNumber);
+const displayValid = document.getElementById("displayValid");
 
-    if (event.key === 'Enter') {
-      event.preventDefault();
+const proof = {
+    lines : document.getElementById('lines'),
+    num : 1,
 
-      if (inputNumber === biggestInputNumber) {
-        createNewInput(inputNumber + 1);
-      } else {
-        // Move to the input field below without creating a new one
-        const nextInput = document.getElementById('input' + (inputNumber + 1));
-        if (nextInput) {
-          nextInput.focus();
+    addLine : function() {
+        this.num++;
+        const newLine = document.createElement('div');
+        newLine.classList.add('linenum');
+        newLine.id = 'linenum' + this.num
+
+        const row = document.createElement("span");
+        row.textContent = this.num + '.'
+
+        const input = document.createElement("input");
+        input.id = 'input' + this.num;
+        input.type = 'text';
+        input.classList.add('lines');
+        input.onkeydown = function (event) {
+            handleKeyDown(event, proof.num);
+        };
+        newLine.onblur = function () {
+            handleBlur(proof.num);
+        };
+
+        const output = document.createElement('span');
+        output.id = 'output' + this.num;
+        output.classList.add('output-text');
+
+        newLine.appendChild(row);
+        newLine.appendChild(input);
+        newLine.appendChild(output);
+
+        lines.appendChild(newLine);
+
+        input.focus();
+    },
+
+    evalLine : function (linenum) {
+        const prop = document.getElementById('input' + linenum).value;
+        document.getElementById('output' + linenum).textContent = Prooftree.interp(prop);
+        try {
+            displayValid.textContent = Prooftree.editLine(linenum, prop) ? 'Valid' : 'Invalid';
+        } catch (error) {
+            displayValid.textContent = error.message;
         }
-      }
-    } else if (event.key === 'Backspace' && inputElement.value === '' && inputNumber > 1) {
-      event.preventDefault();
-      deleteInput(inputNumber);
+    },
+
+/*    removeLine : function (linenum) {
+       //TODO 
+    }*/
+}
+
+function handleKeyDown(event, linenum) {
+    console.log("Enter pressed");
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        if (linenum === proof.num) {
+            proof.addLine();
+        }
     }
-  }
+}
 
-  function deleteInput(inputNumber) {
-    const inputRow = document.getElementById('inputRow' + inputNumber);
-    inputRow.remove();
-    updateOutputText(inputNumber - 1);
-    if (inputNumber === biggestInputNumber) {
-      biggestInputNumber--;
-    }
-
-    // Set focus to the input field above after deletion
-    const previousInput = document.getElementById('input' + (inputNumber - 1));
-    if (previousInput) {
-      previousInput.focus();
-    }
-    if (Prooftree.deleteline(inputNumber)) {
-        isValid.textContent = 'Valid';
-    } else {
-        isValid.textContent = 'Invalid';
-    }
-  }
-
-  function handleBlur(inputNumber) {
-    updateOutputText(inputNumber);
-  }
-
-  function updateOutputText(inputNumber) {
-    const inputElement = document.getElementById('input' + inputNumber);
-    const outputTextElement = document.getElementById('inputRow' + inputNumber).getElementsByClassName('output-text')[0];
-    outputTextElement.textContent = Prooftree.interp(inputElement.value);
-    if (Prooftree.editline(inputNumber, inputElement.value)) {
-        isValid.textContent = 'Valid';
-    } else {
-        isValid.textContent = 'Invalid';
-    }
-  }
-
-  function createNewInput(newInputNumber) {
-    const inputContainer = document.getElementById('inputContainer');
-    biggestInputNumber = newInputNumber;
-
-    const inputRow = document.createElement('div');
-    inputRow.className = 'input-row';
-    inputRow.id = 'inputRow' + newInputNumber;
-
-    const inputNumberSpan = document.createElement('span');
-    inputNumberSpan.className = 'input-number';
-    inputNumberSpan.textContent = newInputNumber + '.';
-
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.id = 'input' + newInputNumber;
-    input.className = 'dynamic-input';
-    input.onkeydown = function (event) {
-      handleKeyDown(event, newInputNumber);
-    };
-    input.onblur = function () {
-      handleBlur(newInputNumber);
-    };
-
-    const outputTextSpan = document.createElement('span');
-    outputTextSpan.className = 'output-text';
-
-    inputRow.appendChild(inputNumberSpan);
-    inputRow.appendChild(input);
-    inputRow.appendChild(outputTextSpan);
-    inputContainer.appendChild(inputRow);
-
-    // Move the cursor to the newly created input field
-    input.focus();
-  }
+function handleBlur(linenum) {
+    proof.evalLine(linenum);
+}
 </script>
-
 </body>
 </html>

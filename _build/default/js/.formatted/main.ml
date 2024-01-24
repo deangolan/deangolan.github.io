@@ -3,11 +3,11 @@ open Js_of_ocaml
 let _ =
   Js.export "Prooftree"
     (object%js
-       method interp line = Line.interp line |> Line.show
+       method interp s = Line.interp s |> Line.show
 
-       method replace linenum line = Prooftree.replace_line linenum line
+       method editLine linenum s = Prooftree.replace_line linenum s
 
-       method delete linenum = Prooftree.delete_line linenum
+       method deleteLine linenum = Prooftree.delete_line linenum
 
        val lines = Prooftree.lines
     end )

@@ -20,7 +20,7 @@
 #        }
 #  ; instrument_with = []
 #  }
-$ /home/dean/.opam/default/bin/ocamlc.opt -config > /tmp/dune_e41b16_output
+$ /home/dean/.opam/default/bin/ocamlc.opt -config > /tmp/dune_2151cb_output
 $ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/site/dune _build/default/site/.formatted/dune
 > diff --git a/_build/default/site/dune b/_build/default/site/.formatted/dune
 > index de83136..acf2365 100644
@@ -37,6 +37,41 @@ $ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/site/
 > + (action
 > +  (copy %{deps} %{target})))
 [1]
+$ (cd _build/default && /home/dean/.opam/default/bin/ocamlformat --impl test/test_proofwriter.ml) > _build/default/test/.formatted/test_proofwriter.ml
+$ (cd _build/default && /home/dean/.opam/default/bin/ocamlformat --impl interpreter/main.ml) > _build/default/interpreter/.formatted/main.ml
+$ (cd _build/default && /home/dean/.opam/default/bin/ocamlformat --impl interpreter/line.ml) > _build/default/interpreter/.formatted/line.ml
+$ (cd _build/default && /home/dean/.opam/default/bin/ocamlformat --impl interpreter/ast.ml) > _build/default/interpreter/.formatted/ast.ml
+$ (cd _build/default && /home/dean/.opam/default/bin/ocamlformat --intf interpreter/line.mli) > _build/default/interpreter/.formatted/line.mli
+$ (cd _build/default && /home/dean/.opam/default/bin/ocamlformat --intf interpreter/main.mli) > _build/default/interpreter/.formatted/main.mli
+$ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/js/dune _build/default/js/.formatted/dune
+> diff --git a/_build/default/js/dune b/_build/default/js/.formatted/dune
+> index 8882090..5bc3a64 100644
+> --- a/_build/default/js/dune
+> +++ b/_build/default/js/.formatted/dune
+> @@ -1,9 +1,11 @@
+>  (executable
+> -  (name main)
+> -  (libraries js_of_ocaml line)
+> -  (preprocess (pps js_of_ocaml-ppx))
+> -  (modes js))
+> + (name main)
+> + (libraries js_of_ocaml line)
+> + (preprocess
+> +  (pps js_of_ocaml-ppx))
+> + (modes js))
+>  
+> -(install 
+> -  (section bin)
+> -  (files (main.bc.js as prooftree.js)))
+> +(install
+> + (section bin)
+> + (files
+> +  (main.bc.js as prooftree.js)))
+[1]
+$ (cd _build/default && /home/dean/.opam/default/bin/ocamlformat --intf js/rules.mli) > _build/default/js/.formatted/rules.mli
+$ (cd _build/default && /home/dean/.opam/default/bin/ocamlformat --impl js/main.ml) > _build/default/js/.formatted/main.ml
+$ (cd _build/default && /home/dean/.opam/default/bin/ocamlformat --impl js/prooftree.ml) > _build/default/js/.formatted/prooftree.ml
+$ (cd _build/default && /home/dean/.opam/default/bin/ocamlformat --impl js/rules.ml) > _build/default/js/.formatted/rules.ml
 $ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/interpreter/line.mli _build/default/interpreter/.formatted/line.mli
 > diff --git a/_build/default/interpreter/line.mli b/_build/default/interpreter/.formatted/line.mli
 > index 36ef5a7..26fa00b 100644
@@ -60,25 +95,20 @@ $ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/inter
 > -val interp : string -> t 
 > +val interp : string -> t
 [1]
-$ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/js/dune _build/default/js/.formatted/dune
-> diff --git a/_build/default/js/dune b/_build/default/js/.formatted/dune
-> index 28cc99e..45c89fb 100644
-> --- a/_build/default/js/dune
-> +++ b/_build/default/js/.formatted/dune
-> @@ -1,6 +1,8 @@
->  (executable
-> -  (name main)
-> -  (libraries js_of_ocaml line)
-> -  (preprocess (pps js_of_ocaml-ppx))
-> -  (modes js)
-> -  (ocamlopt_flags (--enable with-js-error)))
-> + (name main)
-> + (libraries js_of_ocaml line)
-> + (preprocess
-> +  (pps js_of_ocaml-ppx))
-> + (modes js)
-> + (ocamlopt_flags
-> +  (--enable with-js-error)))
+$ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/js/main.ml _build/default/js/.formatted/main.ml
+> diff --git a/_build/default/js/main.ml b/_build/default/js/.formatted/main.ml
+> index 1630994..80e1d70 100644
+> --- a/_build/default/js/main.ml
+> +++ b/_build/default/js/.formatted/main.ml
+> @@ -5,7 +5,7 @@ let _ =
+>      (object%js
+>         method interp s = Line.interp s |> Line.show
+>  
+> -       method editLine linenum s = Prooftree.replace_line linenum s 
+> +       method editLine linenum s = Prooftree.replace_line linenum s
+>  
+>         method deleteLine linenum = Prooftree.delete_line linenum
+>  
 [1]
 $ /usr/bin/git --no-pager diff --no-index --color=always -u _build/default/js/prooftree.ml _build/default/js/.formatted/prooftree.ml
 > diff --git a/_build/default/js/prooftree.ml b/_build/default/js/.formatted/prooftree.ml
