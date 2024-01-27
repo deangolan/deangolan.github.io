@@ -8,3 +8,6 @@ module Prooftree = Dune__exe__Prooftree
 
 (** @canonical Dune__exe.Rules *)
 module Rules = Dune__exe__Rules
+
+(** @canonical Dune__exe.Zipper *)
+module Zipper = Dune__exe__Zipper
