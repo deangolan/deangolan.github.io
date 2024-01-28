@@ -1,12 +1,7 @@
 open Ast
 
 let parse s =
-  let lexbuf = Lexing.from_string s in
-  match Parser.prog Lexer.read lexbuf with
-  | None ->
-      failwith "Cannot parse empty proposition"
-  | Some e ->
-      e
+  Lexing.from_string s |> Parser.prog Lexer.read |> Linezipper.from_list
 
 let rec eval = function
   | `Conn (binop, exp1, exp2) ->
@@ -38,6 +33,13 @@ and collapse binop exp1 exp2 =
 and negate exp =
   match eval exp with `Bool a -> `Bool (not a) | exp -> `Not exp
 
-let interp s =
-  let line = parse s in
-  {prop= eval line.prop; derivedby= line.derivedby}
+let getast (zipper : Linezipper.t) =
+  match zipper with
+  | ([], _) -> []
+  | (hd :: _, _) -> match hd with
+    | Premise _ as premise ->
+      premise
+    | EquivalenceRule (rule, Lineref i, q) ->
+      EquivalenceRule (rule, getline zipper i, q)
+    | ImplicationRule (rule, Lineref i1, Lineref i2, q) ->
+      ImplicationRule (rule, getline zipper i1, getline zipper i2, q)
