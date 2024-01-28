@@ -1,4 +1,4 @@
 (lang dune 3.12)
 (name proofwriter)
 (sections (lib .) (bin ../../bin))
-(files (lib (META dune-package opam)) (bin (prooftree.js)))
+(files (lib (META dune-package opam)) (bin (interpreter.js)))

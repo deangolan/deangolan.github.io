@@ -1,6 +1,6 @@
 open Ast
 
-let parse s = Lexing.from_string s |> Parser.prog Lexer.read
+let parse s = Lexing.from_string s |> Parser.prog Lexer.read |> List.rev
 
 let rec simplify = function
   | `Conn (binop, exp1, exp2) ->
@@ -51,5 +51,8 @@ let ast_from_lines lines =
   List.hd lines |> aux (List.length lines) lines
 
 let interp s =
-  try (true, parse s |> ast_from_lines |> validate |> show_prop)
-  with Rules.Invalid msg -> (false, msg)
+  try parse s |> ast_from_lines |> validate |> show_prop |> (^) "|- " with
+  | Rules.Invalid msg ->
+      msg
+  | Failure _ ->
+      ""

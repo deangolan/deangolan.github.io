@@ -2,13 +2,16 @@
 //# buildInfo:effects=false, kind=cmo, use-js-string=true, version=5.5.2
 
 //# unitInfo: Provides: Dune__exe__Main
-//# unitInfo: Requires: CamlinternalOO, Interp__Main, Js_of_ocaml__Js
+//# unitInfo: Requires: CamlinternalOO, Interp__Ast, Interp__Lexer, Interp__Main, Interp__Parser, Js_of_ocaml__Js, Stdlib, Stdlib__List
 (function
   (globalThis){
    "use strict";
    var
     runtime = globalThis.jsoo_runtime,
-    caml_js_wrap_meth_callback = runtime.caml_js_wrap_meth_callback;
+    cst_Syntax_Error$1 = "Syntax Error",
+    caml_js_wrap_meth_callback = runtime.caml_js_wrap_meth_callback,
+    caml_maybe_attach_backtrace = runtime.caml_maybe_attach_backtrace,
+    caml_wrap_exception = runtime.caml_wrap_exception;
    function caml_call1(f, a0){
     return (f.l >= 0 ? f.l : f.l = f.length) == 1
             ? f(a0)
@@ -21,22 +24,53 @@
    }
    var
     global_data = runtime.caml_get_global_data(),
-    Interp_Main = global_data.Interp__Main;
+    cst = "",
+    Stdlib = global_data.Stdlib,
+    Interp_Main = global_data.Interp__Main,
+    Interp_Ast = global_data.Interp__Ast,
+    Stdlib_List = global_data.Stdlib__List,
+    Interp_Lexer = global_data.Interp__Lexer,
+    Interp_Parser = global_data.Interp__Parser;
    global_data.CamlinternalOO;
    var
     Js_of_ocaml_Js = global_data.Js_of_ocaml__Js,
+    cst_Syntax_Error$0 = cst_Syntax_Error$1,
+    cst_Syntax_Error = cst_Syntax_Error$1,
     cst_Interpreter = "Interpreter";
-   function t3(param, s){return caml_call1(Interp_Main[6], s);}
-   function t2(param, s){return caml_call1(Interp_Main[1], s);}
+   function t3(param, s){
+    try{var _e_ = caml_call1(Interp_Main[6], s); return _e_;}
+    catch(exn$0){
+     var exn = caml_wrap_exception(exn$0);
+     if(exn[1] === Interp_Lexer[1]){var err = exn[2]; return err;}
+     if(exn === Interp_Parser[1]) return cst_Syntax_Error;
+     throw caml_maybe_attach_backtrace(exn, 0);
+    }
+   }
+   function t2(param, s){
+    try{
+     var
+      _a_ = caml_call1(Interp_Main[1], s),
+      _b_ = caml_call1(caml_call1(Stdlib_List[20], Interp_Ast[6]), _a_),
+      _c_ = function(acc, s){return caml_call2(Stdlib[28], acc, s);},
+      _d_ = caml_call1(caml_call2(Stdlib_List[26], _c_, cst), _b_);
+     return _d_;
+    }
+    catch(exn$0){
+     var exn = caml_wrap_exception(exn$0);
+     if(exn[1] === Interp_Lexer[1]){var err = exn[2]; return err;}
+     if(exn === Interp_Parser[1]) return cst_Syntax_Error$0;
+     throw caml_maybe_attach_backtrace(exn, 0);
+    }
+   }
    caml_call2
     (Js_of_ocaml_Js[50],
      cst_Interpreter,
      {parse: caml_js_wrap_meth_callback(t2),
       interp: caml_js_wrap_meth_callback(t3)});
    var Dune_exe_Main = [0];
-   runtime.caml_register_global(9, Dune_exe_Main, "Dune__exe__Main");
+   runtime.caml_register_global(17, Dune_exe_Main, "Dune__exe__Main");
    return;
   }
   (globalThis));
 
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLjAsImZpbGUiOiIubWFpbi5lb2Jqcy9qc29vL2R1bmVfX2V4ZV9fTWFpbi5jbW8uanMiLCJzb3VyY2VSb290IjoiIiwibmFtZXMiOlsicyJdLCJzb3VyY2VzIjpbIi93b3Jrc3BhY2Vfcm9vdC9qcy9tYWluLm1sIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7OztHOzs7OztHOzs7Ozs7Ozs7Ozs7c0JBT3FCQSxHQUFJLE9BQUEsMkJBQUpBLEdBQXdCO3NCQUZ6QkEsR0FBSSxPQUFBLDJCQUFKQSxHQUF1QjtHQUZ6Qzs7Ozs7R0FBQTs7O0UiLCJzb3VyY2VzQ29udGVudCI6WyJvcGVuIEpzX29mX29jYW1sXG5cbmxldCBfID1cbiAgSnMuZXhwb3J0IFwiSW50ZXJwcmV0ZXJcIlxuICAgIChvYmplY3QlanNcbiAgICAgICBtZXRob2QgcGFyc2UgcyA9IEludGVycC5NYWluLnBhcnNlIHNcblxuICAgICAgIG1ldGhvZCBpbnRlcnAgcyA9IEludGVycC5NYWluLmludGVycCBzXG4gICAgZW5kIClcbiJdfQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLjAsImZpbGUiOiIubWFpbi5lb2Jqcy9qc29vL2R1bmVfX2V4ZV9fTWFpbi5jbW8uanMiLCJzb3VyY2VSb290IjoiIiwibmFtZXMiOlsicyIsImVyciIsImFjYyJdLCJzb3VyY2VzIjpbIi93b3Jrc3BhY2Vfcm9vdC9qcy9tYWluLm1sIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7OztHOzs7OztHOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztzQkFlcUJBO0lBQ1osSUFBSSxVQUFBLDJCQURRQSxJQUNSOzs7d0NBQ3VCQyxjQUN2QixPQUR1QkE7a0NBR3ZCOzs7R0FBYztzQkFmUEQ7SUFDWDtLQUNFO01BQUEsTUFBQSwyQkFGU0E7TUFFVCxNQUFBLFdBQXVCO3FCQUNBRSxLQUFJRixHQUFLLE9BQUEsdUJBQVRFLEtBQUlGLEdBQVk7TUFEdkMsTUFBQSxXQUNHO0tBREg7Ozs7d0NBR3lCQyxjQUN2QixPQUR1QkE7a0NBR3ZCOzs7R0FBYztHQVZ6Qjs7Ozs7R0FBQTs7O0UiLCJzb3VyY2VzQ29udGVudCI6WyJvcGVuIEpzX29mX29jYW1sXG5cbmxldCBfID1cbiAgSnMuZXhwb3J0IFwiSW50ZXJwcmV0ZXJcIlxuICAgIChvYmplY3QlanNcbiAgICAgICBtZXRob2QgcGFyc2UgcyA9XG4gICAgICAgICB0cnlcbiAgICAgICAgICAgSW50ZXJwLk1haW4ucGFyc2UgcyB8PiBMaXN0Lm1hcCBJbnRlcnAuQXN0LnNob3dcbiAgICAgICAgICAgfD4gTGlzdC5mb2xkX2xlZnQgKGZ1biBhY2MgcyAtPiBhY2MgXiBzKSBcIlwiXG4gICAgICAgICB3aXRoXG4gICAgICAgICB8IEludGVycC5MZXhlci5TeW50YXhFcnJvciBlcnIgLT5cbiAgICAgICAgICAgICBlcnJcbiAgICAgICAgIHwgSW50ZXJwLlBhcnNlci5FcnJvciAtPlxuICAgICAgICAgICAgIFwiU3ludGF4IEVycm9yXCJcblxuICAgICAgIG1ldGhvZCBpbnRlcnAgcyA9XG4gICAgICAgICB0cnkgSW50ZXJwLk1haW4uaW50ZXJwIHMgd2l0aFxuICAgICAgICAgfCBJbnRlcnAuTGV4ZXIuU3ludGF4RXJyb3IgZXJyIC0+XG4gICAgICAgICAgICAgZXJyXG4gICAgICAgICB8IEludGVycC5QYXJzZXIuRXJyb3IgLT5cbiAgICAgICAgICAgICBcIlN5bnRheCBFcnJvclwiXG4gICAgZW5kIClcbiJdfQ==

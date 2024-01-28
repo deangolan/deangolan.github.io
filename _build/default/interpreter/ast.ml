@@ -14,7 +14,7 @@ type t =
 module Rules = struct
   exception Invalid of string
 
-  let not_equivalent p q = Invalid (show_prop p ^ "⊬" ^ show_prop q)
+  let not_equivalent p q = Invalid (show_prop p ^ " <!=> " ^ show_prop q)
 
   let rec is_equivalent pattern p q =
     if check pattern p q then q else raise (not_equivalent p q)
@@ -131,7 +131,7 @@ module Rules = struct
   (* Patterns for implication rules. *)
 
   let not_implied p1 p2 q =
-    Invalid (show_prop p1 ^ show_prop p2 ^ "⊬" ^ show_prop q)
+    Invalid (show_prop p1 ^ show_prop p2 ^ " !=> " ^ show_prop q)
 
   let is_implied pattern p1 p2 q =
     if pattern p1 p2 q then q else raise (not_implied p1 p2 q)
@@ -182,3 +182,4 @@ let rec validate = function
       rule (validate p1) (validate p2) q
   | Lineref _ ->
       failwith "Precondition violated"
+

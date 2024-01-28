@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Proof Writer</title>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="myapp"></div>
+</body>
+
+<script src="interpreter.js"></script>
+
+<script>
+const app = Elm.Main.init({
+    node: document.getElementById('myapp')  
+});
+
+app.ports.sendProof.subscribe(function(proof) {
+    const eval = Interpreter.interp(proof);
+    console.log(eval);
+    app.ports.receiveEval.send(eval);
+});
+
+</script>
+
+</html>

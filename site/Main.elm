@@ -10,19 +10,19 @@ import Browser
 -- PORTS
 
 port sendProof : String -> Cmd msg
-port receiveEval : (List String -> msg) -> Sub msg
+port receiveEval : ( String -> msg ) -> Sub msg
 
 
 -- MODEL
 
 type alias Model = 
     { proof : String
-    , linesEval : List String 
+    , valid : String 
     }
 
 init : ( Model, Cmd Msg )
 init =
-    ( { proof = "", linesEval = [] }
+    ( { proof = "", valid = "" }
     , Cmd.none
     )
 
@@ -30,19 +30,25 @@ init =
 -- UPDATE
 
 type Msg
-    = Send
-    | Receive ( List String )
+    = Change String
+    | Send
+    | Receive String 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        Change text ->
+            ( {model | proof = text} 
+            , Cmd.none
+            )
+
         Send ->
             ( model  
             , sendProof model.proof 
             )
 
-        Receive linesEval ->
-            ( { model | linesEval = linesEval }
+        Receive message ->
+            ( Debug.log message { model | valid = message }
             , Cmd.none
             )
 
@@ -55,14 +61,18 @@ subscriptions _ =
 
 view : Model -> Html Msg
 view model = 
-    textarea
+    div [] 
+    [ textarea
         [ class "proofcontainer"
         , placeholder "Enter your proof here"
         , rows 1
         , on "keydown" (isEnterOrBackspace Send) 
         , value model.proof
+        , onInput Change
         ] 
         []
+    , output [class "output"] [text model.valid]
+    ]
 
 isEnterOrBackspace : msg -> Json.Decoder msg
 isEnterOrBackspace msg =

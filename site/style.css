@@ -1,0 +1,16 @@
+.proofcontainer {
+    width: 400px; 
+    height: 300px;     
+    resize: none; 
+    font-family: 'Fira Code', sans-serif; 
+    font-size: 16px;     
+    margin: auto; 
+    display: block; 
+}
+
+.output {
+    margin-top: 20px;
+    text-align: center;
+    font-family: 'Fira Code', monospace; 
+    display: block;
+}

@@ -4,5 +4,5 @@ lib: [
   "_build/install/default/lib/proofwriter/opam"
 ]
 bin: [
-  "_build/install/default/bin/prooftree.js"
+  "_build/install/default/bin/interpreter.js"
 ]
