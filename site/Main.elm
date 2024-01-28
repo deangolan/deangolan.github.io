@@ -1,112 +1,85 @@
 port module Main exposing (..)
 
-import Browser
 import Html exposing (..)
-import Html.Attributes exposing (id, class, value)
+import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Array exposing (Array)
-import Task
-import Browser.Dom as Dom
+import Json.Decode as Json
+import Browser
 
 
-type InfoForOutside
-    = EditLine Int String
-    | DeleteLine Int
+-- PORTS
+
+port sendProof : String -> Cmd msg
+port receiveEval : (List String -> msg) -> Sub msg
 
 
-type InfoForElm
-    = LineEval Result String (Bool, String) 
+-- MODEL
 
-
-main : Program() (Model) Msg
-main =
-    Browser.element
-        { init = \_ -> (init, Cmd.none)
-        , view = view
-        , update = update
-        , subscriptions = \_ -> Sub.none
-        }
-
-
-type alias Line = 
-    { prop : String
-    , validity : (Bool, String) 
+type alias Model = 
+    { proof : String
+    , linesEval : List String 
     }
 
-
-type alias Model = Array Line
-
-
-emptyLine : Line
-emptyLine = Line "" (True, "")
-
-
-init : Model
+init : ( Model, Cmd Msg )
 init =
-    Array.fromList [ Line "Enter your proof here" (True, "") ]
+    ( { proof = "", linesEval = [] }
+    , Cmd.none
+    )
 
 
-type Msg 
-    = Submit Int
-    | Eval Int
-    | FocusResult (Result Dom.Error ()) 
+-- UPDATE
 
+type Msg
+    = Send
+    | Receive ( List String )
 
-inputId : Int -> String
-inputId linenum =
-    "lineinput" ++ String.fromInt linenum
-
-
-update : Msg -> Model -> (Model, Cmd Msg)
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Submit linenum ->
-            if linenum == Array.length model then
-                (Array.push emptyLine model
-                , Dom.focus (inputId (linenum + 1)) |> Task.attempt FocusResult)
-            else
-                (model
-                , Dom.focus (inputId (linenum + 1)) |> Task.attempt FocusResult)
+        Send ->
+            ( model  
+            , sendProof model.proof 
+            )
 
-        FocusResult result ->
-            case result of
-                Ok () ->
-                    (model, Cmd.none)
-                Err (Dom.NotFound id) ->
-                    (model, 
-                    Cmd.none 
-                        |> Debug.log ("Error loading: " ++ id))
+        Receive linesEval ->
+            ( { model | linesEval = linesEval }
+            , Cmd.none
+            )
 
-        Eval linenum ->
-            case Array.get linenum model of
-                Just line ->
-                    (Array.set linenum line model, Cmd.none)
-
-                Nothing ->
-                    -- Should be impossible
-                    (model, Cmd.none 
-                        |> Debug.log 
-                        ("Failed to retreive line: " ++ String.fromInt linenum))
+subscriptions : Model -> Sub Msg
+subscriptions _ =
+    receiveEval Receive
 
 
-lineToHtml : (Int, Line) -> Html Msg
-lineToHtml (index, line) =
-    let linenum = index + 1 in
-    li [ class "line" ]
-        [ form [ onSubmit (Submit linenum) ] 
-            [ input 
-                [ id (inputId linenum)
-                , value line.prop
-                , onBlur (Eval linenum)
-                ] 
-                []
-            ]
-        , output [value <| Tuple.second line.validity] []
-    ]
-
+-- VIEW
 
 view : Model -> Html Msg
-view model =
-    div 
-    [class "container"]
-    [ ol [] (List.map lineToHtml (Array.toIndexedList model)) ]
+view model = 
+    textarea
+        [ class "proofcontainer"
+        , placeholder "Enter your proof here"
+        , rows 1
+        , on "keydown" (isEnterOrBackspace Send) 
+        , value model.proof
+        ] 
+        []
+
+isEnterOrBackspace : msg -> Json.Decoder msg
+isEnterOrBackspace msg =
+    Json.field "key" Json.string
+        |> Json.andThen (\key -> if key == "Enter" || key == "Backspace" then 
+                Json.succeed msg
+            else 
+                Json.fail "Some other key")
+
+
+-- MAIN
+
+main : Program () Model Msg
+main = 
+    Browser.element 
+        { init = ( \_ -> init )
+        , update = update
+        , view = view
+        , subscriptions = subscriptions 
+        }

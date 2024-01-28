@@ -21,7 +21,6 @@ type token =
   | DIS
   | COMMA
   | COM
-  | COLON
   | BOOL of (bool)
   | ATOM of (string)
   | ASO
@@ -33,4 +32,4 @@ exception Error
 
 (* The monolithic API. *)
 
-val prog: (Lexing.lexbuf -> token) -> Lexing.lexbuf -> (Ast.t option)
+val prog: (Lexing.lexbuf -> token) -> Lexing.lexbuf -> (Ast.t list)

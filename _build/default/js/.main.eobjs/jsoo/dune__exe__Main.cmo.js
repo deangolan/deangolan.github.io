@@ -2,7 +2,7 @@
 //# buildInfo:effects=false, kind=cmo, use-js-string=true, version=5.5.2
 
 //# unitInfo: Provides: Dune__exe__Main
-//# unitInfo: Requires: CamlinternalOO, Dune__exe__Prooftree, Js_of_ocaml__Js, Line
+//# unitInfo: Requires: CamlinternalOO, Interp__Main, Js_of_ocaml__Js
 (function
   (globalThis){
    "use strict";
@@ -21,34 +21,22 @@
    }
    var
     global_data = runtime.caml_get_global_data(),
-    Line = global_data.Line,
-    Dune_exe_Prooftree = global_data.Dune__exe__Prooftree;
+    Interp_Main = global_data.Interp__Main;
    global_data.CamlinternalOO;
    var
     Js_of_ocaml_Js = global_data.Js_of_ocaml__Js,
-    t7 = Dune_exe_Prooftree[1],
-    cst_Prooftree = "Prooftree";
-   function t6(param, linenum){
-    return caml_call1(Dune_exe_Prooftree[3], linenum);
-   }
-   function t5(param, linenum, s){
-    return caml_call2(Dune_exe_Prooftree[2], linenum, s);
-   }
-   function t4(param, s){
-    var _a_ = caml_call1(Line[9], s);
-    return caml_call1(Line[8], _a_);
-   }
+    cst_Interpreter = "Interpreter";
+   function t3(param, s){return caml_call1(Interp_Main[6], s);}
+   function t2(param, s){return caml_call1(Interp_Main[1], s);}
    caml_call2
     (Js_of_ocaml_Js[50],
-     cst_Prooftree,
-     {interp: caml_js_wrap_meth_callback(t4),
-      editLine: caml_js_wrap_meth_callback(t5),
-      deleteLine: caml_js_wrap_meth_callback(t6),
-      lines: t7});
+     cst_Interpreter,
+     {parse: caml_js_wrap_meth_callback(t2),
+      interp: caml_js_wrap_meth_callback(t3)});
    var Dune_exe_Main = [0];
-   runtime.caml_register_global(12, Dune_exe_Main, "Dune__exe__Main");
+   runtime.caml_register_global(9, Dune_exe_Main, "Dune__exe__Main");
    return;
   }
   (globalThis));
 
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLjAsImZpbGUiOiIubWFpbi5lb2Jqcy9qc29vL2R1bmVfX2V4ZV9fTWFpbi5jbW8uanMiLCJzb3VyY2VSb290IjoiIiwibmFtZXMiOlsibGluZW51bSIsInMiXSwic291cmNlcyI6WyIvd29ya3NwYWNlX3Jvb3QvanMvbWFpbi5tbCJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Rzs7Ozs7Rzs7Ozs7Ozs7Ozs7Ozs7c0JBU3lCQTtJQUFVLE9BQUEsa0NBQVZBO0dBQXVDO3NCQUZ6Q0EsU0FBUUM7SUFBSSxPQUFBLGtDQUFaRCxTQUFRQztHQUFvQztzQkFGOUNBO0lBQUksVUFBQSxvQkFBSkE7SUFBSSxPQUFBO0dBQTBCO0dBRmpEOzs7Ozs7O0dBQUE7OztFIiwic291cmNlc0NvbnRlbnQiOlsib3BlbiBKc19vZl9vY2FtbFxuXG5sZXQgXyA9XG4gIEpzLmV4cG9ydCBcIlByb29mdHJlZVwiXG4gICAgKG9iamVjdCVqc1xuICAgICAgIG1ldGhvZCBpbnRlcnAgcyA9IExpbmUuaW50ZXJwIHMgfD4gTGluZS5zaG93XG5cbiAgICAgICBtZXRob2QgZWRpdExpbmUgbGluZW51bSBzID0gUHJvb2Z0cmVlLnJlcGxhY2VfbGluZSBsaW5lbnVtIHMgXG5cbiAgICAgICBtZXRob2QgZGVsZXRlTGluZSBsaW5lbnVtID0gUHJvb2Z0cmVlLmRlbGV0ZV9saW5lIGxpbmVudW1cblxuICAgICAgIHZhbCBsaW5lcyA9IFByb29mdHJlZS5saW5lc1xuICAgIGVuZCApXG4iXX0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLjAsImZpbGUiOiIubWFpbi5lb2Jqcy9qc29vL2R1bmVfX2V4ZV9fTWFpbi5jbW8uanMiLCJzb3VyY2VSb290IjoiIiwibmFtZXMiOlsicyJdLCJzb3VyY2VzIjpbIi93b3Jrc3BhY2Vfcm9vdC9qcy9tYWluLm1sIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7OztHOzs7OztHOzs7Ozs7Ozs7Ozs7c0JBT3FCQSxHQUFJLE9BQUEsMkJBQUpBLEdBQXdCO3NCQUZ6QkEsR0FBSSxPQUFBLDJCQUFKQSxHQUF1QjtHQUZ6Qzs7Ozs7R0FBQTs7O0UiLCJzb3VyY2VzQ29udGVudCI6WyJvcGVuIEpzX29mX29jYW1sXG5cbmxldCBfID1cbiAgSnMuZXhwb3J0IFwiSW50ZXJwcmV0ZXJcIlxuICAgIChvYmplY3QlanNcbiAgICAgICBtZXRob2QgcGFyc2UgcyA9IEludGVycC5NYWluLnBhcnNlIHNcblxuICAgICAgIG1ldGhvZCBpbnRlcnAgcyA9IEludGVycC5NYWluLmludGVycCBzXG4gICAgZW5kIClcbiJdfQ==

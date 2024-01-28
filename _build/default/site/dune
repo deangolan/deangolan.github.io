@@ -1,6 +1,7 @@
 (rule
  (deps ../js/main.bc.js)
- (target ./prooftree.js )
+ (target ./prooftree.js)
  (mode
   (promote (until-clean)))
- (action (copy %{deps} %{target})))
+ (action
+  (copy %{deps} %{target})))

@@ -18,14 +18,12 @@ type token =
   | DIS
   | COMMA
   | COM
-  | COLON
   | BOOL of bool
   | ATOM of string
   | ASO
   | AND
 val menhir_begin_marker : int
-val xv_rule : Ast.rule
 val xv_prop : Ast.prop
-val xv_prog : Ast.t option
+val xv_prog : Ast.t list
 val xv_expr : Ast.t
 val menhir_end_marker : int

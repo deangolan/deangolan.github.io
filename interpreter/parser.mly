@@ -29,6 +29,8 @@
 %nonassoc NOT
 
 %start <Ast.t list> prog
+%type <Ast.t> expr
+%type <Ast.prop> prop
 
 %%
 
@@ -39,16 +41,16 @@ prog:
 
 expr:
     | p = prop; PR { Premise p }
-    | q = prop; LE; i = INT { EquivalenceRule (LE, Lineref i, q) }
-    | q = prop; IDM; i = INT { EquivalenceRule (Idempotence, Lineref i, q) }
-    | q = prop; COM; i = INT { EquivalenceRule (Commutative, Lineref i, q) }
-    | q = prop; ASO; i = INT { EquivalenceRule (Associative, Lineref i, q) }
-    | q = prop; DIS; i = INT { EquivalenceRule (Distributive, Lineref i, q) }
-    | q = prop; DN;  i = INT { EquivalenceRule (DoubleNegation, Lineref i, q) }
-    | q = prop; DM; i = INT { EquivalenceRule (DeMorgan, Lineref i, q) }
-    | q = prop; ID; i = INT { EquivalenceRule (Identity, Lineref i, q) }
-    | q = prop; MP; i1 = INT; COMMA; i2 = INT { ImplicationRule (ModusPonens, Lineref i1, Lineref i2, q) }
-    | q = prop; MT; i1 = INT; COMMA; i2 = INT { ImplicationRule (ModusTollens, Lineref i1, Lineref i2, q) }
+    | q = prop; LE; i = INT { EquivalenceRule (Ast.le, Lineref i, q) }
+    | q = prop; IDM; i = INT { EquivalenceRule (Ast.idempotence, Lineref i, q) }
+    | q = prop; COM; i = INT { EquivalenceRule (Ast.commutative, Lineref i, q) }
+    | q = prop; ASO; i = INT { EquivalenceRule (Ast.associative, Lineref i, q) }
+    | q = prop; DIS; i = INT { EquivalenceRule (Ast.distributive, Lineref i, q) }
+    | q = prop; DN;  i = INT { EquivalenceRule (Ast.doublenegation, Lineref i, q) }
+    | q = prop; DM; i = INT { EquivalenceRule (Ast.demorgan, Lineref i, q) }
+    | q = prop; ID; i = INT { EquivalenceRule (Ast.identity, Lineref i, q) }
+    | q = prop; MP; i1 = INT; COMMA; i2 = INT { ImplicationRule (Ast.modusponens, Lineref i1, Lineref i2, q) }
+    | q = prop; MT; i1 = INT; COMMA; i2 = INT { ImplicationRule (Ast.modustollens, Lineref i1, Lineref i2, q) }
     ;
 
 prop:

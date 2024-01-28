@@ -1,5 +1,5 @@
 (library
- (name line)
+ (name interp)
  (preprocess
   (pps ppx_deriving.show)))
 

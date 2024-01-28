@@ -20,7 +20,6 @@ rule read =
     parse
     | whitespace { read lexbuf }
     | atom { ATOM (Lexing.lexeme lexbuf) }
-    | ":" { COLON }
     | "(" { LPAREN }
     | ")" { RPAREN }
     | _true { BOOL true }
