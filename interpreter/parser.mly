@@ -18,6 +18,9 @@
 %token DN 
 %token DM
 %token ID
+%token DO
+%token CON
+%token TA
 %token MP
 %token MT
 %token EOF
@@ -26,7 +29,7 @@
 %right IMP
 %left AND
 %left OR
-%nonassoc NOT
+%right NOT
 
 %start <Ast.t list> prog
 %type <Ast.t> expr
@@ -41,25 +44,28 @@ prog:
 
 expr:
     | p = prop; PR { Premise p }
-    | q = prop; LE; i = INT { EquivalenceRule (Ast.le, Lineref i, q) }
-    | q = prop; IDM; i = INT { EquivalenceRule (Ast.idempotence, Lineref i, q) }
-    | q = prop; COM; i = INT { EquivalenceRule (Ast.commutative, Lineref i, q) }
-    | q = prop; ASO; i = INT { EquivalenceRule (Ast.associative, Lineref i, q) }
-    | q = prop; DIS; i = INT { EquivalenceRule (Ast.distributive, Lineref i, q) }
-    | q = prop; DN;  i = INT { EquivalenceRule (Ast.doublenegation, Lineref i, q) }
-    | q = prop; DM; i = INT { EquivalenceRule (Ast.demorgan, Lineref i, q) }
-    | q = prop; ID; i = INT { EquivalenceRule (Ast.identity, Lineref i, q) }
-    | q = prop; MP; i1 = INT; COMMA; i2 = INT { ImplicationRule (Ast.modusponens, Lineref i1, Lineref i2, q) }
-    | q = prop; MT; i1 = INT; COMMA; i2 = INT { ImplicationRule (Ast.modustollens, Lineref i1, Lineref i2, q) }
+    | q = prop; LE; i = INT { EquivalenceRule (Validate.le, Lineref i, q) }
+    | q = prop; IDM; i = INT { EquivalenceRule (Validate.idempotence, Lineref i, q) }
+    | q = prop; COM; i = INT { EquivalenceRule (Validate.commutative, Lineref i, q) }
+    | q = prop; ASO; i = INT { EquivalenceRule (Validate.associative, Lineref i, q) }
+    | q = prop; DIS; i = INT { EquivalenceRule (Validate.distributive, Lineref i, q) }
+    | q = prop; DN;  i = INT { EquivalenceRule (Validate.doublenegation, Lineref i, q) }
+    | q = prop; DM; i = INT { EquivalenceRule (Validate.demorgan, Lineref i, q) }
+    | q = prop; ID; i = INT { EquivalenceRule (Validate.identity, Lineref i, q) }
+    | q = prop; DO; i = INT { EquivalenceRule (Validate.dominance, Lineref i, q) }
+    | q = prop; CON; i = INT { EquivalenceRule (Validate.contradiction, Lineref i, q) }
+    | q = prop; TA; i = INT { EquivalenceRule (Validate.tautology, Lineref i, q) }
+    | q = prop; MP; i1 = INT; COMMA; i2 = INT { ImplicationRule (Validate.modusponens, Lineref i1, Lineref i2, q) }
+    | q = prop; MT; i1 = INT; COMMA; i2 = INT { ImplicationRule (Validate.modustollens, Lineref i1, Lineref i2, q) }
     ;
 
 prop:
-    | a = ATOM { `Atom a }
-    | b = BOOL { `Bool b }
-    | p1 = prop; OR; p2 = prop { `Conn (`Or, p1, p2) }
-    | p1 = prop; AND; p2 = prop { `Conn (`And, p1, p2) }
-    | p1 = prop; IMP; p2 = prop { `Conn (`Impl, p1, p2) }
-    | p1 = prop; IFF; p2 = prop { `Conn (`Iff, p1, p2) }
-    | NOT; p = prop { `Not (p) }
+    | a = ATOM { Atom a }
+    | b = BOOL { Bool b }
+    | p1 = prop; OR; p2 = prop { Conn (Or, p1, p2) }
+    | p1 = prop; AND; p2 = prop { Conn (And, p1, p2) }
+    | p1 = prop; IMP; p2 = prop { Conn (Impl, p1, p2) }
+    | p1 = prop; IFF; p2 = prop { Conn (Iff, p1, p2) }
+    | NOT; p = prop { Not (p) }
     | LPAREN; p = prop; RPAREN { p } 
     ;

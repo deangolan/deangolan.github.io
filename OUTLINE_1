@@ -1,0 +1,10 @@
+  󰆧 Main
+  𝓢 Model
+   init
+  ℰ Msg
+   Change String
+   Receive String
+   update
+   subscriptions
+   view
+   main

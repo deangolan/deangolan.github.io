@@ -2,6 +2,7 @@
 (* The type of tokens. *)
 
 type token = 
+  | TA
   | RPAREN
   | PR
   | OR
@@ -16,9 +17,11 @@ type token =
   | IDM
   | ID
   | EOF
+  | DO
   | DN
   | DM
   | DIS
+  | CON
   | COMMA
   | COM
   | BOOL of (bool)

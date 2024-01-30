@@ -33,14 +33,17 @@ rule read =
     | "," { COMMA }
     | "PR" | "Premise" { PR }
     | "LE" { LE }
-    | "IDM" | "Idem" { IDM }
-    | "COM" | "Commu" { COM }
-    | "ASO" | "Asso" { ASO }
-    | "DIS" | "Dist" { DIS }
-    | "DN" | "DoubleNeg" { DN }
-    | "DM" | "Dominance" { DM }
+    | "IDM" | "Idem" | "Idempotence" { IDM }
+    | "COM" | "Commu" | "Commutative" { COM }
+    | "ASO" | "Asso" | "Associative" { ASO }
+    | "DIS" | "Dist" | "Distributive" { DIS }
+    | "DN" | "DoubleNeg" | "DoubleNegation" { DN }
+    | "DM" | "DeMorg" | "DeMorgan" ['s']? { DM }
     | "ID" | "Identity" { ID }
+    | "DO" | "Dominance" | "Dominance" { DO }
+    | "CON" | "Con" | "Contradiction" { CON }
+    | "TA" | "Taut" | "Tautology" { TA }
     | "MP" | "Modus Ponens" { MP }
     | "MT" | "Modus Tolens" { MT }
-    | _ { raise (SyntaxError ("Unexpected character: " ^ Lexing.lexeme lexbuf)) }
+    | _ { raise ( SyntaxError ("Unexpected character: " ^ Lexing.lexeme lexbuf)) }
     | eof { EOF }

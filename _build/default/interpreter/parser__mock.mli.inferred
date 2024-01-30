@@ -1,5 +1,6 @@
 type token =
-    RPAREN
+    TA
+  | RPAREN
   | PR
   | OR
   | NOT
@@ -13,9 +14,11 @@ type token =
   | IDM
   | ID
   | EOF
+  | DO
   | DN
   | DM
   | DIS
+  | CON
   | COMMA
   | COM
   | BOOL of bool
