@@ -41,8 +41,7 @@ and check_implication pattern p1 p2 q =
 
 let le p q =
   let pattern p q =
-    Eval.simplify p = q
-    || Eval.simplify q = p
+    Eval.simplify p = Eval.simplify q
     ||
     match (p, q) with
     | Conn (Impl, p1, q1), Conn (Or, Not p2, q2) ->
@@ -185,7 +184,7 @@ let modustollens p1 p2 q =
   let pattern p1 p2 q =
     match (p1, p2) with
     | Conn (Impl, q1, p1), Not p2 ->
-        p1 = p2 && q1 = Not q
+        p1 = p2 && Not q1 = q
     | _ ->
         false
   in

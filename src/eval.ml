@@ -1,8 +1,8 @@
 open Ast
 
 let rec simplify = function
-  | Conn (binop, exp1, exp2) ->
-      collapse binop (simplify exp1) (simplify exp2)
+  | Conn (conn, exp1, exp2) ->
+      collapse conn (simplify exp1) (simplify exp2)
   | Not (Bool a) ->
       Bool (not a)
   | Not exp ->
@@ -12,10 +12,10 @@ let rec simplify = function
   | Bool _ as bool ->
       bool
 
-and collapse binop exp1 exp2 =
-  match (binop, exp1, exp2) with
-  | binop, Bool a, Bool b -> (
-    match binop with
+and collapse conn exp1 exp2 =
+  match (conn, exp1, exp2) with
+  | conn, Bool a, Bool b -> (
+    match conn with
     | And ->
         Bool (a && b)
     | Or ->
@@ -25,7 +25,7 @@ and collapse binop exp1 exp2 =
     | Iff ->
         Bool (a = b) )
   | _ ->
-      Conn (binop, exp1, exp2)
+      Conn (conn, exp1, exp2)
 
 and negate exp =
   match simplify exp with Bool a -> Bool (not a) | exp -> Not exp
