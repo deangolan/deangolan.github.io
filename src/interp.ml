@@ -35,7 +35,7 @@ let ast_from_lines lines =
 
 let interp s =
   try
-    parse s |> ast_from_lines |> Rules.validate |> format_prop |> ( ^ ) "|-"
+    parse s |> ast_from_lines |> Rules.validate |> format_prop |> ( ^ ) "|- "
   with
   | Rules.Invalid msg ->
       msg
