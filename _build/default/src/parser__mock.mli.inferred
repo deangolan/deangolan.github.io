@@ -1,0 +1,32 @@
+type token =
+    TA
+  | RPAREN
+  | PR
+  | OR
+  | NOT
+  | MT
+  | MP
+  | LPAREN
+  | LE
+  | INT of int
+  | IMP
+  | IFF
+  | IDM
+  | ID
+  | EOF
+  | DO
+  | DN
+  | DM
+  | DIS
+  | CON
+  | COMMA
+  | COM
+  | BOOL of bool
+  | ATOM of string
+  | ASO
+  | AND
+val menhir_begin_marker : int
+val xv_prop : Ast.prop
+val xv_prog : Ast.t list
+val xv_expr : Ast.t
+val menhir_end_marker : int

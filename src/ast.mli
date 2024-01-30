@@ -14,5 +14,3 @@ type t =
 [@@deriving show]
 
 val format_prop : prop -> string
-
-val format_conc : t -> string

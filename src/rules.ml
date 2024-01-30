@@ -2,25 +2,42 @@ open Ast
 
 exception Invalid of string
 
-(* Patterns for equivalence rules *)
-
 let not_equivalent p q = Invalid (format_prop p ^ " <!=> " ^ format_prop q)
 
-let rec is_equivalent pattern p q =
-  if check pattern p q then q else raise (not_equivalent p q)
+let not_implied p1 p2 q =
+  Invalid (format_prop p1 ^ ", " ^ format_prop p2 ^ " !=> " ^ format_prop q)
 
-and check pattern p q =
-  pattern p q
+let rec is_equivalent pattern p q =
+  if check_equivelence pattern p q then q else raise (not_equivalent p q)
+
+and check_equivelence pattern p q =
+  pattern p q || pattern q p
   ||
   match (p, q) with
   | Conn (conn1, p1, q1), Conn (conn2, p2, q2) when conn1 = conn2 ->
-      (check pattern p1 p2 || check pattern q1 q2) && (p1 = p2 || q1 = q2)
+      (check_equivelence pattern p1 p2 || check_equivelence pattern q1 q2)
+      && (p1 = p2 || q1 = q2)
   | Not p, Not q ->
-      check pattern p q
+      check_equivelence pattern p q
   | _ ->
       false
 
-(* Symmetric equivalence rules *)
+let rec is_implication pattern p1 p2 q =
+  if check_implication pattern p1 p2 q then q else raise (not_implied p1 p2 q)
+
+and check_implication pattern p1 p2 q =
+  pattern p1 p2 q
+  ||
+  match (p1, q) with
+  | Conn (conn1, r1, s1), Conn (conn2, r2, s2) when conn1 = conn2 ->
+      (check_implication pattern r1 p2 r2 || check_implication pattern s1 p2 s2)
+      && (r1 = r2 || s1 = s2)
+  | Not r, Not s ->
+      check_implication pattern r p2 s
+  | _ ->
+      false
+
+(* Patterns for equivalence rules *)
 
 let le p q =
   let pattern p q =
@@ -28,11 +45,9 @@ let le p q =
     || Eval.simplify q = p
     ||
     match (p, q) with
-    | Conn (Impl, p1, q1), Conn (Or, Not p2, q2)
-    | Conn (Or, Not p2, q2), Conn (Impl, p1, q1) ->
+    | Conn (Impl, p1, q1), Conn (Or, Not p2, q2) ->
         p1 = p2 && q1 = q2
     | Conn (Iff, p1, q1), Conn (And, Conn (Impl, p2, q2), Conn (Impl, q3, p3))
-    | Conn (And, Conn (Impl, p2, q2), Conn (Impl, q3, p3)), Conn (Iff, p1, q1)
       ->
         p1 = p2 && p2 = p3 && q1 = q2 && q2 = q3
     | _ ->
@@ -44,8 +59,6 @@ let idempotence p q =
   let pattern p q =
     match (p, q) with
     | Conn ((And | Or), p1, p2), p when p1 = p2 ->
-        p1 = p
-    | p, Conn ((And | Or), p1, p2) when p1 = p2 ->
         p1 = p
     | _ ->
         false
@@ -80,13 +93,13 @@ and distributive p q =
     match (p, q) with
     | ( Conn (Or, p1, Conn (And, q1, r1))
       , Conn (And, Conn (Or, p2, q2), Conn (Or, p3, r2)) )
-    | ( Conn (And, Conn (Or, p2, q2), Conn (Or, p3, r2))
-      , Conn (Or, p1, Conn (And, q1, r1)) ) ->
+    | ( Conn (Or, Conn (And, q1, r1), p1)
+      , Conn (And, Conn (Or, p2, q2), Conn (Or, p3, r2)) ) ->
         p1 = p2 && p2 = p3 && q1 = q2 && r1 = r2
     | ( Conn (And, p1, Conn (Or, q1, r1))
       , Conn (Or, Conn (And, p2, q2), Conn (And, p3, r2)) )
-    | ( Conn (Or, Conn (And, p2, q2), Conn (And, p3, r2))
-      , Conn (And, p1, Conn (Or, q1, r1)) ) ->
+    | ( Conn (And, Conn (Or, q1, r1), p1)
+      , Conn (Or, Conn (And, p2, q2), Conn (And, p3, r2)) ) ->
         p1 = p2 && p2 = p3 && q1 = q2 && r1 = r2
     | _ ->
         false
@@ -95,13 +108,7 @@ and distributive p q =
 
 and doublenegation p q =
   let pattern p q =
-    match (p, q) with
-    | Not (Not p1), p2 ->
-        p1 = p2
-    | p1, Not (Not p2) ->
-        p1 = p2
-    | _ ->
-        false
+    match (p, q) with Not (Not p1), p2 -> p1 = p2 | _ -> false
   in
   is_equivalent pattern p q
 
@@ -109,9 +116,7 @@ and demorgan p q =
   let pattern p q =
     match (p, q) with
     | ( Not (Conn (((And | Or) as conn1), p1, q1))
-      , Conn (((And | Or) as conn2), Not p2, Not q2) )
-    | ( Conn (((And | Or) as conn1), Not p1, Not q1)
-      , Not (Conn (((And | Or) as conn2), p2, q2)) ) ->
+      , Conn (((And | Or) as conn2), Not p2, Not q2) ) ->
         conn1 <> conn2 && p1 = p2 && q1 = q2
     | _ ->
         false
@@ -122,9 +127,7 @@ and identity p q =
   let pattern p q =
     match (p, q) with
     | (Conn (And, Bool true, p1) | Conn (And, p1, Bool true)), p2
-    | (Conn (Or, Bool false, p1) | Conn (Or, p1, Bool false)), p2
-    | p1, (Conn (And, Bool true, p2) | Conn (And, p2, Bool true))
-    | p1, (Conn (Or, Bool false, p2) | Conn (Or, p2, Bool false)) ->
+    | (Conn (Or, Bool false, p1) | Conn (Or, p1, Bool false)), p2 ->
         p1 = p2
     | _ ->
         false
@@ -135,16 +138,12 @@ and dominance p q =
   let pattern p q =
     match (p, q) with
     | (Conn (And, Bool false, _) | Conn (And, _, Bool false)), Bool false
-    | Bool false, (Conn (And, Bool false, _) | Conn (And, _, Bool false))
-    | (Conn (Or, Bool true, _) | Conn (Or, _, Bool true)), Bool true
-    | Bool true, (Conn (Or, Bool true, _) | Conn (Or, _, Bool true)) ->
+    | (Conn (Or, Bool true, _) | Conn (Or, _, Bool true)), Bool true ->
         true
     | _ ->
         false
   in
   is_equivalent pattern p q
-
-(* Non-symmetric equivalence rules *)
 
 and contradiction p q =
   let pattern p q =
@@ -172,12 +171,6 @@ and tautology p q =
 
 (* Patterns for implication rules *)
 
-let not_implied p1 p2 q =
-  Invalid (format_prop p1 ^ ", " ^ format_prop p2 ^ " !=> " ^ format_prop q)
-
-let is_implied pattern p1 p2 q =
-  if pattern p1 p2 q then q else raise (not_implied p1 p2 q)
-
 let modusponens p1 p2 q =
   let pattern p1 p2 q =
     match (p1, p2) with
@@ -186,7 +179,7 @@ let modusponens p1 p2 q =
     | _ ->
         false
   in
-  is_implied pattern p1 p2 q
+  is_implication pattern p1 p2 q
 
 let modustollens p1 p2 q =
   let pattern p1 p2 q =
@@ -196,7 +189,7 @@ let modustollens p1 p2 q =
     | _ ->
         false
   in
-  is_implied pattern p1 p2 q
+  is_implication pattern p1 p2 q
 
 (** Take a proof ast and return the conclusion if it is valid.
     @raise Invalid otherwise *)

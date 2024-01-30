@@ -14,17 +14,6 @@ type t =
   | Lineref of int
 [@@deriving show]
 
-let get_conc t =
-  match t with
-  | Premise p ->
-      p
-  | EquivalenceRule (_, _, q) ->
-      q
-  | ImplicationRule (_, _, _, q) ->
-      q
-  | Lineref _ ->
-      failwith "Precondition violated"
-
 let rec format_prop = function
   | Atom a ->
       a
@@ -45,5 +34,3 @@ let rec format_prop = function
       "~" ^ format_prop p
   | Not p ->
       "~(" ^ format_prop p ^ ")"
-
-let format_conc t = get_conc t |> format_prop |> ( ^ ) "|- "
