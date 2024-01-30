@@ -30,7 +30,7 @@ let rec format_prop = function
       | Iff ->
           format_prop p ^ " <-> " ^ format_prop q )
       |> fun s -> "(" ^ s ^ ")"
-  | Not ((Atom _ | Bool _) as p) ->
-      "~" ^ format_prop p
-  | Not p ->
+  | Not (Not _ as p)->
       "~(" ^ format_prop p ^ ")"
+  | Not p ->
+      "~" ^ format_prop p
