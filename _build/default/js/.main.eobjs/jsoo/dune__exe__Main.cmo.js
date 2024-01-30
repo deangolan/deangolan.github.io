@@ -2,13 +2,12 @@
 //# buildInfo:effects=false, kind=cmo, use-js-string=true, version=5.5.2
 
 //# unitInfo: Provides: Dune__exe__Main
-//# unitInfo: Requires: CamlinternalOO, Interp, Js_of_ocaml__Js, Stdlib, Stdlib__List
+//# unitInfo: Requires: CamlinternalOO, Interp, Js_of_ocaml__Js, Stdlib
 (function
   (globalThis){
    "use strict";
    var
     runtime = globalThis.jsoo_runtime,
-    caml_js_wrap_meth_callback = runtime.caml_js_wrap_meth_callback,
     caml_wrap_exception = runtime.caml_wrap_exception;
    function caml_call1(f, a0){
     return (f.l >= 0 ? f.l : f.l = f.length) == 1
@@ -22,20 +21,19 @@
    }
    var
     global_data = runtime.caml_get_global_data(),
-    cst = "",
-    Interp = global_data.Interp,
-    Stdlib = global_data.Stdlib,
-    Stdlib_List = global_data.Stdlib__List;
+    Interp = global_data.Interp;
    global_data.CamlinternalOO;
    var
+    Stdlib = global_data.Stdlib,
     Js_of_ocaml_Js = global_data.Js_of_ocaml__Js,
     cst_Syntax_Error = "Syntax Error",
     cst_A_line_can_only_refrence_l =
       "A line can only refrence lines that came before",
     cst_Something_went_wrong = "Something went wrong",
     cst_Interpreter = "Interpreter";
-   function handle_errors(f, x){
-    try{var _d_ = caml_call1(f, x); return _d_;}
+   function t1(param, s){
+    var f = Interp[4];
+    try{var _a_ = caml_call1(f, s); return _a_;}
     catch(exn$0){
      var exn = caml_wrap_exception(exn$0);
      if(exn[1] === Interp[1]){var err = exn[2]; return err;}
@@ -48,28 +46,14 @@
      return err$0;
     }
    }
-   function t3(param, s){return handle_errors(Interp[7], s);}
-   function t2(param, s){
-    return handle_errors
-            (function(s){
-              var _a_ = caml_call1(Interp[6], s);
-              function _b_(acc, s){
-               var _c_ = caml_call1(Interp[4], s);
-               return caml_call2(Stdlib[28], acc, _c_);
-              }
-              return caml_call1(caml_call2(Stdlib_List[26], _b_, cst), _a_);
-             },
-             s);
-   }
    caml_call2
     (Js_of_ocaml_Js[50],
      cst_Interpreter,
-     {parse: caml_js_wrap_meth_callback(t2),
-      interp: caml_js_wrap_meth_callback(t3)});
+     {interp: runtime.caml_js_wrap_meth_callback(t1)});
    var Dune_exe_Main = [0];
-   runtime.caml_register_global(15, Dune_exe_Main, "Dune__exe__Main");
+   runtime.caml_register_global(12, Dune_exe_Main, "Dune__exe__Main");
    return;
   }
   (globalThis));
 
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLjAsImZpbGUiOiIubWFpbi5lb2Jqcy9qc29vL2R1bmVfX2V4ZV9fTWFpbi5jbW8uanMiLCJzb3VyY2VSb290IjoiIiwibmFtZXMiOlsiaGFuZGxlX2Vycm9ycyIsImYiLCJ4IiwiZXJyIiwiZXJyJDAiLCJzIiwiYWNjIl0sInNvdXJjZXMiOlsiL3dvcmtzcGFjZV9yb290L2pzL21haW4ubWwiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7OztHOzs7OztHOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O1lBRUlBLGNBQWNDLEdBQUVDO0lBQ2xCLElBQUksVUFBQSxXQURZRCxHQUFFQyxJQUNkOzs7a0NBQ2lCQyxjQUNqQixPQURpQkE7MkJBR2pCOzs7OztTQUNhQztLQUNiLE9BRGFBOztHQUtTO3NCQVlQQyxHQUFJLE9BdkJyQkwseUJBdUJpQkssR0FBaUM7c0JBUGxDQTtJQUNYLE9BakJMTDtzQkFrQllLO2NBQ0gsVUFBQSxzQkFER0E7MkJBRW9CQyxLQUFJRDtlQUFXLFVBQUEsc0JBQVhBO2VBQVcsT0FBQSx1QkFBZkM7Y0FBNEI7Y0FEbkQsT0FBQSxXQUNHO2FBQW9EO2FBSmhERDtHQUtSO0dBUFY7Ozs7O0dBQUE7OztFIiwic291cmNlc0NvbnRlbnQiOlsib3BlbiBKc19vZl9vY2FtbFxuXG5sZXQgaGFuZGxlX2Vycm9ycyBmIHggPVxuICB0cnkgZiB4IHdpdGhcbiAgfCBJbnRlcnAuU3ludGF4RXJyb3IgZXJyIC0+XG4gICAgICBlcnJcbiAgfCBJbnRlcnAuUGFyc2VyRXJyb3IgLT5cbiAgICAgIFwiU3ludGF4IEVycm9yXCJcbiAgfCBJbnRlcnAuU2VsZlJlZiBlcnIgLT5cbiAgICAgIGVyclxuICB8IEludmFsaWRfYXJndW1lbnQgXyAtPlxuICAgICAgXCJBIGxpbmUgY2FuIG9ubHkgcmVmcmVuY2UgbGluZXMgdGhhdCBjYW1lIGJlZm9yZVwiXG4gIHwgXyAtPlxuICAgICAgXCJTb21ldGhpbmcgd2VudCB3cm9uZ1wiXG5cbmxldCBfID1cbiAgSnMuZXhwb3J0IFwiSW50ZXJwcmV0ZXJcIlxuICAgIChvYmplY3QlanNcbiAgICAgICBtZXRob2QgcGFyc2UgcyA9XG4gICAgICAgICBoYW5kbGVfZXJyb3JzXG4gICAgICAgICAgIChmdW4gcyAtPlxuICAgICAgICAgICAgIEludGVycC5wYXJzZSBzXG4gICAgICAgICAgICAgfD4gTGlzdC5mb2xkX2xlZnQgKGZ1biBhY2MgcyAtPiBhY2MgXiBJbnRlcnAuc2hvdyBzKSBcIlwiIClcbiAgICAgICAgICAgc1xuXG4gICAgICAgbWV0aG9kIGludGVycCBzID0gaGFuZGxlX2Vycm9ycyBJbnRlcnAuaW50ZXJwIHNcbiAgICBlbmQgKVxuIl19
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLjAsImZpbGUiOiIubWFpbi5lb2Jqcy9qc29vL2R1bmVfX2V4ZV9fTWFpbi5jbW8uanMiLCJzb3VyY2VSb290IjoiIiwibmFtZXMiOlsicyIsImYiLCJlcnIiLCJlcnIkMCJdLCJzb3VyY2VzIjpbIi93b3Jrc3BhY2Vfcm9vdC9qcy9tYWluLm1sIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7OztHOzs7OztHOzs7Ozs7Ozs7Ozs7Ozs7OztzQkFrQnFCQTtJQUFJLElBaEJQQztJQUNoQixJQUFJLFVBQUEsV0FEWUEsR0FnQkdELElBZmY7OztrQ0FDaUJFLGNBQ2pCLE9BRGlCQTsyQkFHakI7Ozs7O1NBQ2FDO0tBQ2IsT0FEYUE7O0dBVW1DO0dBRnBEOzs7O0dBQUE7OztFIiwic291cmNlc0NvbnRlbnQiOlsib3BlbiBKc19vZl9vY2FtbFxuXG5sZXQgaGFuZGxlX2Vycm9ycyBmIHggPVxuICB0cnkgZiB4IHdpdGhcbiAgfCBJbnRlcnAuU3ludGF4RXJyb3IgZXJyIC0+XG4gICAgICBlcnJcbiAgfCBJbnRlcnAuUGFyc2VyRXJyb3IgLT5cbiAgICAgIFwiU3ludGF4IEVycm9yXCJcbiAgfCBJbnRlcnAuU2VsZlJlZiBlcnIgLT5cbiAgICAgIGVyclxuICB8IEludmFsaWRfYXJndW1lbnQgXyAtPlxuICAgICAgXCJBIGxpbmUgY2FuIG9ubHkgcmVmcmVuY2UgbGluZXMgdGhhdCBjYW1lIGJlZm9yZVwiXG4gIHwgXyAtPlxuICAgICAgXCJTb21ldGhpbmcgd2VudCB3cm9uZ1wiXG5cbmxldCBfID1cbiAgSnMuZXhwb3J0IFwiSW50ZXJwcmV0ZXJcIlxuICAgIChvYmplY3QlanNcbiAgICAgICBtZXRob2QgaW50ZXJwIHMgPSBoYW5kbGVfZXJyb3JzIEludGVycC5pbnRlcnAgc1xuICAgIGVuZCApXG4iXX0=

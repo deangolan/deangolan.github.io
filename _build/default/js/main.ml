@@ -16,12 +16,5 @@ let handle_errors f x =
 let _ =
   Js.export "Interpreter"
     (object%js
-       method parse s =
-         handle_errors
-           (fun s ->
-             Interp.parse s
-             |> List.fold_left (fun acc s -> acc ^ Interp.show s) "" )
-           s
-
        method interp s = handle_errors Interp.interp s
     end )
