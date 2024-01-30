@@ -5172,39 +5172,29 @@ var $author$project$Main$receiveEval = _Platform_incomingPort('receiveEval', $el
 var $author$project$Main$subscriptions = function (_v0) {
 	return $author$project$Main$receiveEval($author$project$Main$Receive);
 };
-var $elm$core$Debug$log = _Debug_log;
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $author$project$Main$sendProof = _Platform_outgoingPort('sendProof', $elm$json$Json$Encode$string);
 var $author$project$Main$update = F2(
 	function (msg, model) {
-		switch (msg.$) {
-			case 'Change':
-				var text = msg.a;
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{proof: text}),
-					$elm$core$Platform$Cmd$none);
-			case 'Send':
-				return _Utils_Tuple2(
+		if (msg.$ === 'Change') {
+			var text = msg.a;
+			return _Utils_Tuple2(
+				_Utils_update(
 					model,
-					$author$project$Main$sendProof(model.proof));
-			default:
-				var message = msg.a;
-				return _Utils_Tuple2(
-					A2(
-						$elm$core$Debug$log,
-						message,
-						_Utils_update(
-							model,
-							{valid: message})),
-					$elm$core$Platform$Cmd$none);
+					{proof: text}),
+				$author$project$Main$sendProof(model.proof));
+		} else {
+			var message = msg.a;
+			return _Utils_Tuple2(
+				_Utils_update(
+					model,
+					{valid: message}),
+				$elm$core$Platform$Cmd$none);
 		}
 	});
 var $author$project$Main$Change = function (a) {
 	return {$: 'Change', a: a};
 };
-var $author$project$Main$Send = {$: 'Send'};
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
 		return A2(
@@ -5214,34 +5204,13 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm$json$Json$Decode$andThen = _Json_andThen;
-var $elm$json$Json$Decode$fail = _Json_fail;
-var $elm$json$Json$Decode$field = _Json_decodeField;
-var $author$project$Main$isEnterOrBackspace = function (msg) {
-	return A2(
-		$elm$json$Json$Decode$andThen,
-		function (key) {
-			return ((key === 'Enter') || (key === 'Backspace')) ? $elm$json$Json$Decode$succeed(msg) : $elm$json$Json$Decode$fail('Some other key');
-		},
-		A2($elm$json$Json$Decode$field, 'key', $elm$json$Json$Decode$string));
-};
-var $elm$virtual_dom$VirtualDom$Normal = function (a) {
-	return {$: 'Normal', a: a};
-};
-var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
-var $elm$html$Html$Events$on = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$Normal(decoder));
-	});
 var $elm$html$Html$Events$alwaysStop = function (x) {
 	return _Utils_Tuple2(x, true);
 };
 var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
 	return {$: 'MayStopPropagation', a: a};
 };
+var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
 var $elm$html$Html$Events$stopPropagationOn = F2(
 	function (event, decoder) {
 		return A2(
@@ -5249,6 +5218,7 @@ var $elm$html$Html$Events$stopPropagationOn = F2(
 			event,
 			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
 	});
+var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$json$Json$Decode$at = F2(
 	function (fields, decoder) {
 		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
@@ -5269,12 +5239,15 @@ var $elm$html$Html$Events$onInput = function (tagger) {
 };
 var $elm$html$Html$output = _VirtualDom_node('output');
 var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
-var $elm$html$Html$Attributes$rows = function (n) {
-	return A2(
-		_VirtualDom_attribute,
-		'rows',
-		$elm$core$String$fromInt(n));
-};
+var $elm$json$Json$Encode$bool = _Json_wrap;
+var $elm$html$Html$Attributes$boolProperty = F2(
+	function (key, bool) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$bool(bool));
+	});
+var $elm$html$Html$Attributes$spellcheck = $elm$html$Html$Attributes$boolProperty('spellcheck');
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$html$Html$textarea = _VirtualDom_node('textarea');
@@ -5291,11 +5264,7 @@ var $author$project$Main$view = function (model) {
 					[
 						$elm$html$Html$Attributes$class('proofcontainer'),
 						$elm$html$Html$Attributes$placeholder('Enter your proof here'),
-						$elm$html$Html$Attributes$rows(1),
-						A2(
-						$elm$html$Html$Events$on,
-						'keydown',
-						$author$project$Main$isEnterOrBackspace($author$project$Main$Send)),
+						$elm$html$Html$Attributes$spellcheck(false),
 						$elm$html$Html$Attributes$value(model.proof),
 						$elm$html$Html$Events$onInput($author$project$Main$Change)
 					]),

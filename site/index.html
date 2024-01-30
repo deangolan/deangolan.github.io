@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Proof Writer</title>
-    <script src="main.js"></script>
+    <script src="elm.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -20,7 +20,7 @@ const app = Elm.Main.init({
 
 app.ports.sendProof.subscribe(function(proof) {
     const eval = Interpreter.interp(proof);
-    console.log(eval);
+    // console.log(proof + ' : ' + eval);
     app.ports.receiveEval.send(eval);
 });
 

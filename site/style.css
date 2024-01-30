@@ -2,7 +2,7 @@
     width: 400px; 
     height: 300px;     
     resize: none; 
-    font-family: 'Fira Code', sans-serif; 
+    font-family: 'Fira Code', monospace; 
     font-size: 16px;     
     margin: auto; 
     display: block; 
