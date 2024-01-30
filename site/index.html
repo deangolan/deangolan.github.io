@@ -20,7 +20,6 @@ const app = Elm.Main.init({
 
 app.ports.sendProof.subscribe(function(proof) {
     const eval = Interpreter.interp(proof);
-    // console.log(proof + ' : ' + eval);
     app.ports.receiveEval.send(eval);
 });
 

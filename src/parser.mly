@@ -44,19 +44,19 @@ prog:
 
 expr:
     | p = prop; PR { Premise p }
-    | q = prop; LE; i = INT { EquivalenceRule (Validate.le, Lineref i, q) }
-    | q = prop; IDM; i = INT { EquivalenceRule (Validate.idempotence, Lineref i, q) }
-    | q = prop; COM; i = INT { EquivalenceRule (Validate.commutative, Lineref i, q) }
-    | q = prop; ASO; i = INT { EquivalenceRule (Validate.associative, Lineref i, q) }
-    | q = prop; DIS; i = INT { EquivalenceRule (Validate.distributive, Lineref i, q) }
-    | q = prop; DN;  i = INT { EquivalenceRule (Validate.doublenegation, Lineref i, q) }
-    | q = prop; DM; i = INT { EquivalenceRule (Validate.demorgan, Lineref i, q) }
-    | q = prop; ID; i = INT { EquivalenceRule (Validate.identity, Lineref i, q) }
-    | q = prop; DO; i = INT { EquivalenceRule (Validate.dominance, Lineref i, q) }
-    | q = prop; CON; i = INT { EquivalenceRule (Validate.contradiction, Lineref i, q) }
-    | q = prop; TA; i = INT { EquivalenceRule (Validate.tautology, Lineref i, q) }
-    | q = prop; MP; i1 = INT; COMMA; i2 = INT { ImplicationRule (Validate.modusponens, Lineref i1, Lineref i2, q) }
-    | q = prop; MT; i1 = INT; COMMA; i2 = INT { ImplicationRule (Validate.modustollens, Lineref i1, Lineref i2, q) }
+    | q = prop; LE; i = INT { EquivalenceRule (Rules.le, Lineref i, q) }
+    | q = prop; IDM; i = INT { EquivalenceRule (Rules.idempotence, Lineref i, q) }
+    | q = prop; COM; i = INT { EquivalenceRule (Rules.commutative, Lineref i, q) }
+    | q = prop; ASO; i = INT { EquivalenceRule (Rules.associative, Lineref i, q) }
+    | q = prop; DIS; i = INT { EquivalenceRule (Rules.distributive, Lineref i, q) }
+    | q = prop; DN;  i = INT { EquivalenceRule (Rules.doublenegation, Lineref i, q) }
+    | q = prop; DM; i = INT { EquivalenceRule (Rules.demorgan, Lineref i, q) }
+    | q = prop; ID; i = INT { EquivalenceRule (Rules.identity, Lineref i, q) }
+    | q = prop; DO; i = INT { EquivalenceRule (Rules.dominance, Lineref i, q) }
+    | q = prop; CON; i = INT { EquivalenceRule (Rules.contradiction, Lineref i, q) }
+    | q = prop; TA; i = INT { EquivalenceRule (Rules.tautology, Lineref i, q) }
+    | q = prop; MP; i1 = INT; COMMA; i2 = INT { ImplicationRule (Rules.modusponens, Lineref i1, Lineref i2, q) }
+    | q = prop; MT; i1 = INT; COMMA; i2 = INT { ImplicationRule (Rules.modustollens, Lineref i1, Lineref i2, q) }
     ;
 
 prop:
