@@ -29,7 +29,7 @@ rule read =
     | not { NOT }
     | imp { IMP }
     | iff { IFF }
-    | ['0'-'9']+ { INT (int_of_string (Lexing.lexeme lexbuf)) }
+    | ['1'-'9']['0'-'9']* { INT (int_of_string (Lexing.lexeme lexbuf)) }
     | "," { COMMA }
     | "PR" | "Premise" { PR }
     | "LE" { LE }
@@ -37,7 +37,7 @@ rule read =
     | "COM" | "Commu" | "Commutative" { COM }
     | "ASO" | "Asso" | "Associative" { ASO }
     | "DIS" | "Dist" | "Distributive" { DIS }
-    | "DN" | "DoubleNeg" | "DoubleNegation" { DN }
+    | "DN" | "DoubleNeg" | "Double Negation" { DN }
     | "DM" | "DeMorg" | "DeMorgan" ['s']? { DM }
     | "ID" | "Identity" { ID }
     | "DO" | "Dominance" | "Dominance" { DO }

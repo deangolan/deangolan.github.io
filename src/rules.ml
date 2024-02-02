@@ -75,7 +75,7 @@ let commutative p q =
   in
   is_equivalent pattern p q
 
-and associative p q =
+let associative p q =
   let pattern p q =
     match (p, q) with
     | Conn (And, Conn (And, p1, q1), r1), Conn (And, p2, Conn (And, q2, r2)) ->
@@ -87,7 +87,7 @@ and associative p q =
   in
   is_equivalent pattern p q
 
-and distributive p q =
+let distributive p q =
   let pattern p q =
     match (p, q) with
     | ( Conn (Or, p1, Conn (And, q1, r1))
@@ -105,13 +105,13 @@ and distributive p q =
   in
   is_equivalent pattern p q
 
-and doublenegation p q =
+let doublenegation p q =
   let pattern p q =
     match (p, q) with Not (Not p1), p2 -> p1 = p2 | _ -> false
   in
   is_equivalent pattern p q
 
-and demorgan p q =
+let demorgan p q =
   let pattern p q =
     match (p, q) with
     | ( Not (Conn (((And | Or) as conn1), p1, q1))
@@ -122,7 +122,7 @@ and demorgan p q =
   in
   is_equivalent pattern p q
 
-and identity p q =
+let identity p q =
   let pattern p q =
     match (p, q) with
     | (Conn (And, Bool true, p1) | Conn (And, p1, Bool true)), p2
@@ -133,7 +133,7 @@ and identity p q =
   in
   is_equivalent pattern p q
 
-and dominance p q =
+let dominance p q =
   let pattern p q =
     match (p, q) with
     | (Conn (And, Bool false, _) | Conn (And, _, Bool false)), Bool false
@@ -144,7 +144,7 @@ and dominance p q =
   in
   is_equivalent pattern p q
 
-and contradiction p q =
+let contradiction p q =
   let pattern p q =
     match (p, q) with
     | Conn (And, Not p1, p2), Bool false when p1 = p2 ->
@@ -156,7 +156,7 @@ and contradiction p q =
   in
   is_equivalent pattern p q
 
-and tautology p q =
+let tautology p q =
   let pattern p q =
     match (p, q) with
     | Conn (Or, Not p1, p2), Bool true when p1 = p2 ->
@@ -189,15 +189,3 @@ let modustollens p1 p2 q =
         false
   in
   is_implication pattern p1 p2 q
-
-(** Take a proof ast and return the conclusion if it is valid.
-    @raise Invalid otherwise *)
-let rec validate = function
-  | Premise p ->
-      p
-  | EquivalenceRule (rule, p, q) ->
-      rule (validate p) q
-  | ImplicationRule (rule, p1, p2, q) ->
-      rule (validate p1) (validate p2) q
-  | Lineref _ ->
-      failwith "Precondition violated"

@@ -4,39 +4,39 @@ exception SyntaxError = Lexer.SyntaxError
 
 exception ParserError = Parser.Error
 
-exception SelfRef of string
-
-let self_ref linenum =
-  raise (SelfRef ("Line " ^ Int.to_string linenum ^ "cannot refrence itself"))
+exception InvalidRef of string
 
 let parse s = Lexing.from_string s |> Parser.prog Lexer.read |> List.rev
 
-let ast_from_lines lines =
-  let rec aux length lines = function
+let invalid_ref linenum ref =
+  raise
+    (InvalidRef
+       ( "Line " ^ Int.to_string linenum ^ " cannot refrence line "
+       ^ Int.to_string ref ) )
+
+let validate lines =
+  let rec aux len lines =
+    match List.hd lines with
     | Premise p ->
-        Premise p
-    | EquivalenceRule (rule, Lineref i, prop) ->
-        if i = 0 then self_ref length
+        p
+    | EquivalenceRule (rule, Lineref i, q) ->
+        if i >= len then invalid_ref len i
+        else rule (drop lines (len - i) |> aux i) q
+    | ImplicationRule (rule, Lineref i1, Lineref i2, q) ->
+        if i1 >= len then invalid_ref len i1
+        else if i2 >= len then invalid_ref len i2
         else
-          EquivalenceRule
-            (rule, List.nth lines (length - i) |> aux length lines, prop)
-    | ImplicationRule (rule, Lineref i1, Lineref i2, prop) ->
-        if i1 = 0 || i2 = 0 then self_ref length
-        else
-          ImplicationRule
-            ( rule
-            , List.nth lines (length - i1) |> aux length lines
-            , List.nth lines (length - i2) |> aux length lines
-            , prop )
+          rule
+            (drop lines (len - i1) |> aux i1)
+            (drop lines (len - i2) |> aux i2)
+            q
     | _ ->
         failwith "Precondition violated"
-  in
-  List.hd lines |> aux (List.length lines) lines
+  and drop lines n = if n = 0 then lines else drop (List.tl lines) (n - 1) in
+  aux (List.length lines) lines
 
 let interp s =
-  try
-    parse s |> ast_from_lines |> Rules.validate |> format_prop |> ( ^ ) "|- "
-  with
+  try parse s |> validate |> format_prop |> ( ^ ) "|- " with
   | Rules.Invalid msg ->
       msg
   | Failure _ ->
