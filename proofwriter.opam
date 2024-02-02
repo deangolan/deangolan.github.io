@@ -5,9 +5,9 @@ description: "A longer description"
 maintainer: ["Maintainer Name"]
 authors: ["Dean Golan"]
 license: "LICENSE"
-homepage: "https://github.com/username/reponame"
+homepage: "https://github.com/deangolan/deangolan.github.io"
 doc: "https://url/to/documentation"
-bug-reports: "https://github.com/username/reponame/issues"
+bug-reports: "https://github.com/deangolan/deangolan.github.io/issues"
 depends: [
   "dune" {>= "3.12"}
   "js_of_ocaml"
@@ -28,4 +28,4 @@ build: [
     "@doc" {with-doc}
   ]
 ]
-dev-repo: "git+https://github.com/username/reponame.git"
+dev-repo: "git+https://github.com/deangolan/deangolan.github.io.git"
