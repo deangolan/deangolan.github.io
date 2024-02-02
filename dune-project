@@ -6,7 +6,7 @@
 (generate_opam_files true)
 
 (source
- (github username/reponame))
+ (github deangolan/deangolan.github.io))
 
 (authors "Dean Golan")
 
