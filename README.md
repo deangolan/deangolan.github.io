@@ -1,4 +1,4 @@
-Simple webpage for verifying propositional logic proofs. https://deangolan.github.io/
+Simple webpage for verifying propositional logic proofs: https://deangolan.github.io/
 
 ## Rules:
 p Premise
