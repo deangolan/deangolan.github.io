@@ -3,21 +3,34 @@ Simple webpage for verifying propositional logic proofs. https://deangolan.githu
 ## Rules:
 p Premise
 
-p<->q <=> (p->q) /\ (q->p) LE <br>
-p->q <=> ~p \\/ q LE <br>
+p<->q <=> (p->q) /\ (q->p) LE
+
+p->q <=> ~p \\/ q LE
+
 T /\ F <=> F LE
 
-p /\ q <=> q Idempotence, Idem, ID <br>
-p /\ q <=> q /\ p Commutative, Commu, COM <br>
-p /\ (q /\ r) <=> (p /\ q) /\ r Associative, Asso, ASO <br>
-p /\ (q \\/ r) <=> (p /\ q) \\/ (p /\ r) Distributive, Dist, DIS <br>
-p <=> ~(~p) Double Negation, DoubleNeg, DN <br>
-~(p /\ q) <=> ~p /\ ~q DeMorgan, DeMorg, DM <br>
-p /\ T <=> p, p \\/ F <=> p Identity, ID <br>
-p /\ F <=> F, p \\/ T <=> T Dominance, DO <br>
-p /\ ~p <=> F Contradiction, CON <br>
-p \\/ ~p <=> T Tautology, TA <br>
-p->q, p => q Modus Ponens, MP <br>
+p /\ q <=> q Idempotence, Idem, ID
+
+p /\ q <=> q /\ p Commutative, Commu, COM 
+
+p /\ (q /\ r) <=> (p /\ q) /\ r Associative, Asso, ASO
+
+p /\ (q \\/ r) <=> (p /\ q) \\/ (p /\ r) Distributive, Dist, DIS
+
+p <=> ~(~p) Double Negation, DoubleNeg, DN
+
+~(p /\ q) <=> ~p /\ ~q DeMorgan, DeMorg, DM
+
+p /\ T <=> p, p \\/ F <=> p Identity, ID
+
+p /\ F <=> F, p \\/ T <=> T Dominance, DO
+
+p /\ ~p <=> F Contradiction, CON
+
+p \\/ ~p <=> T Tautology, TA 
+
+p->q, p => q Modus Ponens, MP
+
 p->q, ~q => ~p Modus Tollens, MT
 
 ## Examples:
