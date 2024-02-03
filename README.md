@@ -3,9 +3,9 @@ Simple webpage for verifying propositional logic proofs. https://deangolan.githu
 ## Rules:
 p Premise
 
-p<->q <=> (p->q) /\ (q->p) LE
-p->q <=> ~p \/ q LE
-T /\ F <=> F LE
+p<->q <=> (p->q) /\ (q->p) LE <br>
+p->q <=> ~p \/ q LE <br>
+T /\ F <=> F LE <br>
 
 p /\ q <=> q Idempotence, Idem, ID
 p /\ q <=> q /\ p Commutative, Commu, COM
