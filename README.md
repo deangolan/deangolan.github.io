@@ -21,9 +21,9 @@ p->q, p => q Modus Ponens, MP <br>
 p->q, ~q => ~p Modus Tollens, MT
 
 ## Examples:
-(a->p) \/ ~a Premise <br>
+(a->p) \\/ ~a Premise <br>
 ~p Premise <br>
-~a \/ ~a Modus Tollens 1,2 <br>
+~a \\/ ~a Modus Tollens 1,2 <br>
 ~a Idempotence 3
 
 a \\/ (T<->F) Premise <br>
