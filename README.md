@@ -4,7 +4,7 @@ Simple webpage for verifying propositional logic proofs. https://deangolan.githu
 p Premise
 
 p<->q <=> (p->q) /\ (q->p) LE <br>
-p->q <=> ~p \/ q LE <br>
+p->q <=> ~p \\/ q LE <br>
 T /\ F <=> F LE <br>
 
 p /\ q <=> q Idempotence, Idem, ID
