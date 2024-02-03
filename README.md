@@ -26,5 +26,5 @@ p->q, ~q => ~p Modus Tollens, MT
 ~a \/ ~a Modus Tollens 1,2 <br>
 ~a Idempotence 3
 
-a \/ (T<->F) Premise <br>
-a \/ F LE 1
+a \\/ (T<->F) Premise <br>
+a \\/ F LE 1
