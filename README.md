@@ -1,6 +1,6 @@
 Simple webpage for verifying propositional logic proofs. https://deangolan.github.io/
 
-Rules:
+## Rules:
 p Premise
 
 p<->q <=> (p->q) /\ (q->p) LE
@@ -20,7 +20,7 @@ p \/ ~p <=> T Tautology, TA
 p->q, p => q Modus Ponens, MP
 p->q, ~q => ~p Modus Tollens, MT
 
-Examples:
+## Examples:
 (a->p) \/ ~a Premise
 ~p Premise
 ~a \/ ~a Modus Tollens 1,2
