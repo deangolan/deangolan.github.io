@@ -1,19 +1,19 @@
 open Ast
 
 let rec simplify = function
-  | Conn (conn, exp1, exp2) ->
-      collapse conn (simplify exp1) (simplify exp2)
+  | Conn (conn, p, q) ->
+      collapse conn (simplify p) (simplify q)
   | Not (Bool a) ->
       Bool (not a)
-  | Not exp ->
-      negate exp
+  | Not p ->
+      negate p
   | Atom _ as atom ->
       atom
   | Bool _ as bool ->
       bool
 
-and collapse conn exp1 exp2 =
-  match (conn, exp1, exp2) with
+and collapse conn p q =
+  match (conn, p, q) with
   | conn, Bool a, Bool b -> (
     match conn with
     | And ->
@@ -25,7 +25,7 @@ and collapse conn exp1 exp2 =
     | Iff ->
         Bool (a = b) )
   | _ ->
-      Conn (conn, exp1, exp2)
+      Conn (conn, p, q)
 
-and negate exp =
-  match simplify exp with Bool a -> Bool (not a) | exp -> Not exp
+and negate p =
+  match simplify p with Bool p -> Bool (not p) | p -> Not p 

@@ -41,8 +41,6 @@ and check_implication pattern p1 p2 q =
 
 let le p q =
   let pattern p q =
-    Eval.simplify p = Eval.simplify q
-    ||
     match (p, q) with
     | Conn (Impl, p1, q1), Conn (Or, Not p2, q2) ->
         p1 = p2 && q1 = q2
@@ -52,7 +50,7 @@ let le p q =
     | _ ->
         false
   in
-  is_equivalent pattern p q
+  if Eval.simplify p = Eval.simplify q then q else is_equivalent pattern p q
 
 let idempotence p q =
   let pattern p q =

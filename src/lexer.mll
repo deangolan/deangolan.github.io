@@ -40,10 +40,10 @@ rule read =
     | "DN" | "DoubleNeg" | "Double Negation" { DN }
     | "DM" | "DeMorg" | "DeMorgan" ['s']? { DM }
     | "ID" | "Identity" { ID }
-    | "DO" | "Dominance" | "Dominance" { DO }
+    | "DO" | "Dominance" | "Dom" { DO }
     | "CON" | "Con" | "Contradiction" { CON }
     | "TA" | "Taut" | "Tautology" { TA }
     | "MP" | "Modus Ponens" { MP }
-    | "MT" | "Modus Tolens" { MT }
+    | "MT" | "Modus Tollens" { MT }
     | _ { raise ( SyntaxError ("Unexpected character: " ^ Lexing.lexeme lexbuf)) }
     | eof { EOF }
