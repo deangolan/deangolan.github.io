@@ -19,7 +19,7 @@ p /\ (q \\/ r) <=> (p /\ q) \\/ (p /\ r) Distributive, Dist, DIS
 
 p <=> ~(~p) Double Negation, DoubleNeg, DN
 
-~(p /\ q) <=> ~p \/ ~q DeMorgan, DeMorg, DM
+~(p /\ q) <=> ~p \\/ ~q DeMorgan, DeMorg, DM
 
 p /\ T <=> p, p \\/ F <=> p Identity, ID
 
