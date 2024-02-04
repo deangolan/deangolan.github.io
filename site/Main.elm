@@ -67,9 +67,9 @@ subscriptions _ =
 
 view : Model -> Html Msg
 view model =
-    div []
+    div [ class "proofcontainer" ]
         [ textarea
-            [ class "proofcontainer"
+            [ class "editor"
             , placeholder "Enter your proof here"
             , spellcheck False
             , value model.proof

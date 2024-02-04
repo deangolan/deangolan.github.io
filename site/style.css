@@ -1,16 +1,21 @@
 .proofcontainer {
+    justify-content: center;
+    text-align: center;
+}
+
+.editor {
+    font-family: 'Fira Code', monospace; 
+    font-size: 16px;     
     width: 400px; 
     height: 300px;     
     resize: none; 
-    font-family: 'Fira Code', monospace; 
-    font-size: 16px;     
     margin: auto; 
-    display: block; 
+    white-space: pre;
 }
 
 .output {
-    margin-top: 20px;
-    text-align: center;
     font-family: 'Fira Code', monospace; 
+    font-size: 16px;     
+    margin-top: 20px;
     display: block;
 }
