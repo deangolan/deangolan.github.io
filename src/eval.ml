@@ -27,5 +27,4 @@ and collapse conn p q =
   | _ ->
       Conn (conn, p, q)
 
-and negate p =
-  match simplify p with Bool p -> Bool (not p) | p -> Not p 
+and negate p = match simplify p with Bool p -> Bool (not p) | p -> Not p

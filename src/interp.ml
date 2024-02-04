@@ -40,4 +40,6 @@ let interp s =
   | Rules.Invalid msg ->
       msg
   | Failure _ ->
+      (* Should only occur when the input proof is empty so List.hd produces
+         Failure *)
       ""
