@@ -9,7 +9,7 @@ p->q <=> ~p \\/ q LE
 
 T /\ F <=> F LE
 
-p /\ q <=> q Idempotence, Idem, ID
+p /\ p <=> p Idempotence, Idem, ID
 
 p /\ q <=> q /\ p Commutative, Commu, COM 
 
