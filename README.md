@@ -56,11 +56,11 @@ $p \land (q \lor r) \iff (p \land q) \lor (p \land r)$
 
 Double Negation, DoubleNeg, DN
 
-$p \iff ~(~p)$ 
+$p \iff \neg (\neg p)$ 
 
 DeMorgan, DeMorg, DM
 
-$~(p \land q) \iff ~p \lor ~q$ 
+$\neg (p \land q) \iff \neg p \lor \neg q$ 
 
 Identity, ID
 
@@ -72,11 +72,11 @@ $p \land F \iff F, \ \ p \lor T \iff T$
 
 Contradiction, CON
 
-$p \land ~p \iff F$
+$p \land \neg p \iff F$
 
 Tautology, TA 
 
-$p \lor ~p \iff T$ 
+$p \lor \neg p \iff T$ 
 
 Modus Ponens, MP
 
@@ -84,5 +84,5 @@ $p \rightarrow q, \ \ p \implies q$
 
 Modus Tollens, MT
 
-$p \rightarrow q, \ \ ~q \implies ~p$
+$p \rightarrow q, \ \ \neg q \implies \neg p$
 
