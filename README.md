@@ -5,7 +5,7 @@ Try copy and pasting these into the editor.
 
 ```
 (a -> p) \/ ~a Premise
-~p Premise <br>
+~p Premise
 ~a \/ ~a Modus Tollens 1,2
 ~a Idempotence 3
 ```
