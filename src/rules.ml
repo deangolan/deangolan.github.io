@@ -91,12 +91,13 @@ let distributive p q =
     | ( Conn (Or, p1, Conn (And, q1, r1))
       , Conn (And, Conn (Or, p2, q2), Conn (Or, p3, r2)) )
     | ( Conn (Or, Conn (And, q1, r1), p1)
-      , Conn (And, Conn (Or, p2, q2), Conn (Or, p3, r2)) ) ->
+      , Conn (And, Conn (Or, q2, p2), Conn (Or, r2, p3)) ) ->
         p1 = p2 && p2 = p3 && q1 = q2 && r1 = r2
+    (* And and Or swapped *)
     | ( Conn (And, p1, Conn (Or, q1, r1))
       , Conn (Or, Conn (And, p2, q2), Conn (And, p3, r2)) )
     | ( Conn (And, Conn (Or, q1, r1), p1)
-      , Conn (Or, Conn (And, p2, q2), Conn (And, p3, r2)) ) ->
+      , Conn (Or, Conn (And, q2, p2), Conn (And, r2, p3)) ) ->
         p1 = p2 && p2 = p3 && q1 = q2 && r1 = r2
     | _ ->
         false
