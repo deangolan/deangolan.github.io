@@ -2,13 +2,13 @@ open Ast
 
 exception Invalid of string
 
-let not_equivalent p q = Invalid (format_prop p ^ " <!=> " ^ format_prop q)
+let not_equivalent p q = raise (Invalid (format_prop p ^ " <!=> " ^ format_prop q))
 
 let not_implied p1 p2 q =
-  Invalid (format_prop p1 ^ ", " ^ format_prop p2 ^ " !=> " ^ format_prop q)
+  raise (Invalid (format_prop p1 ^ ", " ^ format_prop p2 ^ " !=> " ^ format_prop q))
 
 let rec is_equivalent pattern p q =
-  if check_equivelence pattern p q then q else raise (not_equivalent p q)
+  if check_equivelence pattern p q then q else (not_equivalent p q)
 
 and check_equivelence pattern p q =
   pattern p q || pattern q p
@@ -23,7 +23,7 @@ and check_equivelence pattern p q =
       false
 
 let rec is_implication pattern p1 p2 q =
-  if check_implication pattern p1 p2 q then q else raise (not_implied p1 p2 q)
+  if check_implication pattern p1 p2 q then q else (not_implied p1 p2 q)
 
 and check_implication pattern p1 p2 q =
   pattern p1 p2 q

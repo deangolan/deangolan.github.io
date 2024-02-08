@@ -15,15 +15,15 @@ a \/ F LE 1
 ```
 ```
 (p->q)->r Premise
-~(p->q)\/r LE 1
-~(~p\/q)\/r LE 2
-~(~p\/~~q)\/r Double Negation 3
-~~(p/\~q)\/r DeMorgan 4
-(p/\~q)\/r Double Negation 5
-(p\/r)/\(~q\/r) Distributive 6
-(~~p\/r)/\(~q\/r) Double Negation 7
-(~p->r)/\(~q\/r) LE 8
-(~p->r)/\(q->r) LE 9
+~(p->q) \/ r LE 1
+~(~p \/ q) \/ r LE 2
+~(~p \/ ~~q) \/ r Double Negation 3
+~~(p /\ ~q) \/ r DeMorgan 4
+(p /\ ~q) \/ r Double Negation 5
+(p \/ r) /\ (~q \/ r) Distributive 6
+(~~p \/ r) /\ (~q \/ r) Double Negation 7
+(~p->r) /\ (~q \/ r) LE 8
+(~p->r) /\ (q->r) LE 9
 ```
 ## Rules:
 Premise
