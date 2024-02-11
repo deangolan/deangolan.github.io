@@ -17,9 +17,8 @@
       conclusion, which is the final logical statement derived from the
       premises using the defined rules. *)
 
-(** interp s interprets the proof string s into a string indicating its 
+(** interp s interprets the proof string s into a string indicating its
     validity. If the proof is valid it returns the formatted conclusion.
-    Otherwise, it returns an appropriate error string or if s is empty it
-    returns an empty string.
- *)
+    Otherwise, it returns an appropriate error string, or if s is empty, it
+    returns an empty string. *)
 val interp : string -> string

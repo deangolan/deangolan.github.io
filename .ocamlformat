@@ -1,2 +1,6 @@
-profile = ocamlformat 
+profile = janestreet 
+margin=80
+parse-docstrings=true
+let-binding-spacing=compact
+wrap-comments=true
 version = 0.26.1

@@ -28,7 +28,7 @@ val tautology : prop -> prop -> prop
 
 (* --------------------------- Implication Rules ---------------------------
 
-   @raise Invalid "p1, p2 !=> q"
+   For rule p1 p2 q @raise Invalid "p1, p2 !=> q"
 
    ------------------------------------------------------------------------- *)
 

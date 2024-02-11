@@ -10,34 +10,37 @@ let invalid_ref linenum ref =
         ^ " cannot refrence line "
         ^ Int.to_string ref))
 
-(** validate (len, lines) transforms every linerefrence into its corrosponding
+(** validate (len, lines) transforms every line refrence into its corrosponding
     proposition and applies the given rule to validate it. Returns the
-    conclusion of the proof if it is valid or None lines is empty.
+    conclusion of the proof if it is valid or None if lines is empty.
     @raise InvalidRef
       if a line contains a refrence to itself or a line after it.
     @raise Invalid if the proof is invalid. *)
 let validate ((len, lines) : int * t list) : prop option =
-  let rec aux len lines =
+  let rec apply_rule len lines =
     match List.hd lines with
     | Premise p -> p
-    | EquivalenceRule (rule, i, q) ->
-      if i >= len
-      then invalid_ref len i
-      else rule (drop lines (len - i) |> aux i) q
+    | EquivalenceRule (rule, i, q) -> apply_equivalence_rule len lines rule i q
     | ImplicationRule (rule, i1, i2, q) ->
-      if i1 >= len
-      then invalid_ref len i1
-      else if i2 >= len
-      then invalid_ref len i2
-      else
-        rule
-          (drop lines (len - i1) |> aux i1)
-          (drop lines (len - i2) |> aux i2)
-          q
+      apply_implication_rule len lines rule i1 i2 q
+  and apply_equivalence_rule len lines rule i q =
+    if i >= len
+    then invalid_ref len i
+    else rule (drop lines (len - i) |> apply_rule i) q
+  and apply_implication_rule len lines rule i1 i2 q =
+    if i1 >= len
+    then invalid_ref len i1
+    else if i2 >= len
+    then invalid_ref len i2
+    else
+      rule
+        (drop lines (len - i1) |> apply_rule i1)
+        (drop lines (len - i2) |> apply_rule i2)
+        q
   and drop lines n = if n = 0 then lines else drop (List.tl lines) (n - 1) in
   match lines with
-  | [] -> None
-  | lines -> Some (aux len (List.rev lines))
+  | [] -> None (* Empty proof *)
+  | _ -> Some (apply_rule len (List.rev lines))
 
 let interp s =
   try
