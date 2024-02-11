@@ -1,42 +1,36 @@
+(** Propositional logic rules module.
+
+    Each rule takes propositions as input and returns a proposition if the
+    input satisfies the rule, otherwise it raises Invalid. *)
+
 open Ast
 
 exception Invalid of string
 
+(* --------------------------- Equivalence Rules ---------------------------
+
+   Equivalence rule patterns are symmetric. This means that if a rule p q
+   returns q then rule q p is guranteed to return p. @raise Invalid "p <!=> q"
+
+   ------------------------------------------------------------------------- *)
+
 val le : prop -> prop -> prop
-(** Apply a general Logical Equivalence *)
-
 val idempotence : prop -> prop -> prop
-(** Apply the Law of Idempotence *)
-
 val commutative : prop -> prop -> prop
-(** Apply the Law of Commutativity *)
-
 val associative : prop -> prop -> prop
-(** Apply the Law of Associativity *)
-
 val distributive : prop -> prop -> prop
-(** Apply the Law of Distributivity *)
-
 val doublenegation : prop -> prop -> prop
-(** Apply the Law of Double Negation *)
-
 val demorgan : prop -> prop -> prop
-(** Apply the DeMorgan's Law *)
-
 val identity : prop -> prop -> prop
-(** Apply the Law of Identity *)
-
 val dominance : prop -> prop -> prop
-(** Apply the Law of Dominance *)
-
 val contradiction : prop -> prop -> prop
-(** Apply the Law of Contradiction *)
-
 val tautology : prop -> prop -> prop
-(** Apply the Law of Tautology *)
+
+(* --------------------------- Implication Rules ---------------------------
+
+   @raise Invalid "p1, p2 !=> q"
+
+   ------------------------------------------------------------------------- *)
 
 val modusponens : prop -> prop -> prop -> prop
-(** Apply Modus Ponens *)
-
 val modustollens : prop -> prop -> prop -> prop
-(** Apply Modus Tollens *)

@@ -1,11 +1,6 @@
 open Ast
 
-exception SyntaxError = Lexer.SyntaxError
-exception ParserError = Parser.Error
 exception InvalidRef of string
-exception Invalid = Rules.Invalid
-
-let parse s = Lexing.from_string s |> Parser.prog Lexer.read
 
 let invalid_ref linenum ref =
   raise
@@ -44,4 +39,15 @@ let validate ((len, lines) : int * t list) : prop option =
   | [] -> None
   | lines -> Some (aux len (List.rev lines))
 
-let interp s = parse s |> validate |> Option.map format_prop
+let interp s =
+  try
+    Lexing.from_string s
+    |> Parser.prog Lexer.read
+    |> validate
+    |> Option.map format_prop
+    |> Option.value ~default:""
+  with
+  | Lexer.SyntaxError err -> err
+  | Parser.Error -> "Syntax Error"
+  | InvalidRef err -> err
+  | Rules.Invalid err -> err

@@ -17,16 +17,9 @@
       conclusion, which is the final logical statement derived from the
       premises using the defined rules. *)
 
-exception SyntaxError of string
-exception ParserError
-exception InvalidRef of string
-exception Invalid of string
-
-(** interp s returns Some conclusion of the logical proof string in a readable
-    format or None if s is empty. Otherwise:
-    @raise SyntaxError if s contains an invalid lexeme.
-    @raise ParserError if s contains invalid grammer.
-    @raise InvalidRef
-      if a line contains a refrence to itself or a line after it.
-    @raise Invalid if the proof is invalid. *)
-val interp : string -> string option
+(** interp s interprets the proof string s into a string indicating its 
+    validity. If the proof is valid it returns the formatted conclusion.
+    Otherwise, it returns an appropriate error string or if s is empty it
+    returns an empty string.
+ *)
+val interp : string -> string

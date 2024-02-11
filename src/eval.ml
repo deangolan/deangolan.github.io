@@ -1,6 +1,8 @@
 open Ast
 
-let rec simplify = function
+(** simplfy p reduces the proposition p as much as possible by applying
+    operators to booleans inside the proposition. *)
+let rec simplify : prop -> prop = function
   | Conn (conn, p, q) -> collapse conn (simplify p) (simplify q)
   | Not (Bool a) -> Bool (not a)
   | Not p -> negate p
