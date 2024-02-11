@@ -1,4 +1,8 @@
-type conn = And | Or | Impl | Iff
+type conn =
+  | And
+  | Or
+  | Impl
+  | Iff
 
 type prop =
   | Atom of string
@@ -8,9 +12,10 @@ type prop =
 
 type t =
   | Premise of prop
-  | EquivalenceRule of (prop -> prop -> prop) * t * prop
-  | ImplicationRule of (prop -> prop -> prop -> prop) * t * t * prop
-  | Lineref of int
+  | EquivalenceRule of (prop -> prop -> prop) * int * prop
+  | ImplicationRule of (prop -> prop -> prop -> prop) * int * int * prop
 [@@deriving show]
 
+(** format_prop p formats p into a string representing a regular logical
+    expression. *)
 val format_prop : prop -> string

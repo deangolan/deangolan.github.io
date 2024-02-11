@@ -1,4 +1,5 @@
 {
+open Lexing
 open Parser
 
 exception SyntaxError of string
@@ -18,7 +19,7 @@ let iff = "<->"
 
 rule read =
     parse
-    | whitespace { read lexbuf }
+    | whitespace { new_line lexbuf; read lexbuf }
     | atom { ATOM (Lexing.lexeme lexbuf) }
     | "(" { LPAREN }
     | ")" { RPAREN }
