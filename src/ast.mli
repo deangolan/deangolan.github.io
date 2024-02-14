@@ -16,6 +16,6 @@ type t =
   | ImplicationRule of (prop -> prop -> prop -> prop) * int * int * prop
 [@@deriving show]
 
-(** format_prop p formats p into a string representing a regular logical
+(** [format_prop p] formats [p] into a string representing a regular logical
     expression. *)
 val format_prop : prop -> string

@@ -1,4 +1,4 @@
-%token <string> ATOM 
+%token <string> ATOM
 %token <bool> BOOL
 %token <int> INT
 %token COMMA
@@ -11,11 +11,11 @@
 %token RPAREN
 %token PR
 %token LE
-%token IDM 
-%token COM 
-%token ASO 
+%token IDM
+%token COM
+%token ASO
 %token DIS
-%token DN 
+%token DN
 %token DM
 %token ID
 %token DO
@@ -31,32 +31,38 @@
 %left OR
 %right NOT
 
-%start <int * Ast.t list> prog
+%start <(int * Ast.t list) option> main 
+%type <int * Ast.t list> prog
 %type <Ast.t> expr
 %type <Ast.prop> prop
 
 %%
 
+main:
+    | EOF { None }
+    | p = prog { Some (fst p, List.rev (snd p)) }
+    ;
+
 prog:
-    | h = expr; t = prog { fst t + 1, h :: snd t}
-    | EOF { 0, [] }
+    | EOF { (0, []) }
+    | e = expr; p = prog { (fst p + 1, e :: snd p) }
     ;
 
 expr:
-    | p = prop; PR { Premise p }
-    | q = prop; LE ; i = INT { EquivalenceRule (Rules.le, i, q) }
-    | q = prop; IDM; i = INT { EquivalenceRule (Rules.idempotence, i, q) }
-    | q = prop; COM; i = INT { EquivalenceRule (Rules.commutative, i, q) }
-    | q = prop; ASO; i = INT { EquivalenceRule (Rules.associative, i, q) }
-    | q = prop; DIS; i = INT { EquivalenceRule (Rules.distributive, i, q) }
-    | q = prop; DN ; i = INT { EquivalenceRule (Rules.doublenegation, i, q) }
-    | q = prop; DM ; i = INT { EquivalenceRule (Rules.demorgan, i, q) }
-    | q = prop; ID ; i = INT { EquivalenceRule (Rules.identity, i, q) }
-    | q = prop; DO ; i = INT { EquivalenceRule (Rules.dominance, i, q) }
-    | q = prop; CON; i = INT { EquivalenceRule (Rules.contradiction, i, q) }
-    | q = prop; TA ; i = INT { EquivalenceRule (Rules.tautology, i, q) }
-    | q = prop; MP ; i1 = INT; COMMA; i2 = INT { ImplicationRule (Rules.modusponens, i1, i2, q) }
-    | q = prop; MT ; i1 = INT; COMMA; i2 = INT { ImplicationRule (Rules.modustollens, i1, i2, q) }
+    | p = prop; PR { Ast.Premise p }
+    | q = prop; LE ; i = INT { Ast.EquivalenceRule (Rules.le, i, q) }
+    | q = prop; IDM; i = INT { Ast.EquivalenceRule (Rules.idempotence, i, q) }
+    | q = prop; COM; i = INT { Ast.EquivalenceRule (Rules.commutative, i, q) }
+    | q = prop; ASO; i = INT { Ast.EquivalenceRule (Rules.associative, i, q) }
+    | q = prop; DIS; i = INT { Ast.EquivalenceRule (Rules.distributive, i, q) }
+    | q = prop; DN ; i = INT { Ast.EquivalenceRule (Rules.doublenegation, i, q) }
+    | q = prop; DM ; i = INT { Ast.EquivalenceRule (Rules.demorgan, i, q) }
+    | q = prop; ID ; i = INT { Ast.EquivalenceRule (Rules.identity, i, q) }
+    | q = prop; DO ; i = INT { Ast.EquivalenceRule (Rules.dominance, i, q) }
+    | q = prop; CON; i = INT { Ast.EquivalenceRule (Rules.contradiction, i, q) }
+    | q = prop; TA ; i = INT { Ast.EquivalenceRule (Rules.tautology, i, q) }
+    | q = prop; MP ; i1 = INT; COMMA; i2 = INT { Ast.ImplicationRule (Rules.modusponens, i1, i2, q) }
+    | q = prop; MT ; i1 = INT; COMMA; i2 = INT { Ast.ImplicationRule (Rules.modustollens, i1, i2, q) }
     ;
 
 prop:

@@ -9,8 +9,9 @@ exception Invalid of string
 
 (* --------------------------- Equivalence Rules ---------------------------
 
-   Equivalence rule patterns are symmetric. This means that if a rule p q
-   returns q then rule q p is guranteed to return p. @raise Invalid "p <!=> q"
+   Equivalence rule patterns are symmetric. This means that if a [rule p q]
+   returns [q] then [rule q p] is guranteed to return [p]. @raise Invalid "p
+   <!=> q"
 
    ------------------------------------------------------------------------- *)
 
@@ -28,7 +29,7 @@ val tautology : prop -> prop -> prop
 
 (* --------------------------- Implication Rules ---------------------------
 
-   For rule p1 p2 q @raise Invalid "p1, p2 !=> q"
+   For [rule p1 p2 q] @raise Invalid "p1, p2 !=> q"
 
    ------------------------------------------------------------------------- *)
 

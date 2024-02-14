@@ -10,13 +10,13 @@ let invalid_ref linenum ref =
         ^ " cannot refrence line "
         ^ Int.to_string ref))
 
-(** validate (len, lines) transforms every line refrence into its corrosponding
+(** [validate (len, lines)] transforms every line refrence into its corrosponding
     proposition and applies the given rule to validate it. Returns the
-    conclusion of the proof if it is valid or None if lines is empty.
+    conclusion of the proof if it is valid or [None] if [lines] is empty.
     @raise InvalidRef
       if a line contains a refrence to itself or a line after it.
     @raise Invalid if the proof is invalid. *)
-let validate ((len, lines) : int * t list) : prop option =
+let validate ((len, lines) : int * t list) : prop =
   let rec apply_rule len lines =
     match List.hd lines with
     | Premise p -> p
@@ -38,16 +38,14 @@ let validate ((len, lines) : int * t list) : prop option =
         (drop lines (len - i2) |> apply_rule i2)
         q
   and drop lines n = if n = 0 then lines else drop (List.tl lines) (n - 1) in
-  match lines with
-  | [] -> None (* Empty proof *)
-  | _ -> Some (apply_rule len (List.rev lines))
+  apply_rule len lines
+
+let parse s = Lexing.from_string s |> Parser.main Lexer.read
 
 let interp s =
   try
-    Lexing.from_string s
-    |> Parser.prog Lexer.read
-    |> validate
-    |> Option.map format_prop
+    parse s
+    |> Option.map (fun p -> validate p |> format_prop)
     |> Option.value ~default:""
   with
   | Lexer.SyntaxError err -> err
