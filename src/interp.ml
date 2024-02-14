@@ -10,9 +10,10 @@ let invalid_ref linenum ref =
         ^ " cannot refrence line "
         ^ Int.to_string ref))
 
-(** [validate (len, lines)] transforms every line refrence into its corrosponding
-    proposition and applies the given rule to validate it. Returns the
-    conclusion of the proof if it is valid or [None] if [lines] is empty.
+(** [validate (len, lines)] transforms every line refrence into its
+    corrosponding proposition and applies the given rule to validate it. 
+    Returns the conclusion of the proof if it is valid or [None] if [lines] is 
+    empty.
     @raise InvalidRef
       if a line contains a refrence to itself or a line after it.
     @raise Invalid if the proof is invalid. *)
