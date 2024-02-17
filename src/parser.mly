@@ -31,21 +31,21 @@
 %left OR
 %right NOT
 
-%start <(int * Ast.t list) option> main 
-%type <int * Ast.t list> prog
+%start <(int * Ast.t list) option> prog 
+%type <int * Ast.t list> line 
 %type <Ast.t> expr
 %type <Ast.prop> prop
 
 %%
 
-main:
+prog:
     | EOF { None }
-    | p = prog { Some (fst p, List.rev (snd p)) }
+    | l = line { Some (fst l, List.rev (snd l)) }
     ;
 
-prog:
+line:
     | EOF { (0, []) }
-    | e = expr; p = prog { (fst p + 1, e :: snd p) }
+    | e = expr; l = line { (fst l + 1, e :: snd l) }
     ;
 
 expr:

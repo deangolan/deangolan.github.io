@@ -11,8 +11,8 @@ let invalid_ref linenum ref =
         ^ Int.to_string ref))
 
 (** [validate (len, lines)] transforms every line refrence into its
-    corrosponding proposition and applies the given rule to validate it. 
-    Returns the conclusion of the proof if it is valid or [None] if [lines] is 
+    corrosponding proposition and applies the given rule to validate it.
+    Returns the conclusion of the proof if it is valid or [None] if [lines] is
     empty.
     @raise InvalidRef
       if a line contains a refrence to itself or a line after it.
@@ -41,13 +41,18 @@ let validate ((len, lines) : int * t list) : prop =
   and drop lines n = if n = 0 then lines else drop (List.tl lines) (n - 1) in
   apply_rule len lines
 
-let parse s = Lexing.from_string s |> Parser.main Lexer.read
+(** [parse s] parses the input string [s] representing a logical proof. Returns
+    [Some] tuple of (number of lines, line AST list) or [None] if [s] is empty.
+    @raise Lexer.SyntaxError if it encounters an invalid lexeme.
+    @raise Parser.Error if it encounters invalid grammer. *)
+let parse (s : string) : (int * t list) option =
+  Lexing.from_string s |> Parser.prog Lexer.read
 
 let interp s =
   try
-    parse s
-    |> Option.map (fun p -> validate p |> format_prop)
-    |> Option.value ~default:""
+    match parse s with
+    | None -> ""
+    | Some proof -> validate proof |> format_prop
   with
   | Lexer.SyntaxError err -> err
   | Parser.Error -> "Syntax Error"
