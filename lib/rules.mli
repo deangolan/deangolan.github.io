@@ -16,16 +16,11 @@ exception Invalid of string
    ------------------------------------------------------------------------- *)
 
 val le : prop -> prop -> prop
-val idempotence : prop -> prop -> prop
 val commutative : prop -> prop -> prop
 val associative : prop -> prop -> prop
 val distributive : prop -> prop -> prop
 val doublenegation : prop -> prop -> prop
 val demorgan : prop -> prop -> prop
-val identity : prop -> prop -> prop
-val dominance : prop -> prop -> prop
-val contradiction : prop -> prop -> prop
-val tautology : prop -> prop -> prop
 
 (* --------------------------- Implication Rules ---------------------------
 
@@ -33,5 +28,7 @@ val tautology : prop -> prop -> prop
 
    ------------------------------------------------------------------------- *)
 
-val modusponens : prop -> prop -> prop -> prop
-val modustollens : prop -> prop -> prop -> prop
+val modus_ponens : prop -> prop -> prop -> prop
+val modus_tollens : prop -> prop -> prop -> prop
+val disjunctive_syllogism : prop -> prop -> prop -> prop
+val hypothetical_syllogism : prop -> prop -> prop -> prop

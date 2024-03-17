@@ -4,14 +4,21 @@ Simple webpage for verifying propositional logic proofs: https://deangolan.githu
 Try copy and pasting these into the editor.
 
 ```
+*This is a comment*
 (a -> p) \/ ~a Premise
 ~p Premise
 ~a \/ ~a Modus Tollens 1,2
-~a Idempotence 3
+~a LE 3
+*Try deleting one of the ~ symbols*
 ```
 ```
-a \/ (T<->F) Premise
-a \/ F LE 1
+*The LE rule can simplify expressions*
+(a /\ ~a) <-> (a \/ ~a) Premise
+F <-> T LE 1
+F LE 2
+
+*Or in one step*
+F LE 1 
 ```
 ```
 (p->q)->r Premise
@@ -26,11 +33,12 @@ a \/ F LE 1
 (~p->r) /\ (q->r) LE 9
 ```
 ## Rules:
-Premise
+Premise, PR
 
 $p$ 
 
-LE
+LE \
+*(Powerful general rule for various logical equivalences)*
 
 $p \leftrightarrow q \iff (p \rightarrow q) \land (q \rightarrow p)$ 
 
@@ -38,51 +46,42 @@ $p \rightarrow q \iff \neg p \lor q$
 
 $T \land F \iff F$
 
-Idempotence, Idem, ID
-
 $p \land p \iff p$
-
-Commutative, Commu, COM 
-
-$p \land q \iff q \land p$
-
-Associative, Asso, ASO
-
-$p \land (q \land r) \iff (p \land q) \land r$ 
-
-Distributive, Dist, DIS
-
-$p \land (q \lor r) \iff (p \land q) \lor (p \land r)$ 
-
-Double Negation, DoubleNeg, DN
-
-$p \iff \neg (\neg p)$ 
-
-DeMorgan, DeMorg, DM
-
-$\neg (p \land q) \iff \neg p \lor \neg q$ 
-
-Identity, ID
-
-$p \land T \iff p, \ \ p \lor F \iff p$ 
-
-Dominance, DO
-
-$p \land F \iff F, \ \ p \lor T \iff T$ 
-
-Contradiction, CON
 
 $p \land \neg p \iff F$
 
-Tautology, TA 
+Commutative, CM
 
-$p \lor \neg p \iff T$ 
+$p \land q \iff q \land p$
+
+Associative, AS
+
+$p \land (q \land r) \iff (p \land q) \land r$ 
+
+Distributive, DI
+
+$p \land (q \lor r) \iff (p \land q) \lor (p \land r)$ 
+
+Double Negation, DN
+
+$p \iff \neg (\neg p)$ 
+
+DeMorgan, DM
+
+$\neg (p \land q) \iff \neg p \lor \neg q$ 
 
 Modus Ponens, MP
 
-$p \rightarrow q, \ \ p \implies q$
+$p \rightarrow q$, $p \implies q$
 
 Modus Tollens, MT
 
-$p \rightarrow q, \ \ \neg q \implies \neg p$
+$p \rightarrow q, \neg q \implies \neg p$
 
+Disjunctive Syllogism, DS
+
+$p \lor q, \neg ~p \implies p$
+
+Hypothetical Syllogism, HS
+
+$p \rightarrow q, q \rightarrow r \implies p \rightarrow r$

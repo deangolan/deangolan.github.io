@@ -1,29 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proof Writer</title>
-    <script src="elm.js"></script>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Proof Writer</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="proofcontainer">
+            <textarea id="proofInput" class="editor" placeholder="Enter your proof here" spellcheck="false"></textarea>
+            <output id="proofOutput" class="output"></output>
+        </div>
+        <script src="interpreter.js"></script>
+        <script>
+            function handleChange() {
+                const proof = document.getElementById('proofInput').value;
+                const eval = Interpreter.interp(proof);
+                document.getElementById('proofOutput').textContent = eval;
+            }
 
-<body>
-    <div id="myapp"></div>
-</body>
-
-<script src="interpreter.js"></script>
-
-<script>
-const app = Elm.Main.init({
-    node: document.getElementById('myapp')  
-});
-
-app.ports.sendProof.subscribe(function(proof) {
-    const eval = Interpreter.interp(proof);
-    app.ports.receiveEval.send(eval);
-});
-
-</script>
-
+            document.getElementById('proofInput').addEventListener('input', handleChange);
+        </script>
+    </body>
 </html>

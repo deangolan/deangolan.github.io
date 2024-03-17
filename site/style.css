@@ -4,18 +4,17 @@
 }
 
 .editor {
-    font-family: 'Fira Code', monospace; 
-    font-size: 16px;     
-    width: 400px; 
-    height: 300px;     
-    resize: none; 
-    margin: auto; 
+    font-family: 'Fira Code', monospace;
+    font-size: 16px;
+    width: 450px;
+    height: 300px;
+    margin: auto;
     white-space: pre;
 }
 
 .output {
-    font-family: 'Fira Code', monospace; 
-    font-size: 16px;     
+    font-family: 'Fira Code', monospace;
+    font-size: 16px;
     margin-top: 20px;
     display: block;
 }

@@ -3,21 +3,16 @@
 
 (name proofwriter)
 
-(generate_opam_files true)
+(generate_opam_files false)
 
 (source
  (github deangolan/deangolan.github.io))
 
 (authors "Dean Golan")
 
-(maintainers "Maintainer Name")
-
-(license LICENSE)
-
-(documentation https://url/to/documentation)
+(license BSD-3-Clause)
 
 (package
  (name proofwriter)
- (synopsis "A short synopsis")
- (description "A longer description")
+ (synopsis "Simple webpage for verifying propositional logic proofs.")
  (depends js_of_ocaml js_of_ocaml-ppx))

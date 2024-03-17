@@ -50,14 +50,6 @@ let le p q =
   then q
   else validate_equivalence pattern p q
 
-let idempotence p q =
-  let pattern p q =
-    match p, q with
-    | Conn ((And | Or), p1, p2), p when p1 = p2 -> p1 = p
-    | _ -> false
-  in
-  validate_equivalence pattern p q
-
 let commutative p q =
   let pattern p q =
     match p, q with
@@ -115,45 +107,9 @@ let demorgan p q =
   in
   validate_equivalence pattern p q
 
-let identity p q =
-  let pattern p q =
-    match p, q with
-    | (Conn (And, Bool true, p1) | Conn (And, p1, Bool true)), p2
-    | (Conn (Or, Bool false, p1) | Conn (Or, p1, Bool false)), p2 -> p1 = p2
-    | _ -> false
-  in
-  validate_equivalence pattern p q
-
-let dominance p q =
-  let pattern p q =
-    match p, q with
-    | (Conn (And, Bool false, _) | Conn (And, _, Bool false)), Bool false
-    | (Conn (Or, Bool true, _) | Conn (Or, _, Bool true)), Bool true -> true
-    | _ -> false
-  in
-  validate_equivalence pattern p q
-
-let contradiction p q =
-  let pattern p q =
-    match p, q with
-    | Conn (And, Not p1, p2), Bool false when p1 = p2 -> true
-    | Conn (And, p1, Not p2), Bool false when p1 = p2 -> true
-    | _ -> false
-  in
-  validate_equivalence pattern p q
-
-let tautology p q =
-  let pattern p q =
-    match p, q with
-    | Conn (Or, Not p1, p2), Bool true when p1 = p2 -> true
-    | Conn (Or, p1, Not p2), Bool true when p1 = p2 -> true
-    | _ -> false
-  in
-  validate_equivalence pattern p q
-
 (* --------------------------- Implication Rules --------------------------- *)
 
-let modusponens p1 p2 q =
+let modus_ponens p1 p2 q =
   let pattern p1 p2 q =
     match p1, p2 with
     | Conn (Impl, p1, q1), p2 -> p1 = p2 && q1 = q
@@ -161,10 +117,27 @@ let modusponens p1 p2 q =
   in
   validate_implication pattern p1 p2 q
 
-let modustollens p1 p2 q =
+let modus_tollens p1 p2 q =
   let pattern p1 p2 q =
     match p1, p2 with
     | Conn (Impl, q1, p1), Not p2 -> p1 = p2 && Not q1 = q
+    | _ -> false
+  in
+  validate_implication pattern p1 p2 q
+
+let disjunctive_syllogism p1 p2 q =
+  let pattern p1 p2 q =
+    match p1, p2 with
+    | Conn (Or, p1, p2), Not p3 -> (p1 = p3 && p2 = q) || (p2 = p3 && p1 = q)
+    | _ -> false
+  in
+  validate_implication pattern p1 p2 q
+
+let hypothetical_syllogism p1 p2 q =
+  let pattern p1 p2 q =
+    match p1, p2, q with
+    | Conn (Impl, p1, q1), Conn (Impl, p2, q2), Conn (Impl, p3, q3) ->
+      p1 = p3 && q2 = q3 && q1 = p2
     | _ -> false
   in
   validate_implication pattern p1 p2 q
