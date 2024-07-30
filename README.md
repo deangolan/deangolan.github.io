@@ -80,7 +80,7 @@ $p \rightarrow q, \neg q \implies \neg p$
 
 Disjunctive Syllogism, DS
 
-$p \lor q, \neg ~p \implies p$
+$p \lor q, \neg ~p \implies q$
 
 Hypothetical Syllogism, HS
 
